@@ -7,7 +7,7 @@ neu strukturiert, schneller, zweisprachig und DSGVO-freundlich (keine Cookies, k
 | | |
 |---|---|
 | **Framework** | Next.js 16 (App Router) · React 19 · TypeScript |
-| **Styling** | Tailwind CSS 4 · eigene Design-Tokens aus dem ProjeXs-Logo (Navy + Türkis) |
+| **Styling** | Tailwind CSS 4 · Farben aus dem ProjeXs-Logo (Navy + Türkis), Schrift Source Sans 3 |
 | **Sprachen** | Deutsch unter `/`, Englisch unter `/en` |
 | **Hosting** | vorbereitet für Vercel (alle Seiten statisch vorgerendert) |
 
@@ -118,7 +118,7 @@ Für den Livegang:
 app/
   (de)/            Deutsche Seiten: Startseite, Impressum, Datenschutz, AGB
   (en)/en/         Englische Seiten: Startseite, Legal notice, Privacy
-  globals.css      Design-System (Farben, Schriften, Animationen)
+  globals.css      Design-System (Farben, Schrift, Rechtstext-Styles)
   global-not-found.tsx   404-Seite
   sitemap.ts · robots.ts · manifest.ts · icon.svg · apple-icon.tsx
 components/

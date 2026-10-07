@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { Dictionary } from "@/lib/i18n";
-import { ArrowRight } from "@/components/ui/Icons";
 
 export function LegalPage({
   dict,
@@ -16,31 +15,21 @@ export function LegalPage({
 }) {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-ink pb-16 pt-36 text-paper sm:pb-20 sm:pt-44">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute -left-[10%] -top-[40%] h-[70vh] w-[70vh] rounded-full bg-navy/50 blur-[140px]" />
-          <div className="bg-grid-ink absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_20%_20%,#000,transparent_70%)]" />
-        </div>
-        <div className="mx-auto max-w-[88rem] px-5 sm:px-8 lg:px-12">
-          <Link
-            href={dict.routes.home}
-            className="group inline-flex items-center gap-2 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-mist transition-colors hover:text-paper"
-          >
-            <ArrowRight className="size-4 rotate-180 transition-transform group-hover:-translate-x-1" />
-            {dict.legal.backHome}
+      <section className="border-b border-line bg-surface pb-12 pt-16 sm:pt-20">
+        <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
+          <Link href={dict.routes.home} className="text-[0.95rem] font-semibold text-navy underline underline-offset-4">
+            ← {dict.legal.backHome}
           </Link>
-          <h1 className="mt-8 animate-rise text-[clamp(2.6rem,6vw,5rem)] font-semibold leading-none tracking-[-0.045em]">
-            {title}
-          </h1>
+          <h1 className="mt-6 text-[clamp(2.1rem,4vw,3rem)] font-semibold leading-tight">{title}</h1>
           {updated && (
-            <p className="mt-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] text-mist">
+            <p className="mt-3 text-[0.95rem] text-stone">
               {dict.legal.updated}: {updated}
             </p>
           )}
         </div>
       </section>
-      <section className="bg-paper py-16 sm:py-24">
-        <div className="mx-auto max-w-[88rem] px-5 sm:px-8 lg:px-12">
+      <section className="bg-white py-14 sm:py-20">
+        <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
           <div className="prose-legal max-w-3xl">
             {dict.legal.germanOnly && <p className="note">{dict.legal.germanOnly}</p>}
             {children}
