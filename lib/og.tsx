@@ -20,18 +20,16 @@ export async function renderOgImage(dict: Dictionary) {
 
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#0a0f16", position: "relative" }}>
-        <div
-          style={{
-            position: "absolute",
-            left: -200,
-            top: -260,
-            width: 760,
-            height: 760,
-            borderRadius: 760,
-            background: "radial-gradient(circle, rgba(11,37,128,0.75), rgba(11,37,128,0) 70%)",
-          }}
-        />
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          position: "relative",
+          backgroundColor: "#0a0f16",
+          backgroundImage: "radial-gradient(circle at 12% 8%, rgba(11,37,128,0.7) 0%, rgba(10,15,22,0) 60%)",
+        }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={photoSrc}
@@ -60,8 +58,22 @@ export async function renderOgImage(dict: Dictionary) {
             s
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontFamily: "Geist", fontWeight: 600, fontSize: 70, lineHeight: 1.02, letterSpacing: -3, color: "#f6f5f1" }}>
-              {lead}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                columnGap: 18,
+                fontFamily: "Geist",
+                fontWeight: 600,
+                fontSize: 68,
+                lineHeight: 1.04,
+                letterSpacing: -3,
+                color: "#f6f5f1",
+              }}
+            >
+              {lead.split(" ").map((word) => (
+                <span key={word}>{word}</span>
+              ))}
             </div>
             <div style={{ fontFamily: "Instrument Serif", fontStyle: "italic", fontSize: 82, lineHeight: 1.05, color: "#2fc2dc" }}>
               {tail}

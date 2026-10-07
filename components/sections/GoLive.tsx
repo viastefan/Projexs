@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Check } from "@/components/ui/Icons";
+import { nowrapTerms } from "@/components/ui/Nowrap";
 
 export function GoLive({ dict }: { dict: Dictionary }) {
   const g = dict.golive;
@@ -77,7 +78,7 @@ export function GoLive({ dict }: { dict: Dictionary }) {
             data-reveal
             className="mt-6 text-[clamp(2.3rem,5vw,4.4rem)] font-semibold leading-[1.02] tracking-[-0.045em]"
           >
-            {g.title}
+            {nowrapTerms(g.title)}
           </h2>
           <figure data-reveal style={{ "--reveal-delay": 120 } as React.CSSProperties} className="mt-10">
             <svg aria-hidden="true" viewBox="0 0 48 36" className="h-8 w-10 text-accent" fill="currentColor">

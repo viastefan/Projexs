@@ -20,6 +20,12 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
     if (startedRef.current) startedRef.current.value = String(Date.now());
   }, []);
 
+  // Nach fehlerhaftem Absenden: erstes ungültiges Feld fokussieren
+  useEffect(() => {
+    if (state.status !== "invalid") return;
+    document.querySelector<HTMLElement>("form [aria-invalid='true']")?.focus();
+  }, [state]);
+
   const message = (code?: ContactErrorCode) =>
     code === "required"
       ? f.required
@@ -47,17 +53,14 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
   }
 
   if (state.status === "unconfigured") {
-    const body = [
-      `${f.firstName} ${f.lastName}: ${v.firstName ?? ""} ${v.lastName ?? ""}`,
+    const details = [
+      `Name: ${v.firstName ?? ""} ${v.lastName ?? ""}`,
       `${f.email}: ${v.email ?? ""}`,
-      v.phone ? `${f.phone}: ${v.phone}` : "",
-      v.company ? `${f.company}: ${v.company}` : "",
-      v.topic ? `${f.topic} ${v.topic}` : "",
-      "",
-      v.message ?? "",
-    ]
-      .filter((line, i, arr) => line !== "" || arr[i - 1] !== "")
-      .join("\n");
+      v.phone && `${f.phone}: ${v.phone}`,
+      v.company && `${f.company}: ${v.company}`,
+      v.topic && `${f.topic} ${v.topic}`,
+    ].filter(Boolean);
+    const body = `${details.join("\n")}\n\n${v.message ?? ""}`;
     const href = `mailto:${site.contact.email}?subject=${encodeURIComponent(f.mailSubject)}&body=${encodeURIComponent(body)}`;
 
     return (
@@ -88,7 +91,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         </label>
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field name="firstName" label={f.firstName} autoComplete="given-name" required error={err("firstName")} defaultValue={v.firstName} />
         <Field name="lastName" label={f.lastName} autoComplete="family-name" required error={err("lastName")} defaultValue={v.lastName} />
         <Field name="email" type="email" label={f.email} autoComplete="email" required error={err("email")} defaultValue={v.email} />

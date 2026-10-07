@@ -36,7 +36,7 @@ export function Services({ dict }: { dict: Dictionary }) {
       <div className="mx-auto max-w-[88rem] px-5 sm:px-8 lg:px-12">
         <SectionHeading eyebrow={<Eyebrow index="01">{s.eyebrow}</Eyebrow>} title={s.title} intro={s.intro} />
 
-        <ol className="mt-16 grid gap-5 lg:mt-24 lg:grid-cols-3">
+        <ol className="mt-16 grid grid-cols-1 gap-5 lg:mt-24 lg:grid-cols-3">
           {s.roles.map((role, i) => (
             <li
               key={role.title}
@@ -71,7 +71,7 @@ export function Services({ dict }: { dict: Dictionary }) {
           <h3 data-reveal className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-stone">
             {s.situationsTitle}
           </h3>
-          <ul className="mt-8 grid border-t border-ink/10 md:grid-cols-2">
+          <ul className="mt-8 grid grid-cols-1 border-t border-ink/10 md:grid-cols-2">
             {s.situations.map((item, i) => (
               <li
                 key={item.title}
@@ -82,7 +82,7 @@ export function Services({ dict }: { dict: Dictionary }) {
                 <span className="font-serif text-[2.6rem] leading-none text-accent-deep/80 transition-colors duration-300 group-hover:text-accent-deep">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <div>
+                <div className="min-w-0">
                   <h4 className="text-xl font-semibold tracking-[-0.02em] sm:text-[1.4rem]">{item.title}</h4>
                   <p className="mt-3 max-w-[34rem] leading-relaxed text-stone">{item.text}</p>
                 </div>

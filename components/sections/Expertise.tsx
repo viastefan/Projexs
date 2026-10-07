@@ -32,7 +32,7 @@ export function Expertise({ dict }: { dict: Dictionary }) {
         />
 
         {/* Säulen der Expertise */}
-        <ul className="mt-16 grid gap-px overflow-hidden rounded-[1.75rem] bg-white/10 ring-1 ring-white/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-3">
+        <ul className="mt-16 grid grid-cols-1 gap-px overflow-hidden rounded-[1.75rem] bg-white/10 ring-1 ring-white/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-3">
           {e.pillars.map((p, i) => (
             <li
               key={p.title}
@@ -52,7 +52,7 @@ export function Expertise({ dict }: { dict: Dictionary }) {
           <h3 data-reveal className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-mist">
             {e.highlightsTitle}
           </h3>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {e.highlights.map((h, i) => (
               <li
                 key={h.title}

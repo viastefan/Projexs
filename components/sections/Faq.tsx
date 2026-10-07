@@ -30,7 +30,7 @@ export function Faq({ dict }: { dict: Dictionary }) {
                   <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-7 text-left sm:py-8">
                     <span className="flex gap-5">
                       <span className="pt-1 font-mono text-xs text-stone">{String(i + 1).padStart(2, "0")}</span>
-                      <span className="text-[1.15rem] font-semibold leading-snug tracking-[-0.02em] transition-colors group-hover:text-accent-deep sm:text-[1.35rem]">
+                      <span className="min-w-0 text-[1.15rem] font-semibold leading-snug tracking-[-0.02em] transition-colors group-hover:text-accent-deep sm:text-[1.35rem]">
                         {item.q}
                       </span>
                     </span>

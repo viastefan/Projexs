@@ -16,7 +16,7 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <div className={cn("grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12", className)}>
+    <div className={cn("grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end lg:gap-12", className)}>
       <div className="lg:col-span-7">
         <div data-reveal>{eyebrow}</div>
         <h2

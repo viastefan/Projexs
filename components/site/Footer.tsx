@@ -98,7 +98,7 @@ export function Footer({ dict }: { dict: Dictionary }) {
           <div className="flex items-end justify-between gap-6 border-t border-white/10 pt-8">
             <span className="font-sans text-[clamp(4.5rem,17vw,15.5rem)] font-semibold leading-[0.78] tracking-[-0.06em] text-white/[0.05]">
               Proje
-              <XMark className="inline-block h-[0.66em] w-[0.66em] align-baseline text-white/[0.05] opacity-80" />
+              <XMark className="inline-block h-[0.66em] w-[0.66em] align-baseline text-white/[0.05] opacity-50" />
               s
             </span>
           </div>

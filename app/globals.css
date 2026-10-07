@@ -127,6 +127,19 @@
     text-wrap: balance;
   }
 
+  /* Lange deutsche Komposita auf schmalen Displays sauber trennen */
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  li,
+  dd {
+    overflow-wrap: break-word;
+    hyphens: auto;
+    hyphenate-limit-chars: 12 5 5;
+  }
+
   p {
     text-wrap: pretty;
   }

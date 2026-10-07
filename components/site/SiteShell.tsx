@@ -11,7 +11,7 @@ export function SiteShell({ dict, children }: { dict: Dictionary; children: Reac
     <html lang={dict.htmlLang} className={fontVariables} data-scroll-behavior="smooth">
       <body className="min-h-dvh bg-paper text-ink antialiased">
         <Header dict={dict} />
-        <main id="main" tabIndex={-1} className="outline-none">
+        <main id="main" tabIndex={-1} className="overflow-x-clip outline-none">
           {children}
         </main>
         <Footer dict={dict} />

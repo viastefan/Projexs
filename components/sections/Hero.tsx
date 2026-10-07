@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/Button";
 import { Check } from "@/components/ui/Icons";
+import { nowrapTerms } from "@/components/ui/Nowrap";
 
 export function Hero({ dict }: { dict: Dictionary }) {
   const h = dict.hero;
@@ -71,7 +72,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
               <em className="pr-[0.08em] font-serif text-[1.08em] font-normal italic tracking-[-0.02em] text-accent">
                 {h.titleAccent}
               </em>{" "}
-              {h.titleTail}
+              {nowrapTerms(h.titleTail)}
             </span>
           </h1>
 

@@ -28,7 +28,7 @@ function EngagementCard({ e, labels, index }: { e: Engagement; labels: Labels; i
         {e.points.map((p) => (
           <li key={p} className="flex gap-3 leading-relaxed text-ink/80">
             <span aria-hidden="true" className="mt-[0.7em] h-px w-3 shrink-0 bg-accent-deep" />
-            <span>{p}</span>
+            <span className="min-w-0">{p}</span>
           </li>
         ))}
       </ul>
@@ -37,7 +37,7 @@ function EngagementCard({ e, labels, index }: { e: Engagement; labels: Labels; i
           <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent text-ink">
             <Check className="size-4" />
           </span>
-          <p className="leading-relaxed">
+          <p className="min-w-0 leading-relaxed">
             <span className="mr-2 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent-deep">{labels.result}</span>
             <span className="font-medium text-ink">{e.result}</span>
           </p>
@@ -52,7 +52,7 @@ function ClientCase({ c, labels, index }: { c: Client; labels: Labels; index: nu
   const hidden = c.engagements.slice(VISIBLE);
 
   return (
-    <article className="grid gap-10 border-t border-ink/15 py-14 sm:py-20 lg:grid-cols-12 lg:gap-16">
+    <article className="grid grid-cols-1 gap-10 border-t border-ink/15 py-14 sm:py-20 lg:grid-cols-12 lg:gap-16">
       <header className="self-start lg:sticky lg:top-28 lg:col-span-5 xl:col-span-4">
         <div data-reveal className="flex items-center gap-3 font-mono text-[0.72rem] text-stone">
           <span className="text-ink">{String(index + 1).padStart(2, "0")}</span>
@@ -73,18 +73,18 @@ function ClientCase({ c, labels, index }: { c: Client; labels: Labels; index: nu
           {c.release && (
             <div className="flex gap-4">
               <dt className="w-28 shrink-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-stone">{labels.release}</dt>
-              <dd className="font-medium">{c.release}</dd>
+              <dd className="min-w-0 font-medium">{c.release}</dd>
             </div>
           )}
           {c.team && (
             <div className="flex gap-4">
               <dt className="w-28 shrink-0 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-stone">{labels.team}</dt>
-              <dd className="font-medium">{c.team}</dd>
+              <dd className="min-w-0 font-medium">{c.team}</dd>
             </div>
           )}
           <div className="flex gap-4">
             <dt className="w-28 shrink-0 pt-1 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-stone">{labels.modules}</dt>
-            <dd>
+            <dd className="min-w-0">
               <ul className="flex flex-wrap gap-1.5">
                 {c.modules.map((m) => (
                   <li key={m} className="rounded-md bg-ink px-2 py-1 font-mono text-[0.72rem] font-medium text-paper">
@@ -99,9 +99,9 @@ function ClientCase({ c, labels, index }: { c: Client; labels: Labels; index: nu
         {c.kpis.length > 0 && (
           <ul data-reveal className="mt-8 grid grid-cols-3 gap-2">
             {c.kpis.map((k) => (
-              <li key={k.label} className="rounded-2xl bg-ink p-4 text-paper">
+              <li key={k.label} className="min-w-0 rounded-2xl bg-ink p-4 text-paper">
                 <p className="text-[1.35rem] font-semibold leading-none tracking-[-0.03em] text-accent-2 sm:text-2xl">{k.value}</p>
-                <p className="mt-2 text-[0.72rem] leading-snug text-mist">{k.label}</p>
+                <p className="mt-2 hyphens-auto text-[0.72rem] leading-snug text-mist [overflow-wrap:anywhere]">{k.label}</p>
               </li>
             ))}
           </ul>

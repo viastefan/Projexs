@@ -56,17 +56,17 @@ export function About({ dict }: { dict: Dictionary }) {
             <h3 data-reveal className="mt-16 font-mono text-[0.72rem] uppercase tracking-[0.18em] text-stone">
               {a.valuesTitle}
             </h3>
-            <ul className="mt-6 grid gap-4 md:grid-cols-3">
+            <ul className="mt-6 border-t border-ink/10">
               {a.values.map((v, i) => (
                 <li
                   key={v.title}
                   data-reveal
                   style={{ "--reveal-delay": i * 90 } as React.CSSProperties}
-                  className="rounded-2xl border border-ink/10 bg-white/70 p-6"
+                  className="grid grid-cols-1 gap-2 border-b border-ink/10 py-6 sm:grid-cols-[3.5rem_minmax(0,15rem)_minmax(0,1fr)] sm:gap-6"
                 >
                   <span className="font-serif text-3xl leading-none text-accent-deep">{String(i + 1).padStart(2, "0")}</span>
-                  <h4 className="mt-5 text-lg font-semibold leading-snug tracking-[-0.02em]">{v.title}</h4>
-                  <p className="mt-2 text-[0.93rem] leading-relaxed text-stone">{v.text}</p>
+                  <h4 className="text-lg font-semibold leading-snug tracking-[-0.02em]">{v.title}</h4>
+                  <p className="text-[0.95rem] leading-relaxed text-stone">{v.text}</p>
                 </li>
               ))}
             </ul>
@@ -81,7 +81,7 @@ export function About({ dict }: { dict: Dictionary }) {
                   key={c.detail}
                   data-reveal
                   style={{ "--reveal-delay": i * 70 } as React.CSSProperties}
-                  className="group flex flex-col justify-between gap-6 rounded-2xl bg-ink p-5 text-paper transition-transform duration-500 ease-out-expo hover:-translate-y-1"
+                  className="group flex flex-col justify-between gap-6 rounded-2xl bg-ink p-5 text-paper transition-transform duration-500 ease-out-expo last:col-span-2 hover:-translate-y-1"
                 >
                   <span className="font-mono text-[1.15rem] font-medium tracking-tight text-accent-2">{c.name}</span>
                   <span className="text-[0.82rem] leading-snug text-mist">{c.detail}</span>
