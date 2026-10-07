@@ -45,7 +45,6 @@ export const site = {
     hero: "/images/daniela-franzen-hero.jpg",
     portrait: "/images/daniela-franzen-portrait.jpg",
     golive: "/images/daniela-franzen-golive.jpg",
-    avatar: "/images/daniela-franzen-avatar.jpg",
   },
 } as const;
 

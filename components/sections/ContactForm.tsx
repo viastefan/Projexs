@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect } from "react";
 import { submitContact, type ContactErrorCode, type ContactField, type ContactState } from "@/lib/contact";
 import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
@@ -13,13 +13,6 @@ const initialState: ContactState = { status: "idle" };
 export function ContactForm({ dict }: { dict: Dictionary }) {
   const f = dict.contact.form;
   const [state, action, pending] = useActionState(submitContact, initialState);
-  const startedRef = useRef<HTMLInputElement>(null);
-
-  // Zeitpunkt des Seitenaufrufs für den Spam-Schutz (Mindest-Ausfüllzeit)
-  useEffect(() => {
-    if (startedRef.current) startedRef.current.value = String(Date.now());
-  }, []);
-
   // Nach fehlerhaftem Absenden: erstes ungültiges Feld fokussieren
   useEffect(() => {
     if (state.status !== "invalid") return;
@@ -87,7 +80,6 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
 
   return (
     <form action={action} noValidate className="border border-line bg-white p-6 sm:p-10" aria-busy={pending}>
-      <input ref={startedRef} type="hidden" name="startedAt" defaultValue="0" />
       {/* Honeypot – für Menschen unsichtbar */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>

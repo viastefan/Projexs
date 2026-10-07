@@ -24,13 +24,13 @@ export function Footer({ dict }: { dict: Dictionary }) {
           <ul className="mt-4 space-y-2.5">
             {dict.nav.items.map((item) => (
               <li key={item.id}>
-                <Link href={`${home === "/" ? "" : home}#${item.id}`} className="hover:underline underline-offset-4">
+                <Link href={`${home}#${item.id}`} className="hover:underline underline-offset-4">
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href={`${home === "/" ? "" : home}#${dict.ids.contact}`} className="hover:underline underline-offset-4">
+              <Link href={`${home}#${dict.ids.contact}`} className="hover:underline underline-offset-4">
                 {dict.nav.contactLabel}
               </Link>
             </li>

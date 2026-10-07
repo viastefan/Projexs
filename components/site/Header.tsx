@@ -14,7 +14,7 @@ export function Header({ dict }: { dict: Dictionary }) {
   const pathname = usePathname();
   const locale = dict.locale as Locale;
   const home = dict.routes.home;
-  const sectionHref = (id: string) => `${home === "/" ? "" : home}#${id}`;
+  const sectionHref = (id: string) => `${home}#${id}`;
   const switchHref = alternatePath(pathname, locale === "de" ? "en" : "de");
   const [open, setOpen] = useState(false);
 

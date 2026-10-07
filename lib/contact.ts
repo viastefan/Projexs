@@ -14,10 +14,14 @@ export type ContactState = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const MIN_FILL_MS = 2500;
 
 function clean(value: FormDataEntryValue | null, max = 2000) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
+}
+
+/** Entfernt Zeilenumbrüche, damit Eingaben nicht in den Betreff gelangen. */
+function oneLine(text: string) {
+  return text.replace(/[\r\n\t]+/g, " ");
 }
 
 function escapeHtml(text: string) {
@@ -36,11 +40,9 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   };
   const consent = formData.get("consent") === "on";
 
-  // Spam-Schutz: unsichtbares Honeypot-Feld und Mindest-Ausfüllzeit.
-  // Bots erhalten eine scheinbar erfolgreiche Antwort.
+  // Spam-Schutz: unsichtbares Honeypot-Feld. Bots erhalten eine scheinbar erfolgreiche Antwort.
   const honeypot = clean(formData.get("website"));
-  const startedAt = Number(formData.get("startedAt") ?? 0);
-  if (honeypot || (startedAt > 0 && Date.now() - startedAt < MIN_FILL_MS)) {
+  if (honeypot) {
     return { status: "success" };
   }
 
@@ -107,11 +109,12 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
         from,
         to: [to],
         reply_to: values.email,
-        subject: `Anfrage von ${name}${values.company ? ` (${values.company})` : ""}${values.topic ? ` – ${values.topic}` : ""}`,
+        subject: oneLine(`Anfrage von ${name}${values.company ? ` (${values.company})` : ""}${values.topic ? ` – ${values.topic}` : ""}`),
         text,
         html,
       }),
       cache: "no-store",
+      signal: AbortSignal.timeout(10_000),
     });
 
     if (!res.ok) {
