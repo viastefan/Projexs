@@ -34,6 +34,7 @@ export function PrivacyDe() {
         die Bereitstellung der Website technisch erforderlich ist oder wenn Sie mir über das Kontaktformular bzw. per E-Mail
         eine Nachricht senden.
       </p>
+      <p>Eine automatisierte Entscheidungsfindung einschließlich Profiling (Art. 22 DSGVO) findet nicht statt.</p>
 
       <h2>3. Hosting und Server-Logfiles</h2>
       <p>
@@ -165,6 +166,7 @@ export function PrivacyEn() {
         analytics or marketing services. Personal data is only processed where technically necessary to provide the website
         or when you send me a message via the contact form or by email.
       </p>
+      <p>There is no automated decision-making, including profiling (Art. 22 GDPR).</p>
 
       <h2>3. Hosting and server log files</h2>
       <p>

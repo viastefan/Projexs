@@ -67,7 +67,7 @@ export function ImprintDe() {
 export function ImprintEn() {
   return (
     <>
-      <h2>Information pursuant to Section 5 DDG (German Digital Services Act)</h2>
+      <h2>Legal notice pursuant to Section 5 DDG (Digitale-Dienste-Gesetz)</h2>
       <address>
         <strong>ProjeXs – {site.owner.name}</strong>
         <br />
