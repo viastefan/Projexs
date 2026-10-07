@@ -60,7 +60,7 @@ export const en: Dictionary = {
     menuClose: "Close menu",
     menuTitle: "Navigation",
     switchLabel: "DE",
-    switchAria: "Auf Deutsch wechseln",
+    switchAria: "Switch to German",
     homeAria: "ProjeXs – home",
   },
 
@@ -70,7 +70,7 @@ export const en: Dictionary = {
     titleAccent: "Safely",
     titleTail: "to go-live.",
     lead:
-      "I’m Daniela Franzen – SAP programme and project manager with more than 23 years of experience. I lead S/4HANA transformations, global template rollouts and upgrades to success: on time, on budget and with teams that own the result.",
+      "I’m Daniela Franzen – SAP programme and project manager with more than 23 years of experience. I lead S/4HANA transformations, global template rollouts and upgrades to success – with budget discipline and teams that own the result.",
     primary: "Start a project",
     secondary: "View projects",
     credentialsLabel: "Certifications",
@@ -286,7 +286,7 @@ export const en: Dictionary = {
         kpis: [
           { value: "16 years", label: "SAP project & portfolio management" },
           { value: "70", label: "project members at peak" },
-          { value: "100 %", label: "of rollouts on time & on budget" },
+          { value: "All", label: "SAP rollouts 2005–2016 on time & on budget" },
         ],
         engagements: [
           {
@@ -403,7 +403,7 @@ export const en: Dictionary = {
     roles: "Project leadership · Programme management · Interim management",
     title: "I specialise in leading and successfully delivering complex SAP projects and programmes.",
     paragraphs: [
-      "With more than 23 years of experience in SAP projects – over 15 of them in leadership positions – ProjeXs offers you tailored advice and successful delivery of your initiatives.",
+      "With more than 23 years of experience in SAP projects – over 15 of them in leadership positions – at ProjeXs I offer you tailored advice and successful delivery of your initiatives.",
       "My career began as an SD consultant at IBM. It was followed by 16 years of SAP project and portfolio management at Panasonic and programme leadership of a global S/4HANA implementation at HELM AG. This blend of consulting and in-house experience shapes how I work.",
     ],
     portraitAlt: "Portrait of Daniela Franzen in a light blazer",
@@ -453,7 +453,7 @@ export const en: Dictionary = {
       },
       {
         q: "Do you work on-site or remotely?",
-        a: "I’m based in Buchholz in der Nordheide near Hamburg. Depending on the project phase I work on-site, hybrid or remotely – including in international teams across Europe and Asia.",
+        a: "I’m based in Buchholz in der Nordheide near Hamburg. I have worked in international teams across Europe and Asia.",
       },
       {
         q: "Which certifications do you hold?",
@@ -474,7 +474,7 @@ export const en: Dictionary = {
     eyebrow: "Contact",
     title: "Let’s talk about your SAP project.",
     intro:
-      "Use the contact form or write to me directly. I’ll get back to you personally – confidentially and without obligation.",
+      "Use the contact form or write to me directly. I’ll get back to you personally.",
     personal: "I look forward to hearing from you.",
     emailLabel: "Email",
     phoneLabel: "Mobile",

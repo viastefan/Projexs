@@ -61,7 +61,7 @@ export const de = {
     menuClose: "Menü schließen",
     menuTitle: "Navigation",
     switchLabel: "EN",
-    switchAria: "Switch to English",
+    switchAria: "Auf Englisch wechseln",
     homeAria: "ProjeXs – zur Startseite",
   },
 
@@ -71,7 +71,7 @@ export const de = {
     titleAccent: "Sicher",
     titleTail: "ins Go-live.",
     lead:
-      "Ich bin Daniela Franzen – SAP-Programm- und Projektmanagerin mit über 23 Jahren Erfahrung. Ich führe S/4HANA-Transformationen, globale Template-Rollouts und Upgrades zum Ziel: termingerecht, im Budget und mit Teams, die das Ergebnis tragen.",
+      "Ich bin Daniela Franzen – SAP-Programm- und Projektmanagerin mit über 23 Jahren Erfahrung. Ich führe S/4HANA-Transformationen, globale Template-Rollouts und Upgrades zum Ziel – mit Budgettreue und Teams, die das Ergebnis tragen.",
     primary: "Projekt anfragen",
     secondary: "Projekte ansehen",
     credentialsLabel: "Zertifizierungen",
@@ -242,7 +242,7 @@ export const de = {
         ],
         engagements: [
           {
-            role: "Programm-Manager S/4HANA-Implementierung Europa & Asien",
+            role: "Programm-Managerin S/4HANA-Implementierung Europa & Asien",
             period: "04/2021 – 05/2024",
             points: [
               "Entwicklung und Umsetzung einer detaillierten globalen Rollout-Roadmap für Europa, Asien und Amerika",
@@ -256,7 +256,7 @@ export const de = {
               "Erfolgreicher Go-live in 8 europäischen und 5 asiatischen Niederlassungen innerhalb des geplanten 3-Jahres-Zeitrahmens – termingerecht und im Budget.",
           },
           {
-            role: "Programm-Manager SAP-Upgrade",
+            role: "Programm-Managerin SAP-Upgrade",
             period: "06/2023 – 01/2024",
             points: [
               "Durchführung des Upgrades von S/4HANA 1809 auf 2022",
@@ -288,7 +288,7 @@ export const de = {
         kpis: [
           { value: "16 Jahre", label: "SAP-Projekt- & Portfoliomanagement" },
           { value: "70", label: "Projektmitglieder in der Spitze" },
-          { value: "100 %", label: "der Rollouts termingerecht & im Budget" },
+          { value: "Alle", label: "SAP-Rollouts 2005–2016 termingerecht & im Budget" },
         ],
         engagements: [
           {
@@ -304,7 +304,7 @@ export const de = {
               "Projektkostenkalkulation erfolgreich abgeschlossen und konzerninternen Genehmigungsprozess gestartet.",
           },
           {
-            role: "Projektmanager BW on HANA",
+            role: "Projektmanagerin BW on HANA",
             period: "10/2017 – 09/2018",
             points: [
               "Leitung der Migration der zentralen SAP BW-Systeme von DB2 auf BW on HANA",
@@ -313,7 +313,7 @@ export const de = {
             result: "",
           },
           {
-            role: "Projektmanager Agile Projektmethodik",
+            role: "Projektmanagerin Agile Projektmethodik",
             period: "04/2017 – 08/2018",
             points: ["Entwicklung und Implementierung einer internen hybrid-agilen Projektmethodik auf Basis von Scrum"],
             result: "",
@@ -326,7 +326,7 @@ export const de = {
               "Business Case und strategische Roadmap – Grundlage für den späteren S/4HANA-Implementierungsplan.",
           },
           {
-            role: "Projektmanager SAP-Rollouts",
+            role: "Projektmanagerin SAP-Rollouts",
             period: "2005 – 2016",
             points: [
               "SAP-Rollouts u. a. in der Türkei, den Niederlanden, Portugal und Finnland",
@@ -441,7 +441,7 @@ export const de = {
     timeline: [
       { year: "2001", title: "IBM Deutschland", text: "SD-Consultant SAP-Implementierung & Rollout" },
       { year: "2003", title: "Panasonic", text: "SAP-Projekt- & Portfoliomanagement, Integration Manager S/4HANA" },
-      { year: "2020", title: "HELM AG", text: "Programm-Manager globale S/4HANA-Implementierung" },
+      { year: "2020", title: "HELM AG", text: "Programm-Managerin globale S/4HANA-Implementierung" },
       { year: "Heute", title: "ProjeXs", text: "Projektleitung, Programmmanagement & Interim Management" },
     ],
   },
@@ -460,7 +460,7 @@ export const de = {
       },
       {
         q: "Arbeiten Sie vor Ort oder remote?",
-        a: "Mein Sitz ist Buchholz in der Nordheide bei Hamburg. Je nach Projektphase arbeite ich vor Ort, hybrid oder remote – auch in internationalen Teams in Europa und Asien.",
+        a: "Mein Sitz ist Buchholz in der Nordheide bei Hamburg. Ich habe in internationalen Teams in Europa und Asien gearbeitet.",
       },
       {
         q: "Welche Zertifizierungen bringen Sie mit?",
@@ -481,7 +481,7 @@ export const de = {
     eyebrow: "Kontakt",
     title: "Lassen Sie uns über Ihr SAP-Projekt sprechen.",
     intro:
-      "Nutzen Sie das Kontaktformular oder schreiben Sie mir direkt. Ich melde mich persönlich bei Ihnen – vertraulich und unverbindlich.",
+      "Nutzen Sie das Kontaktformular oder schreiben Sie mir direkt. Ich melde mich persönlich bei Ihnen.",
     personal: "Ich freue mich auf Ihre Nachricht.",
     emailLabel: "E-Mail",
     phoneLabel: "Mobil",

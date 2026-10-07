@@ -29,15 +29,11 @@ export function buildJsonLd(dict: Dictionary) {
           addressRegion: site.address.region,
           addressCountry: site.address.countryCode,
         },
-        areaServed: ["DE", "AT", "CH", "EU"],
-        knowsAbout: [
-          "SAP S/4HANA",
-          "SAP Projektmanagement",
-          "SAP Programmmanagement",
-          "SAP Template Rollout",
-          "Interim Management",
-          "IT-Krisenmanagement",
-        ],
+        areaServed: ["DE", "AT", "EU"],
+        knowsAbout:
+          dict.locale === "de"
+            ? ["SAP S/4HANA", "SAP Projektmanagement", "SAP Programmmanagement", "SAP Template Rollout", "Interim Management", "IT-Krisenmanagement"]
+            : ["SAP S/4HANA", "SAP project management", "SAP programme management", "SAP template rollout", "Interim management", "IT crisis management"],
         sameAs: [site.contact.linkedin],
         inLanguage: dict.htmlLang,
       },
