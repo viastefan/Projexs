@@ -2,11 +2,15 @@
 
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { buttonBase, buttonVariants } from "@/components/ui/Button";
 
 export const INQUIRY_EVENT = "projexs:inquiry";
 
-export function openInquiry() {
-  window.dispatchEvent(new CustomEvent(INQUIRY_EVENT));
+/** Herkunft der Anfrage – wird als verstecktes Feld „source“ mitgesendet. */
+export type InquirySource = "dialog" | "form" | "contact-page" | "popup";
+
+export function openInquiry(source: InquirySource = "dialog") {
+  window.dispatchEvent(new CustomEvent<{ source: InquirySource }>(INQUIRY_EVENT, { detail: { source } }));
 }
 
 /**
@@ -19,28 +23,24 @@ export function InquiryTrigger({
   variant = "primary",
   display = "inline-flex",
   className,
+  source = "dialog",
 }: {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "plain";
+  variant?: "primary" | "secondary" | "light" | "ghost-light" | "plain";
   /** Display-Klassen getrennt, damit responsive Varianten wie "hidden md:inline-flex" greifen. */
   display?: string;
   className?: string;
+  source?: InquirySource;
 }) {
-  const styles = {
-    primary:
-      "h-12 items-center justify-center gap-2 rounded-md bg-navy px-6 text-[1rem] font-semibold text-white transition-colors hover:bg-navy-deep",
-    secondary:
-      "h-12 items-center justify-center gap-2 rounded-md border border-navy px-6 text-[1rem] font-semibold text-navy transition-colors hover:bg-navy hover:text-white",
-    plain: "",
-  };
+  const styles = variant === "plain" ? "" : cn(buttonBase.replace("inline-flex ", ""), buttonVariants[variant]);
   return (
     <a
       href={href}
-      className={cn(display, styles[variant], className)}
+      className={cn(display, styles, className)}
       onClick={(e) => {
         e.preventDefault();
-        openInquiry();
+        openInquiry(source);
       }}
     >
       {children}

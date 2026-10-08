@@ -7,6 +7,7 @@ import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, Mail } from "@/components/ui/Icons";
+import type { InquirySource } from "./InquiryTrigger";
 
 type StepKey = "topic" | "timeframe" | "person" | "contact" | "message" | "consent";
 
@@ -41,7 +42,16 @@ const emptyValues: Values = {
  * Alle Felder bleiben in einem Formular; nicht aktive Schritte sind ausgeblendet,
  * sodass am Ende ein einziger Server-Aufruf erfolgt.
  */
-export function InquiryForm({ dict, variant = "inline" }: { dict: Dictionary; variant?: "inline" | "modal" }) {
+export function InquiryForm({
+  dict,
+  variant = "inline",
+  source,
+}: {
+  dict: Dictionary;
+  variant?: "inline" | "modal";
+  /** Herkunft der Anfrage (verstecktes Feld „source“). */
+  source?: InquirySource;
+}) {
   const f = dict.contact.form;
   const q = dict.inquiry;
   const [state, action, pending] = useActionState(submitContact, initialState);
@@ -101,10 +111,6 @@ export function InquiryForm({ dict, variant = "inline" }: { dict: Dictionary; va
       if (!values.email.trim()) errors.email = f.required;
       else if (!EMAIL_RE.test(values.email.trim())) errors.email = f.invalidEmail;
     }
-    if (s.key === "message") {
-      if (!values.message.trim()) errors.message = f.required;
-      else if (values.message.trim().length < 10) errors.message = f.tooShort;
-    }
     if (s.key === "consent" && !values.consent) errors.consent = f.consentRequired;
     setClientErrors(errors);
     return Object.keys(errors).length === 0;
@@ -126,7 +132,7 @@ export function InquiryForm({ dict, variant = "inline" }: { dict: Dictionary; va
 
   const frame = cn(
     "bg-white",
-    variant === "inline" ? "rounded-lg border border-line p-6 sm:p-10" : "p-6 sm:p-8",
+    variant === "inline" ? "rounded-xl border border-line p-5 shadow-[var(--shadow-card)] sm:p-10" : "p-5 sm:p-8",
   );
 
   if (state.status === "success") {
@@ -181,6 +187,8 @@ export function InquiryForm({ dict, variant = "inline" }: { dict: Dictionary; va
 
   return (
     <form action={action} noValidate onKeyDown={onKeyDown} className={frame} aria-busy={pending}>
+      <input type="hidden" name="source" value={source ?? (variant === "modal" ? "dialog" : "contact-page")} />
+      <input type="hidden" name="locale" value={dict.locale} />
       {/* Honeypot – für Menschen unsichtbar */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
@@ -286,6 +294,7 @@ export function InquiryForm({ dict, variant = "inline" }: { dict: Dictionary; va
               {err("message")}
             </p>
           )}
+          <p className="mt-5 text-[0.9rem] text-stone">{q.optionalHint}</p>
         </div>
 
         {/* 6 · Einwilligung */}

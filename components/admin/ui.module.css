@@ -1,0 +1,1017 @@
+/*
+ * Grundbausteine der Praxis-App — sachlich und ruhig wie ein gutes
+ * Büroprogramm: heller, neutraler Grund, weiße Flächen mit feiner Linie,
+ * kleine Rundungen, schlichte Knöpfe. Hell oder dunkel nach Systemeinstellung. Navy und Türkis aus dem ProjeXs-Logo sind die Akzentfarben und wird
+ * sparsam eingesetzt.
+ *
+ * Größen sind feste rem-Werte statt der skalierenden Designpixel der Website:
+ * Ein Werkzeug soll auf jedem Gerät gleich greifbar sein.
+ */
+
+.root,
+.root [data-theme='light'] {
+  --a-bg: #f7f7f6;
+
+  /* Flächen: weiß, ohne Glas. Die --a-glass-Namen bleiben, damit alle
+     Bausteine, die sie benutzen, automatisch mitgehen. */
+  --a-glass: #ffffff;
+  --a-glass-strong: #ffffff;
+  --a-glass-blur: none;
+  --a-glass-rim: transparent;
+  --a-glass-edge: #ececea;
+  --a-glass-shadow: 0 1px 2px rgba(20, 22, 20, 0.03);
+
+  --a-surface: #ffffff;
+  --a-solid: #ffffff;
+  --a-elevated: #ffffff;
+  --a-field: #ffffff;
+  --a-sunken: #f2f2f1;
+  --a-sunken-strong: #e9e9e7;
+  --a-line: #efefed;
+  --a-line-strong: #e2e2df;
+  --a-ink: #1d1d1f;
+  --a-text: #333533;
+  --a-mute: #6e716c;
+  --a-faint: #a3a6a1;
+  /* Salbei, etwas dunkler als auf der Website — für Knöpfe und Auswahl */
+  --a-accent: #082078;
+  --a-accent-hover: #061a5e;
+  --a-accent-wash: rgba(8, 32, 120, 0.08);
+  --a-on-accent: #ffffff;
+  --a-focus: #082078;
+  --a-bar: #ffffff;
+  --a-bar-line: #ececea;
+
+  --a-ok: #2e6b3a;
+  --a-ok-wash: rgba(46, 107, 58, 0.08);
+  --a-warn: #8a4a06;
+  --a-warn-wash: rgba(176, 106, 20, 0.1);
+  --a-bad: #b3261e;
+  --a-bad-wash: rgba(179, 38, 30, 0.07);
+  --a-info: #2b5a86;
+  --a-info-wash: rgba(43, 90, 134, 0.08);
+  --a-badge: #1d1d1f;
+  /* Knöpfe wie bei Apple/Vercel: fast schwarz, rund, klein */
+  --a-button: #1d1d1f;
+  --a-button-hover: #3a3a3c;
+  --a-on-button: #ffffff;
+  --a-secondary: #efefee;
+  --a-secondary-hover: #e6e6e4;
+  --a-chip-accent: #1d1d1f;
+  --a-on-chip-accent: #ffffff;
+  --a-switch-off: #cfd0cb;
+  --a-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E");
+
+  --a-radius: 14px;
+  --a-radius-sm: 10px;
+  --a-shadow: var(--a-glass-shadow);
+  --a-font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-source), 'Helvetica Neue', system-ui, sans-serif;
+  --a-font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', var(--font-source), 'Helvetica Neue',
+    system-ui, sans-serif;
+  --a-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --a-spring: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  position: relative;
+  isolation: isolate;
+  color-scheme: light;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--a-bg);
+  color: var(--a-text);
+  font-family: var(--a-font);
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Dunkel nach Systemeinstellung — wie iOS 26 / macOS: tiefes Grau, Flächen
+   mit Hauch von Glas, Navy wird zu hellem Türkis-Blau für Text und Akzente.
+   In den Einstellungen lässt sich die Darstellung festlegen: `data-theme`
+   auf der Hülle der App erzwingt hell oder dunkel (gleiche Werte wie unten). */
+@media (prefers-color-scheme: dark) {
+  .root {
+    --a-bg: #0d0f14;
+    --a-glass: rgba(24, 27, 35, 0.82);
+    --a-glass-strong: rgba(30, 33, 42, 0.92);
+    --a-glass-blur: blur(20px) saturate(1.5);
+    --a-glass-rim: rgba(255, 255, 255, 0.06);
+    --a-glass-edge: rgba(255, 255, 255, 0.08);
+    --a-glass-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --a-surface: #171a21;
+    --a-solid: #1c1f27;
+    --a-elevated: #262a34;
+    --a-field: #12141a;
+    --a-sunken: #1f232c;
+    --a-sunken-strong: #2a2f3a;
+    --a-line: #242833;
+    --a-line-strong: #323744;
+    --a-ink: #f3f4f7;
+    --a-text: #d4d7de;
+    --a-mute: #9aa0ad;
+    --a-faint: #5f6675;
+    --a-accent: #7fc6ff;
+    --a-accent-hover: #a3d6ff;
+    --a-accent-wash: rgba(127, 198, 255, 0.12);
+    --a-on-accent: #0d0f14;
+    --a-focus: #7fc6ff;
+    --a-bar: rgba(13, 15, 20, 0.86);
+    --a-bar-line: rgba(255, 255, 255, 0.08);
+    --a-ok: #6fd48a;
+    --a-ok-wash: rgba(111, 212, 138, 0.12);
+    --a-warn: #f0b35a;
+    --a-warn-wash: rgba(240, 179, 90, 0.14);
+    --a-bad: #ff7b72;
+    --a-bad-wash: rgba(255, 123, 114, 0.12);
+    --a-info: #8fc1ff;
+    --a-info-wash: rgba(143, 193, 255, 0.12);
+    --a-badge: #7fc6ff;
+    --a-button: #f3f4f7;
+    --a-button-hover: #ffffff;
+    color-scheme: dark;
+    --a-on-button: #0d0f14;
+    --a-secondary: #262a34;
+    --a-secondary-hover: #30353f;
+    --a-chip-accent: #7fc6ff;
+    --a-on-chip-accent: #0d0f14;
+    --a-switch-off: #3a3f4b;
+    --a-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E");
+  }
+}
+
+.root [data-theme='dark'] {
+  --a-bg: #0d0f14;
+  --a-glass: rgba(24, 27, 35, 0.82);
+  --a-glass-strong: rgba(30, 33, 42, 0.92);
+  --a-glass-blur: blur(20px) saturate(1.5);
+  --a-glass-rim: rgba(255, 255, 255, 0.06);
+  --a-glass-edge: rgba(255, 255, 255, 0.08);
+  --a-glass-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --a-surface: #171a21;
+  --a-solid: #1c1f27;
+  --a-elevated: #262a34;
+  --a-field: #12141a;
+  --a-sunken: #1f232c;
+  --a-sunken-strong: #2a2f3a;
+  --a-line: #242833;
+  --a-line-strong: #323744;
+  --a-ink: #f3f4f7;
+  --a-text: #d4d7de;
+  --a-mute: #9aa0ad;
+  --a-faint: #5f6675;
+  --a-accent: #7fc6ff;
+  --a-accent-hover: #a3d6ff;
+  --a-accent-wash: rgba(127, 198, 255, 0.12);
+  --a-on-accent: #0d0f14;
+  --a-focus: #7fc6ff;
+  --a-bar: rgba(13, 15, 20, 0.86);
+  --a-bar-line: rgba(255, 255, 255, 0.08);
+  --a-ok: #6fd48a;
+  --a-ok-wash: rgba(111, 212, 138, 0.12);
+  --a-warn: #f0b35a;
+  --a-warn-wash: rgba(240, 179, 90, 0.14);
+  --a-bad: #ff7b72;
+  --a-bad-wash: rgba(255, 123, 114, 0.12);
+  --a-info: #8fc1ff;
+  --a-info-wash: rgba(143, 193, 255, 0.12);
+  --a-badge: #7fc6ff;
+  --a-button: #f3f4f7;
+  --a-button-hover: #ffffff;
+  color-scheme: dark;
+  --a-on-button: #0d0f14;
+  --a-secondary: #262a34;
+  --a-secondary-hover: #30353f;
+  --a-chip-accent: #7fc6ff;
+  --a-on-chip-accent: #0d0f14;
+  --a-switch-off: #3a3f4b;
+  --a-select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa0ad' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3C/svg%3E");
+}
+
+/* Unsichtbar, aber für Screenreader da (CodeBoxes, Fieldsets). */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Fläche mit feiner Linie — für Karten, Leisten, Dialoge. */
+.glass {
+  background: var(--a-glass);
+  box-shadow:
+    0 0 0 1px var(--a-glass-edge),
+    var(--a-glass-shadow);
+}
+
+/* Die Website setzt Überschriften in ihrer Serife — in der App gilt die Systemschrift. */
+/* :where() hält die Regel so schwach wie die der Website — Klassen wie .label behalten ihre Farbe. */
+:where(.root) :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--a-font-display);
+  color: var(--a-ink);
+}
+
+.root :focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--a-focus) 55%, transparent);
+  outline-offset: 2px;
+}
+
+/* ---------- Typografie ---------- */
+
+/* „Large Title“ wie in iOS */
+.pageTitle {
+  margin: 0;
+  font-family: var(--a-font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--a-ink);
+  text-wrap: balance;
+}
+
+@media (min-width: 900px) {
+  .pageTitle {
+    font-size: 1.75rem;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--a-mute);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--a-font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--a-ink);
+}
+
+.lead {
+  margin: 0.375rem 0 0;
+  max-width: 60ch;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--a-mute);
+}
+
+.muted {
+  color: var(--a-mute);
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+/* ---------- Flächen ---------- */
+
+.card {
+  --pad-x: 1.125rem;
+  border-radius: var(--a-radius);
+  padding: 1rem var(--pad-x);
+  background: var(--a-surface);
+  box-shadow:
+    0 0 0 1px var(--a-glass-edge),
+    var(--a-glass-shadow);
+}
+
+@media (min-width: 640px) {
+  .card {
+    --pad-x: 1.375rem;
+    padding-block: 1.25rem;
+  }
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.stackLg {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.stack > *,
+.stackLg > * {
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .stackLg {
+    gap: 1.5rem;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.divider {
+  height: 1px;
+  margin: 0.25rem 0;
+  border: 0;
+  background: var(--a-line-strong);
+}
+
+/* ---------- Knöpfe ---------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  min-height: 2.125rem;
+  padding: 0.375rem 0.9375rem;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+  /* Umbrechen statt die Karte zu sprengen, falls ein Handy sehr schmal ist */
+  text-wrap: balance;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.button svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex: none;
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.root .primary {
+  background: var(--a-button);
+  color: var(--a-on-button);
+  box-shadow: none;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--a-button-hover);
+}
+
+/* Zweitknopf: zart grau hinterlegt, ohne Rahmen — wie bei Apple */
+.root .secondary {
+  background: var(--a-secondary);
+  color: var(--a-ink);
+  box-shadow: none;
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--a-secondary-hover);
+}
+
+/* „Plain“: nur Text in Akzentfarbe */
+.root .ghost {
+  min-height: 2rem;
+  padding-inline: 0.625rem;
+  background: transparent;
+  color: var(--a-accent);
+  font-weight: 500;
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--a-sunken);
+}
+
+.root .danger {
+  background: var(--a-bad-wash);
+  color: var(--a-bad);
+  box-shadow: none;
+}
+
+.danger:hover:not(:disabled) {
+  background: var(--a-bad-wash);
+}
+
+.block {
+  width: 100%;
+  min-height: 2.5rem;
+}
+
+/* ---------- Formulare ---------- */
+
+.field {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--a-mute);
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--a-mute);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5625rem 0.75rem;
+  border: 1px solid var(--a-line-strong);
+  border-radius: var(--a-radius-sm);
+  background: var(--a-field);
+  box-shadow: none;
+  color: var(--a-ink);
+  /* 16px — darunter zoomt Safari auf dem iPhone beim Tippen in das Feld */
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--a-faint);
+}
+
+.select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: var(--a-select-arrow);
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+}
+
+.textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.textareaTall {
+  min-height: 16rem;
+}
+
+/* Am Computer etwas kleinere Schrift; auf dem Handy bleibt 16px (sonst zoomt Safari). */
+@media (min-width: 900px) {
+  .input,
+  .textarea,
+  .select {
+    font-size: 0.9375rem;
+  }
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #8fa0c4;
+  background-color: var(--a-solid);
+  box-shadow: 0 0 0 3px rgba(8, 32, 120, 0.12);
+  outline: none;
+}
+
+.fieldRow {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 560px) {
+  .fieldRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Häkchen als iOS-Schalter */
+.check {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.check input {
+  order: 2;
+  flex: none;
+  position: relative;
+  width: 2.5rem;
+  height: 1.5rem;
+  margin: 0.125rem 0 0;
+  border-radius: 999px;
+  background: var(--a-switch-off);
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.check input::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.check input:checked {
+  background: var(--a-accent);
+}
+
+.check input:checked::after {
+  transform: translateX(1rem);
+}
+
+/* Gruppe mit Überschrift (fieldset + legend) — ohne Rahmen und Einzug des
+   Browsers. Kasten und Linien gehören an das Element darin, nie an die
+   Gruppe selbst: Sonst läuft die Linie durch die Überschrift. */
+.group {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Schwebend ist die Überschrift ein gewöhnliches Kind der Gruppe — der
+   Browser zeichnet sie dann nicht mehr in den Rahmen hinein. */
+.group > legend {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.groupStack {
+  gap: 1rem;
+}
+
+.groupStack > legend {
+  margin-bottom: -0.5rem;
+}
+
+/* Auswahl wie eine iOS-Liste mit Haken */
+.choices {
+  display: grid;
+  overflow: hidden;
+  border-radius: var(--a-radius-sm);
+  background: var(--a-field);
+  box-shadow: inset 0 0 0 1px var(--a-line-strong);
+}
+
+.choice {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.8125rem 3rem 0.8125rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.choice + .choice::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--a-line);
+}
+
+.choice:has(input:checked) {
+  background: var(--a-accent-wash);
+}
+
+.choice:active {
+  background: var(--a-sunken);
+}
+
+.choice input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.choice:has(input:focus-visible) {
+  box-shadow: inset 0 0 0 2px var(--a-focus);
+}
+
+.choice:has(input:checked)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: -0.625rem;
+  background: var(--a-accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5 10 17.5 19 7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5 10 17.5 19 7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.choiceTitle {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--a-ink);
+}
+
+.choiceText {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--a-mute);
+}
+
+/* ---------- Rückmeldungen ---------- */
+
+.notice {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-start;
+  padding: 0.6875rem 0.875rem;
+  border-radius: var(--a-radius-sm);
+  box-shadow: none;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.notice svg {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.125rem;
+}
+
+.notice a {
+  color: inherit;
+  font-weight: 600;
+}
+
+/* Knopf, der im Hinweis wie ein Link aussieht */
+.noticeLink {
+  font: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.noticeOk {
+  background: var(--a-ok-wash);
+  color: var(--a-ok);
+}
+
+.noticeWarn {
+  background: var(--a-warn-wash);
+  color: var(--a-warn);
+}
+
+.noticeBad {
+  background: var(--a-bad-wash);
+  color: var(--a-bad);
+}
+
+.noticeInfo {
+  background: var(--a-info-wash);
+  color: var(--a-info);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3125rem;
+  padding: 0.0625rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.chip::before {
+  content: '';
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+.chipNeutral {
+  background: var(--a-sunken);
+  color: var(--a-mute);
+}
+
+.chipOk {
+  background: var(--a-ok-wash);
+  color: var(--a-ok);
+}
+
+.chipWarn {
+  background: var(--a-warn-wash);
+  color: var(--a-warn);
+}
+
+.chipBad {
+  background: var(--a-bad-wash);
+  color: var(--a-bad);
+}
+
+.chipInfo {
+  background: var(--a-info-wash);
+  color: var(--a-info);
+}
+
+.chipAccent {
+  background: var(--a-chip-accent);
+  color: var(--a-on-chip-accent);
+}
+
+.chipAccent::before {
+  background: currentColor;
+}
+
+.progress {
+  position: relative;
+  height: 0.3125rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--a-sunken-strong);
+}
+
+.progressBar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--a-accent);
+  transition: width 0.4s var(--a-ease);
+}
+
+.progressIndeterminate {
+  width: 35%;
+  animation: slide 1.4s ease-in-out infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(300%);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressIndeterminate {
+    width: 100%;
+    animation: none;
+    opacity: 0.4;
+  }
+
+  .notice {
+    animation: none;
+  }
+
+  .button,
+  .check input::after {
+    transition: none;
+  }
+}
+
+.empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--a-mute);
+}
+
+.tabularNums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Speichern mit Rückmeldung (SaveBar) ---------- */
+
+.saveBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.875rem;
+}
+
+/* Ungespeichertes: Die Leiste schwebt unten im Bild — über der Tab-Leiste. */
+.saveBar[data-status='dirty'],
+.saveBar[data-status='saving'],
+.saveBar[data-status='error'] {
+  position: sticky;
+  bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  z-index: 20;
+  margin: 0 -0.625rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--a-solid) 94%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px var(--a-line-strong),
+    0 10px 30px -10px rgba(20, 22, 20, 0.22);
+  animation: saveBarIn 0.28s var(--a-ease);
+}
+
+@media (min-width: 900px) {
+  .saveBar[data-status='dirty'],
+  .saveBar[data-status='saving'],
+  .saveBar[data-status='error'] {
+    bottom: 1.25rem;
+  }
+}
+
+@keyframes saveBarIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.saveButton {
+  min-width: 8.5rem;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.15s ease;
+}
+
+.saveButton:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.root .saveButton[data-status='saved'] {
+  background: var(--a-ok);
+  color: #ffffff;
+}
+
+.saveButton[data-status='saved'] svg {
+  animation: savedTick 0.35s var(--a-ease);
+}
+
+.saveButton:disabled {
+  cursor: progress;
+  opacity: 0.85;
+}
+
+@keyframes savedTick {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+.saveNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 1.25rem;
+  font-size: 0.8125rem;
+  color: var(--a-mute);
+}
+
+.saveNote svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex: none;
+}
+
+.saveShort {
+  display: none;
+}
+
+/* Schmal: Leiste einzeilig, Hinweis in kurz */
+@media (max-width: 520px) {
+  .saveBar[data-status] {
+    flex-wrap: nowrap;
+  }
+
+  .saveNote {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .saveLong {
+    display: none;
+  }
+
+  .saveShort {
+    display: inline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .saveButton {
+    min-width: 0;
+    flex: none;
+  }
+}
+
+.saveNote[data-status='saved'] {
+  color: var(--a-ok);
+  font-weight: 500;
+}
+
+.saveNote[data-status='error'] {
+  color: var(--a-bad);
+}
+
+.saveNote[data-status='dirty'] {
+  color: var(--a-ink);
+}
+
+.saveDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #c98a1b;
+  box-shadow: 0 0 0 3px rgba(201, 138, 27, 0.18);
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saveBar[data-status],
+  .saveButton[data-status='saved'] svg {
+    animation: none;
+  }
+
+  .spin {
+    animation-duration: 2s;
+  }
+}

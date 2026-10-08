@@ -1,0 +1,1301 @@
+/*
+ * Die Filme der Anleitung. Jeder läuft 9 Sekunden in Schleife; alle Schritte
+ * eines Films sind Prozentangaben derselben Zeitachse. Ohne Animation (etwa
+ * bei „Bewegung reduzieren“) zeigen die Grundwerte den Endzustand.
+ */
+
+.device {
+  --dur: 9s;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --m-bg: #f2f2f7;
+  --m-card: #ffffff;
+  --m-ink: #111211;
+  --m-mute: #666966;
+  --m-line: rgba(60, 60, 67, 0.14);
+  --m-accent: #082078;
+
+  position: relative;
+  width: 256px;
+  aspect-ratio: 256 / 536;
+  padding: 9px;
+  border-radius: 46px;
+  background: #151716;
+  box-shadow:
+    0 40px 80px -20px rgba(20, 30, 22, 0.45),
+    0 18px 36px -18px rgba(20, 30, 22, 0.35);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', var(--font-source), 'Helvetica Neue', sans-serif;
+  color: var(--m-ink);
+  letter-spacing: -0.01em;
+  user-select: none;
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 38px;
+  background: var(--m-bg);
+}
+
+/* Rahmen über dem Bildschirm: deckt die Ecken sauber ab, auch wenn animierte
+   Ebenen beim Zeichnen über die Rundung hinausragen. */
+.device::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 10px #151716,
+    inset 0 0 0 11px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.status {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 4px 22px 0 26px;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.island {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 76px;
+  height: 22px;
+  border-radius: 12px;
+  background: #000;
+  transform: translateX(-50%);
+}
+
+.statusIcons {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+}
+
+.statusIcons b {
+  width: 3px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.statusIcons b:nth-child(1) {
+  height: 5px;
+}
+
+.statusIcons b:nth-child(2) {
+  height: 7px;
+}
+
+.statusIcons b:nth-child(3) {
+  height: 9px;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 16px 18px;
+  background: var(--m-bg);
+}
+
+.sheet {
+  z-index: 5;
+  box-shadow: -12px 0 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Bausteine ---------- */
+
+.appIcon {
+  width: 48px;
+  height: 48px;
+  margin: 26px auto 12px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(40, 60, 42, 0.2);
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sub {
+  margin: 3px 0 18px;
+  font-size: 10.5px;
+  text-align: center;
+  color: var(--m-mute);
+}
+
+.eyebrow {
+  margin: 8px 0 0;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--m-mute);
+}
+
+.bigTitle {
+  margin: 2px 0 14px;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 9px;
+  padding: 8px 11px;
+  border-radius: 11px;
+  background: var(--m-card);
+  box-shadow: 0 0 0 0.5px var(--m-line);
+}
+
+.fieldLabel {
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--m-mute);
+}
+
+.fieldValue {
+  min-height: 14px;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+
+.dots {
+  letter-spacing: 0.08em;
+}
+
+.button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 36px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--m-accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 30;
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 50%;
+  background: rgba(20, 24, 21, 0.28);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card,
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--m-card);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.cardLabel {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--m-mute);
+}
+
+.cardNumber {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cardText {
+  font-size: 10.5px;
+  color: var(--m-mute);
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.skeleton {
+  display: block;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.skeletonShort {
+  width: 72%;
+}
+
+.skeletonShorter {
+  width: 46%;
+}
+
+.groupTitle {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.groupText {
+  margin: 0 0 4px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--m-mute);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 0.5px solid var(--m-line);
+  font-size: 11.5px;
+}
+
+.toggle {
+  position: relative;
+  width: 38px;
+  height: 23px;
+  border-radius: 999px;
+  background: #34c759;
+}
+
+.toggle i {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateX(15px);
+}
+
+.chips {
+  display: grid;
+  justify-items: start;
+  margin-bottom: 8px;
+}
+
+.chips > * {
+  grid-area: 1 / 1;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(120, 120, 128, 0.14);
+  color: var(--m-mute);
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+.chipNew {
+  background: rgba(0, 122, 255, 0.12);
+  color: #0058b8;
+}
+
+.chipOk {
+  background: rgba(52, 199, 89, 0.16);
+  color: #1f7a36;
+}
+
+.chipWork {
+  background: rgba(255, 149, 0, 0.16);
+  color: #a14a00;
+}
+
+.spinner {
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+/* ---------- Übersicht / Liste ---------- */
+
+.list {
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--m-card);
+}
+
+.listRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 11px;
+  font-size: 10.5px;
+}
+
+.listRow + .listRow {
+  box-shadow: 0 -0.5px 0 var(--m-line);
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #b9c9b6, #8da08a);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.listMain {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.listMain b {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+}
+
+.listMain span {
+  overflow: hidden;
+  color: var(--m-mute);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.listRow small {
+  align-self: flex-start;
+  color: var(--m-mute);
+  font-size: 9px;
+}
+
+.unread {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #007aff;
+}
+
+.back {
+  margin: 4px 0 2px;
+  font-size: 11.5px;
+  color: #007aff;
+}
+
+/* ---------- Mitteilungen ---------- */
+
+.dim {
+  z-index: 8;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 190px;
+  padding: 14px 0 0;
+  border-radius: 14px;
+  background: rgba(246, 246, 246, 0.96);
+  text-align: center;
+  font-size: 10px;
+  color: var(--m-ink);
+}
+
+.alert > b {
+  padding: 0 14px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.alert > span:first-of-type {
+  padding: 0 14px 8px;
+  color: var(--m-mute);
+  line-height: 1.3;
+}
+
+.alertButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 0.5px solid rgba(60, 60, 67, 0.3);
+  font-size: 12px;
+  color: #007aff;
+}
+
+.alertButtons > * {
+  padding: 9px 0;
+}
+
+.alertButtons > strong {
+  position: relative;
+  border-left: 0.5px solid rgba(60, 60, 67, 0.3);
+}
+
+.lock {
+  z-index: 10;
+  align-items: center;
+  padding-top: 64px;
+  background:
+    radial-gradient(120% 70% at 20% 10%, rgba(156, 194, 157, 0.55), transparent 60%),
+    radial-gradient(90% 60% at 90% 90%, rgba(178, 202, 222, 0.45), transparent 60%),
+    linear-gradient(170deg, #26352a, #111713 70%);
+  color: #fff;
+}
+
+.lockDate {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.lockTime {
+  margin: -4px 0 24px;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.banner {
+  display: flex;
+  gap: 9px;
+  width: 100%;
+  padding: 10px 11px;
+  border-radius: 18px;
+  background: rgba(245, 245, 245, 0.78);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+  color: var(--m-ink);
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.bannerIcon {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.bannerText {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.bannerHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.bannerHead b {
+  font-size: 11px;
+}
+
+.bannerHead small {
+  color: var(--m-mute);
+  font-size: 9px;
+}
+
+/* ---------- Passwort: Stärke und Häkchen ---------- */
+
+.meter {
+  display: block;
+  height: 3px;
+  margin-top: 3px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.meter i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff9f0a, #34c759 60%);
+}
+
+.done {
+  z-index: 6;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.check {
+  width: 74px;
+  height: 74px;
+  margin-bottom: 14px;
+  fill: none;
+  stroke: #34c759;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.check circle {
+  stroke-dasharray: 151;
+  stroke-dashoffset: 0;
+}
+
+.check path {
+  stroke-dasharray: 36;
+  stroke-dashoffset: 0;
+}
+
+.doneTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.doneText {
+  max-width: 170px;
+  margin: 5px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--m-mute);
+}
+
+/* ---------- Video ---------- */
+
+.fileRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.fileRow small {
+  color: var(--m-mute);
+}
+
+.progress {
+  display: block;
+  height: 5px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(120, 120, 128, 0.16);
+}
+
+.progress i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--m-accent);
+}
+
+.merge {
+  position: relative;
+  display: flex;
+  gap: 0;
+  height: 44px;
+  margin: 6px 0 12px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.clip {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.clipIntro {
+  flex: 0 0 34%;
+  background: linear-gradient(135deg, #0097b2, #082078);
+}
+
+.clipMain {
+  flex: 1;
+  background: linear-gradient(135deg, #c9a27a, #a47b56);
+}
+
+.vShine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+
+.vWeb {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: var(--m-card);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.globe {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #1f7a36;
+  border-radius: 50%;
+  background:
+    linear-gradient(#1f7a36, #1f7a36) center / 100% 1.5px no-repeat,
+    radial-gradient(ellipse 40% 100% at 50% 50%, transparent 62%, #1f7a36 64%, transparent 70%);
+}
+
+.group:has(.vButton) {
+  display: grid;
+}
+
+.vButton,
+.vUpload {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+/* ======================================================================
+   Choreografie
+   ====================================================================== */
+
+.device * {
+  animation-duration: var(--dur);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-timing-function: var(--ease);
+}
+
+/* Nur laufen, solange der Abschnitt zu sehen ist. */
+[data-play='false'] .device * {
+  animation-play-state: paused;
+}
+
+.spinner {
+  animation-duration: 0.9s !important;
+  animation-timing-function: linear !important;
+}
+
+/* Grundebene blendet am Schleifenanfang weich ein — kein Sprung beim Neustart. */
+.base {
+  animation-name: baseIn;
+}
+
+@keyframes baseIn {
+  0% {
+    opacity: 0;
+  }
+  4%,
+  92% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ---- Anmelden ---- */
+.lEmail {
+  animation-name: lEmail;
+}
+@keyframes lEmail {
+  0%,
+  8% {
+    clip-path: inset(0 100% 0 0);
+    animation-timing-function: steps(26, end);
+  }
+  30%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.lButton {
+  animation-name: press;
+}
+@keyframes press {
+  0%,
+  56% {
+    transform: scale(1);
+    filter: none;
+  }
+  59% {
+    transform: scale(0.95);
+    filter: brightness(0.85);
+  }
+  63%,
+  100% {
+    transform: scale(1);
+    filter: none;
+  }
+}
+
+.lTap {
+  animation-name: tapLogin;
+}
+@keyframes tapLogin {
+  0%,
+  54% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  58% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  66%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.lDash {
+  transform: translateX(105%);
+  animation-name: slideIn;
+}
+@keyframes slideIn {
+  0%,
+  64% {
+    transform: translateX(105%);
+    opacity: 1;
+  }
+  73%,
+  94% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+
+/* ---- Push ---- */
+.nToggle {
+  animation-name: toggleBg;
+}
+@keyframes toggleBg {
+  0%,
+  12% {
+    background: rgba(120, 120, 128, 0.24);
+  }
+  15%,
+  100% {
+    background: #34c759;
+  }
+}
+
+.nToggle i {
+  animation-name: toggleKnob;
+}
+@keyframes toggleKnob {
+  0%,
+  12% {
+    transform: translateX(0);
+  }
+  15%,
+  100% {
+    transform: translateX(15px);
+  }
+}
+
+.nTap1 {
+  animation-name: tapToggle;
+}
+@keyframes tapToggle {
+  0%,
+  9% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  12% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  18%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.nAlert {
+  opacity: 0;
+  animation-name: alertIn;
+}
+@keyframes alertIn {
+  0%,
+  18% {
+    opacity: 0;
+  }
+  21%,
+  38% {
+    opacity: 1;
+  }
+  42%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.nAlert .alert {
+  animation-name: alertPop;
+}
+@keyframes alertPop {
+  0%,
+  18% {
+    transform: scale(1.12);
+  }
+  23%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nTap2 {
+  animation-name: tapAllow;
+}
+@keyframes tapAllow {
+  0%,
+  31% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  34% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  40%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.nLock {
+  opacity: 0;
+  animation-name: lockIn;
+}
+@keyframes lockIn {
+  0%,
+  43% {
+    opacity: 0;
+  }
+  48%,
+  94% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.nBanner {
+  animation-name: bannerDrop;
+}
+@keyframes bannerDrop {
+  0%,
+  52% {
+    opacity: 0;
+    transform: translateY(-140%) scale(0.96);
+  }
+  58% {
+    opacity: 1;
+    transform: translateY(5%) scale(1);
+  }
+  62%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Anfragen ---- */
+.iFirst {
+  animation-name: rowFlash;
+}
+@keyframes rowFlash {
+  0%,
+  15% {
+    background: transparent;
+  }
+  18%,
+  24% {
+    background: rgba(120, 120, 128, 0.14);
+  }
+  28%,
+  100% {
+    background: transparent;
+  }
+}
+
+.iTap1 {
+  animation-name: tapRow;
+}
+@keyframes tapRow {
+  0%,
+  14% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  18% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  25%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.iDetail {
+  transform: translateX(105%);
+  animation-name: detail;
+}
+@keyframes detail {
+  0%,
+  24% {
+    transform: translateX(105%);
+  }
+  32%,
+  90% {
+    transform: translateX(0);
+  }
+  98%,
+  100% {
+    transform: translateX(105%);
+  }
+}
+
+.iButton {
+  animation-name: pressLate;
+}
+@keyframes pressLate {
+  0%,
+  50% {
+    transform: scale(1);
+    filter: none;
+  }
+  53% {
+    transform: scale(0.95);
+    filter: brightness(0.85);
+  }
+  57%,
+  100% {
+    transform: scale(1);
+    filter: none;
+  }
+}
+
+.iTap2 {
+  animation-name: tapReply;
+}
+@keyframes tapReply {
+  0%,
+  49% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  52% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  59%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.iChipNew {
+  opacity: 0;
+  animation-name: chipOut;
+}
+@keyframes chipOut {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  63%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.iChipDone {
+  animation-name: chipIn;
+}
+@keyframes chipIn {
+  0%,
+  60% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  64% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  67%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---- Video ---- */
+.vButton {
+  opacity: 0;
+  animation-name: vButton;
+}
+@keyframes vButton {
+  0%,
+  6% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  8% {
+    opacity: 1;
+    transform: scale(0.95);
+  }
+  11% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  13%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.vTap {
+  animation-name: tapUpload;
+}
+@keyframes tapUpload {
+  0%,
+  4% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  7% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  13%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+.vUpload {
+  animation-name: vUpload;
+}
+@keyframes vUpload {
+  0%,
+  12% {
+    opacity: 0;
+  }
+  15%,
+  100% {
+    opacity: 1;
+  }
+}
+
+.vProgress {
+  animation-name: vProgress;
+}
+@keyframes vProgress {
+  0%,
+  15% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  40%,
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+.vChipDraft {
+  opacity: 0;
+  animation-name: chipDraft;
+}
+@keyframes chipDraft {
+  0%,
+  41% {
+    opacity: 1;
+  }
+  44%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.vChipWork {
+  opacity: 0;
+  animation-name: chipWork;
+}
+@keyframes chipWork {
+  0%,
+  42% {
+    opacity: 0;
+  }
+  45%,
+  74% {
+    opacity: 1;
+  }
+  77%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.vChipOnline {
+  animation-name: chipOnline;
+}
+@keyframes chipOnline {
+  0%,
+  75% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  79% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  82%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.vIntro {
+  animation-name: clipLeft;
+}
+@keyframes clipLeft {
+  0%,
+  45% {
+    opacity: 0;
+    transform: translateX(-70%);
+  }
+  55%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.vMain {
+  animation-name: clipRight;
+}
+@keyframes clipRight {
+  0%,
+  47% {
+    opacity: 0;
+    transform: translateX(70%);
+  }
+  57%,
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.vShine {
+  animation-name: shine;
+}
+@keyframes shine {
+  0%,
+  60% {
+    transform: translateX(-120%);
+  }
+  70%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.vWeb {
+  animation-name: webIn;
+}
+@keyframes webIn {
+  0%,
+  77% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  82%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bewegung reduziert: jeder Film zeigt ruhig sein Ergebnis. */
+@media (prefers-reduced-motion: reduce) {
+  .device * {
+    animation: none !important;
+  }
+
+  .vChipWork,
+  .vChipDraft {
+    opacity: 0;
+  }
+}

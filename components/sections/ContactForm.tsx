@@ -10,7 +10,7 @@ import { Check, Mail } from "@/components/ui/Icons";
 
 const initialState: ContactState = { status: "idle" };
 
-export function ContactForm({ dict }: { dict: Dictionary }) {
+export function ContactForm({ dict, source = "form" }: { dict: Dictionary; source?: "form" | "contact-page" }) {
   const f = dict.contact.form;
   const [state, action, pending] = useActionState(submitContact, initialState);
   // Nach fehlerhaftem Absenden: erstes ungültiges Feld fokussieren
@@ -35,8 +35,8 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
 
   if (state.status === "success") {
     return (
-      <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center border border-line bg-surface p-8 sm:p-12">
-        <span className="grid size-12 place-items-center bg-navy text-white">
+      <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center rounded-xl border border-line bg-surface p-8 sm:p-12">
+        <span className="grid size-12 place-items-center rounded-md bg-navy text-white">
           <Check className="size-6" strokeWidth={2.2} />
         </span>
         <h3 className="mt-6 text-[1.7rem] font-semibold">{f.successTitle}</h3>
@@ -57,8 +57,8 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
     const href = `mailto:${site.contact.email}?subject=${encodeURIComponent(f.mailSubject)}&body=${encodeURIComponent(body)}`;
 
     return (
-      <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center border border-line bg-surface p-8 sm:p-12">
-        <span className="grid size-12 place-items-center bg-navy text-white">
+      <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center rounded-xl border border-line bg-surface p-8 sm:p-12">
+        <span className="grid size-12 place-items-center rounded-md bg-navy text-white">
           <Mail className="size-6" />
         </span>
         <p className="mt-6 max-w-md leading-relaxed text-stone">{f.fallbackText}</p>
@@ -79,7 +79,14 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
     );
 
   return (
-    <form action={action} noValidate className="border border-line bg-white p-6 sm:p-10" aria-busy={pending}>
+    <form
+      action={action}
+      noValidate
+      className="rounded-xl border border-line bg-white p-5 shadow-[var(--shadow-card)] sm:p-10"
+      aria-busy={pending}
+    >
+      <input type="hidden" name="source" value={source} />
+      <input type="hidden" name="locale" value={dict.locale} />
       {/* Honeypot – für Menschen unsichtbar */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>

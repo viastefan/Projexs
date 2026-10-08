@@ -1,12 +1,18 @@
 import { de } from "@/content/de";
 import { ContactPage } from "@/components/sections/ContactPage";
 import { buildMetadata } from "@/lib/metadata";
+import { buildJsonLd, JsonLdScript } from "@/lib/jsonld";
 
 export const metadata = buildMetadata(de, "contact", {
-  title: de.contactPage.metaTitle,
+  title: "Kontakt",
   description: de.contactPage.metaDescription,
 });
 
 export default function Page() {
-  return <ContactPage dict={de} />;
+  return (
+    <>
+      <JsonLdScript data={buildJsonLd(de, "contact")} />
+      <ContactPage dict={de} />
+    </>
+  );
 }

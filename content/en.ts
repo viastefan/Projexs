@@ -78,8 +78,9 @@ export const en: Dictionary = {
     credentials: ["PMP®", "PSM I", "SAP certified"],
     trustLabel: "Project experience includes",
     trust: ["HELM AG", "Panasonic", "IBM"],
-    photoAlt: "Daniela Franzen, SAP programme and project manager",
+    photoAlt: "Daniela Franzen, SAP programme and project manager, portrait in a dark blazer",
     callLabel: "Or call directly",
+    location: "Buchholz i. d. Nordheide · Hamburg · remote",
     card: {
       label: "Most recent programme",
       title: "Global S/4HANA implementation",
@@ -107,6 +108,56 @@ export const en: Dictionary = {
       },
     ],
     cta: "Request an introductory call",
+  },
+
+  why: {
+    eyebrow: "Why ProjeXs",
+    title: "Experience that brings projects safely home.",
+    intro:
+      "What you get when you work with me: proven experience instead of promises – and project leadership that takes responsibility.",
+    points: [
+      {
+        title: "23+ years of SAP, 15+ years of leadership",
+        text: "From SD consulting at IBM and 16 years of project and portfolio management at Panasonic to leading a global S/4HANA programme.",
+      },
+      {
+        title: "On time and on budget",
+        text: "13 go-lives across Europe and Asia within the planned three-year timeframe – and every SAP rollout at Panasonic from 2005 to 2016 delivered to plan.",
+      },
+      {
+        title: "In-house mindset, external perspective",
+        text: "I know both sides – as an external consultant and from in-house positions. That’s how solutions gain real acceptance inside the organisation.",
+      },
+      {
+        title: "Certified and methodical",
+        text: "PMP®, Professional Scrum Master (PSM I) and SAP certified – classic, agile or hybrid, whatever your project needs.",
+      },
+    ],
+    cta: "Book an introductory call",
+    ctaHint: "No obligation · personal reply",
+  },
+
+  lead: {
+    title: "An SAP project coming up?",
+    text: "Let’s talk briefly: starting point, goals, timeline. I’ll get back to you personally – no sales pitch.",
+    primary: "Start a project",
+    call: "Call now",
+    close: "Dismiss",
+  },
+
+  consent: {
+    title: "Privacy settings",
+    text: "This website sets no tracking cookies. External content (Google Maps on the contact page) is loaded only with your consent. Your choice is stored locally in your browser.",
+    necessary: "Technically necessary",
+    necessaryText: "Required to run the website, e.g. remembering your privacy choice. Always on.",
+    external: "External content (Google Maps)",
+    externalText: "Loads the map on the contact page from Google. Data such as your IP address is transmitted to Google.",
+    acceptAll: "Accept all",
+    necessaryOnly: "Necessary only",
+    settings: "Settings",
+    save: "Save selection",
+    privacyLink: "Privacy policy",
+    reopen: "Cookie settings",
   },
 
   inquiry: {
@@ -142,8 +193,17 @@ export const en: Dictionary = {
     eyebrow: "Contact",
     title: "Tell me about your initiative.",
     intro: "Describe your SAP project in a few steps – or simply call me. I’ll get back to you personally.",
-    formTitle: "Your enquiry in a few steps",
+    formTitle: "Your enquiry",
+    tabStepper: "Step by step",
+    tabClassic: "Classic form",
     directTitle: "Direct contact",
+    availabilityTitle: "Availability",
+    availabilityText: "Available on business days by phone and email. I’ll get back to you personally and promptly – by video call if you prefer.",
+    mapTitle: "Location",
+    mapLoad: "Load map (Google Maps)",
+    mapHint: "Loading the map transmits data to Google. Details:",
+    mapRoute: "Get directions",
+    mapIframeTitle: "Google Maps: ProjeXs location in Buchholz in der Nordheide",
     backHome: "Back to home",
   },
 
@@ -590,12 +650,31 @@ export const en: Dictionary = {
 
   footer: {
     tagline: "Your solution for complex SAP projects.",
+    description:
+      "SAP project leadership, programme management and interim management – for S/4HANA transformations, global template rollouts and upgrades. Based in Buchholz in der Nordheide near Hamburg.",
+    servicesTitle: "Services",
+    services: [
+      { label: "SAP project leadership", id: "services" },
+      { label: "Programme management", id: "services" },
+      { label: "Interim management", id: "services" },
+      { label: "IT crisis management", id: "services" },
+      { label: "S/4HANA transformation", id: "expertise" },
+      { label: "Go-live support", id: "go-live" },
+    ],
     navTitle: "Navigation",
     contactTitle: "Contact",
     legalTitle: "Legal",
     imprint: "Legal notice",
     privacy: "Privacy",
     terms: "Terms (German)",
+    certsLabel: "Certified",
+    certs: ["PMP® – Project Management Professional", "PSM I – Professional Scrum Master", "SAP certified (MM)"],
+    languageLabel: "Language",
+    ctaTitle: "Ready for your next SAP project?",
+    ctaText: "Request an introductory call – I’ll get back to you personally.",
+    cta: "Start a project",
+    seoText:
+      "ProjeXs is the consultancy of Daniela Franzen, SAP programme and project manager based in Buchholz in der Nordheide near Hamburg, Germany. She has led SAP projects since 2001 – as an SD consultant at IBM, through 16 years of SAP project and portfolio management at Panasonic, and most recently as programme manager of a global S/4HANA implementation at HELM AG with 13 go-lives across Europe and Asia. Companies in Hamburg, northern Germany, the DACH region and across Europe engage her as SAP project lead, for the programme management of large transformations, as interim manager during leadership gaps, or for IT crisis management when a project is in trouble. Her focus: S/4HANA implementation and transformation, global template rollouts, SAP upgrades, carve-outs and integrations, and building SAP rollout and support organisations. Module experience includes SD, MM, PP, TM, QM, PS, FI, CO, APO, WMS, CS, REA and BW as well as B2B and EDI integrations – in SAP ECC 6.0 and S/4HANA. Daniela Franzen is a certified Project Management Professional (PMP®), Professional Scrum Master (PSM I) and SAP certified; she works on-site, hybrid or remotely and has led international teams across Europe and Asia.",
     rights: "All rights reserved.",
     backToTop: "Back to top",
   },

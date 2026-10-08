@@ -79,8 +79,9 @@ export const de = {
     credentials: ["PMP®", "PSM I", "SAP-zertifiziert"],
     trustLabel: "Projekterfahrung u. a. bei",
     trust: ["HELM AG", "Panasonic", "IBM"],
-    photoAlt: "Daniela Franzen, SAP-Programm- und Projektmanagerin",
+    photoAlt: "Daniela Franzen, SAP-Programm- und Projektmanagerin, Porträt im dunklen Blazer",
     callLabel: "Oder direkt anrufen",
+    location: "Buchholz i. d. Nordheide · Hamburg · remote",
     card: {
       label: "Zuletzt verantwortet",
       title: "Globale S/4HANA-Einführung",
@@ -108,6 +109,56 @@ export const de = {
       },
     ],
     cta: "Erstgespräch anfragen",
+  },
+
+  why: {
+    eyebrow: "Warum ProjeXs",
+    title: "Erfahrung, die Projekte sicher ins Ziel bringt.",
+    intro:
+      "Was Sie bekommen, wenn Sie mit mir arbeiten: belegbare Erfahrung statt Versprechen – und eine Projektleitung, die Verantwortung übernimmt.",
+    points: [
+      {
+        title: "23+ Jahre SAP, 15+ Jahre Führung",
+        text: "Von der SD-Beratung bei IBM über 16 Jahre Projekt- und Portfoliomanagement bei Panasonic bis zur Programmleitung einer globalen S/4HANA-Einführung.",
+      },
+      {
+        title: "Termingerecht und im Budget",
+        text: "13 Go-lives in Europa und Asien innerhalb des geplanten 3-Jahres-Zeitrahmens – und alle SAP-Rollouts 2005–2016 bei Panasonic im Plan.",
+      },
+      {
+        title: "Inhouse-Denken, externe Perspektive",
+        text: "Ich kenne beide Seiten – als externe Beraterin und aus Inhouse-Positionen. So entstehen Lösungen mit hoher Akzeptanz im Unternehmen.",
+      },
+      {
+        title: "Zertifiziert und methodensicher",
+        text: "PMP®, Professional Scrum Master (PSM I) und SAP-zertifiziert – klassisch, agil oder hybrid, je nachdem, was Ihr Projekt braucht.",
+      },
+    ],
+    cta: "Erstgespräch vereinbaren",
+    ctaHint: "Unverbindlich · persönliche Rückmeldung",
+  },
+
+  lead: {
+    title: "Steht ein SAP-Projekt an?",
+    text: "Lassen Sie uns kurz sprechen: Ausgangslage, Ziele, Zeitrahmen. Ich melde mich persönlich – ohne Verkaufsgespräch.",
+    primary: "Projekt anfragen",
+    call: "Direkt anrufen",
+    close: "Hinweis schließen",
+  },
+
+  consent: {
+    title: "Datenschutz-Einstellungen",
+    text: "Diese Website setzt keine Tracking-Cookies. Externe Inhalte (Google Maps auf der Kontaktseite) werden erst nach Ihrer Zustimmung geladen. Ihre Auswahl wird lokal in Ihrem Browser gespeichert.",
+    necessary: "Technisch notwendig",
+    necessaryText: "Für den Betrieb der Website erforderlich, z. B. das Speichern Ihrer Datenschutz-Auswahl. Immer aktiv.",
+    external: "Externe Inhalte (Google Maps)",
+    externalText: "Lädt die Karte auf der Kontaktseite von Google. Dabei werden Daten (z. B. Ihre IP-Adresse) an Google übertragen.",
+    acceptAll: "Alle akzeptieren",
+    necessaryOnly: "Nur notwendige",
+    settings: "Einstellungen",
+    save: "Auswahl speichern",
+    privacyLink: "Datenschutzerklärung",
+    reopen: "Cookie-Einstellungen",
   },
 
   inquiry: {
@@ -144,8 +195,17 @@ export const de = {
     title: "Erzählen Sie mir von Ihrem Vorhaben.",
     intro:
       "Beschreiben Sie Ihr SAP-Projekt in wenigen Schritten – oder rufen Sie mich direkt an. Ich melde mich persönlich bei Ihnen.",
-    formTitle: "Ihre Anfrage in wenigen Schritten",
+    formTitle: "Ihre Anfrage",
+    tabStepper: "Schritt für Schritt",
+    tabClassic: "Klassisches Formular",
     directTitle: "Direkter Kontakt",
+    availabilityTitle: "Erreichbarkeit",
+    availabilityText: "Werktags telefonisch und per E-Mail erreichbar. Ich melde mich persönlich und zeitnah bei Ihnen – auf Wunsch auch per Video-Call.",
+    mapTitle: "Standort",
+    mapLoad: "Karte laden (Google Maps)",
+    mapHint: "Beim Laden der Karte werden Daten an Google übertragen. Details:",
+    mapRoute: "Route planen",
+    mapIframeTitle: "Google Maps: Standort von ProjeXs in Buchholz in der Nordheide",
     backHome: "Zur Startseite",
   },
 
@@ -598,12 +658,31 @@ export const de = {
 
   footer: {
     tagline: "Ihre Lösung für komplexe SAP-Projekte.",
+    description:
+      "SAP-Projektleitung, Programmmanagement und Interim Management – für S/4HANA-Transformationen, globale Template-Rollouts und Upgrades. Sitz in Buchholz in der Nordheide bei Hamburg.",
+    servicesTitle: "Leistungen",
+    services: [
+      { label: "SAP-Projektleitung", id: "leistungen" },
+      { label: "Programmmanagement", id: "leistungen" },
+      { label: "Interim Management", id: "leistungen" },
+      { label: "IT-Krisenmanagement", id: "leistungen" },
+      { label: "S/4HANA-Transformation", id: "expertise" },
+      { label: "Go-live-Begleitung", id: "go-live" },
+    ],
     navTitle: "Navigation",
     contactTitle: "Kontakt",
     legalTitle: "Rechtliches",
     imprint: "Impressum",
     privacy: "Datenschutz",
     terms: "AGB",
+    certsLabel: "Zertifiziert",
+    certs: ["PMP® – Project Management Professional", "PSM I – Professional Scrum Master", "SAP-zertifiziert (MM)"],
+    languageLabel: "Sprache",
+    ctaTitle: "Bereit für Ihr nächstes SAP-Projekt?",
+    ctaText: "Erstgespräch anfragen – ich melde mich persönlich.",
+    cta: "Projekt anfragen",
+    seoText:
+      "ProjeXs ist das Beratungsunternehmen von Daniela Franzen, SAP-Programm- und Projektmanagerin mit Sitz in Buchholz in der Nordheide bei Hamburg. Seit 2001 führt sie SAP-Projekte – als SD-Consultant bei IBM, über 16 Jahre im SAP-Projekt- und Portfoliomanagement bei Panasonic und zuletzt als Programm-Managerin einer globalen S/4HANA-Implementierung bei der HELM AG mit 13 Go-lives in Europa und Asien. Unternehmen aus Hamburg, Norddeutschland, dem gesamten DACH-Raum und Europa beauftragen sie als SAP-Projektleitung, für das Programmmanagement großer Transformationen, als Interim Managerin bei Führungsvakanzen oder für IT-Krisenmanagement, wenn ein Projekt in Schieflage gerät. Die Schwerpunkte: S/4HANA-Implementierung und -Transformation, globale Template-Rollouts, SAP-Upgrades, Carve-outs und Integrationen sowie der Aufbau von SAP-Rollout- und Support-Organisationen. Modulerfahrung besteht unter anderem in SD, MM, PP, TM, QM, PS, FI, CO, APO, WMS, CS, REA und BW sowie in B2B- und EDI-Integrationen – in SAP ECC 6.0 und S/4HANA. Daniela Franzen ist zertifizierte Project Management Professional (PMP®), Professional Scrum Master (PSM I) und SAP-zertifiziert; sie arbeitet vor Ort, hybrid oder remote und hat internationale Teams in Europa und Asien geführt.",
     rights: "Alle Rechte vorbehalten.",
     backToTop: "Nach oben",
   },

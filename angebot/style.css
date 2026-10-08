@@ -1,0 +1,260 @@
+/* ProjeXs – Druck-Stylesheet für Angebot & Vertrag (A4) */
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../assets/fonts/SourceSans3-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../assets/fonts/SourceSans3-600.ttf") format("truetype");
+  font-weight: 600 700;
+  font-style: normal;
+}
+
+:root {
+  --navy: #082078;
+  --navy-deep: #061a5e;
+  --accent: #0097b2;
+  --accent-light: #4ec8e0;
+  --ink: #1f2a3a;
+  --stone: #4f5b6b;
+  --mist: #c4cfe2;
+  --line: #d5dce6;
+  --surface: #f4f6f9;
+  --paper: #ffffff;
+}
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 22mm 18mm;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Source Sans 3", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.45;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ---------- Typografie ---------- */
+h1, h2, h3, h4 { color: var(--navy); font-weight: 600; line-height: 1.25; margin: 0; }
+h1 { font-size: 22pt; letter-spacing: -0.01em; margin-bottom: 4mm; }
+h2 { font-size: 14.5pt; margin: 9mm 0 3mm; padding-bottom: 1.5mm; border-bottom: 1.5px solid var(--accent); break-after: avoid; }
+h2:first-child { margin-top: 0; }
+h3 { font-size: 11.5pt; margin: 5mm 0 1.5mm; break-after: avoid; }
+p { margin: 0 0 2.5mm; }
+p + p { margin-top: 0; }
+ul, ol { margin: 0 0 2.5mm; padding-left: 5mm; }
+li { margin-bottom: 1mm; }
+li::marker { color: var(--accent); }
+strong { font-weight: 600; color: var(--navy); }
+a { color: var(--navy); text-decoration: none; }
+small, .small { font-size: 8.5pt; color: var(--stone); }
+.muted { color: var(--stone); }
+.accent { color: var(--accent); }
+.lead { font-size: 11.5pt; }
+
+/* ---------- Logo ---------- */
+.logo {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--navy);
+  font-size: 22pt;
+}
+.logo .x { color: var(--accent); }
+
+/* ---------- Kopfbereich Seite 1 ---------- */
+.doc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 4mm;
+  border-bottom: 2px solid var(--navy);
+  margin-bottom: 8mm;
+}
+.doc-head .tagline { font-size: 8.5pt; color: var(--stone); margin-top: 1.5mm; letter-spacing: 0.02em; }
+.doc-head .kind { text-align: right; }
+.doc-head .kind .label {
+  font-size: 9pt; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600;
+}
+.doc-head .kind .title { font-size: 15pt; font-weight: 600; color: var(--navy); line-height: 1.2; }
+
+.addr-row { display: flex; justify-content: space-between; gap: 10mm; margin-bottom: 8mm; }
+.addr-row .to { font-size: 10.5pt; line-height: 1.45; }
+.addr-row .to .sender-line { font-size: 7.5pt; color: var(--stone); border-bottom: 0.5px solid var(--line); padding-bottom: 1mm; margin-bottom: 2.5mm; }
+.meta-box { font-size: 9.5pt; min-width: 62mm; }
+.meta-box table { border-collapse: collapse; width: 100%; }
+.meta-box td { padding: 0.8mm 0; vertical-align: top; }
+.meta-box td:first-child { color: var(--stone); padding-right: 4mm; white-space: nowrap; }
+.meta-box td:last-child { font-weight: 600; color: var(--navy); text-align: right; }
+
+/* ---------- Boxen ---------- */
+.box {
+  background: var(--surface);
+  border-left: 3px solid var(--accent);
+  padding: 3.5mm 4.5mm;
+  margin: 3mm 0 4mm;
+  break-inside: avoid;
+}
+.box.navy {
+  background: var(--navy);
+  color: #fff;
+  border-left-color: var(--accent-light);
+}
+.box.navy h3, .box.navy strong, .box.navy a { color: #fff; }
+.box.navy .accent { color: var(--accent-light); }
+.box p:last-child { margin-bottom: 0; }
+
+.callout {
+  border: 1px solid var(--line);
+  border-radius: 2mm;
+  padding: 3.5mm 4.5mm;
+  margin: 3mm 0 4mm;
+  break-inside: avoid;
+}
+
+/* ---------- Tabellen ---------- */
+table.t {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2mm 0 4mm;
+  font-size: 9.2pt;
+}
+table.t th, table.t td {
+  padding: 2.2mm 2.8mm;
+  border-bottom: 0.6px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+}
+table.t th {
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  font-size: 9pt;
+  letter-spacing: 0.03em;
+}
+table.t th.accent-col { background: var(--accent); }
+table.t tbody th {
+  background: var(--surface);
+  color: var(--navy);
+  font-weight: 600;
+  width: 26%;
+  font-size: 9.2pt;
+  letter-spacing: 0;
+}
+table.t tr { break-inside: avoid; }
+table.t thead { display: table-header-group; }
+table.t .num { text-align: right; white-space: nowrap; }
+table.t .total td { font-weight: 600; color: var(--navy); border-top: 1.5px solid var(--navy); border-bottom: none; background: var(--surface); }
+table.t td.good { color: var(--navy); }
+table.t td.good::before { content: "✓ "; color: var(--accent); font-weight: 600; }
+
+/* ---------- Preis-Optionen ---------- */
+.options { display: flex; gap: 6mm; margin: 4mm 0 5mm; align-items: stretch; break-inside: avoid; }
+.option {
+  flex: 1 1 0;
+  border: 1px solid var(--line);
+  border-radius: 2.5mm;
+  padding: 5mm 5mm 4.5mm;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.option.recommended {
+  border: 2px solid var(--accent);
+  background: var(--surface);
+}
+.option .badge {
+  position: absolute;
+  top: -3.2mm;
+  right: 5mm;
+  background: var(--accent);
+  color: #fff;
+  font-size: 8pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 1mm 3mm;
+  border-radius: 1.2mm;
+}
+.option .name { font-size: 9pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.option .title { font-size: 14pt; font-weight: 600; color: var(--navy); margin: 1mm 0 2mm; }
+.option .price { font-size: 24pt; font-weight: 600; color: var(--navy); line-height: 1; letter-spacing: -0.02em; }
+.option .price small { font-size: 10pt; color: var(--stone); font-weight: 400; letter-spacing: 0; }
+.option .sub { font-size: 9pt; color: var(--stone); margin: 1.5mm 0 3mm; }
+.option ul { padding-left: 4.5mm; font-size: 9.6pt; margin-bottom: 0; flex: 1; }
+.option li { margin-bottom: 1.1mm; }
+.option .foot { margin-top: 3.5mm; padding-top: 2.5mm; border-top: 0.6px solid var(--line); font-size: 8.8pt; color: var(--stone); }
+
+/* ---------- Ablauf / Schritte ---------- */
+.steps { list-style: none; padding: 0; margin: 3mm 0 4mm; counter-reset: step; }
+.steps li {
+  counter-increment: step;
+  display: flex;
+  gap: 4mm;
+  margin-bottom: 2.5mm;
+  break-inside: avoid;
+}
+.steps li::before {
+  content: counter(step);
+  flex: 0 0 7mm;
+  height: 7mm;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10pt;
+}
+.steps li .s-title { font-weight: 600; color: var(--navy); }
+.steps li .s-time { color: var(--accent); font-weight: 600; font-size: 9pt; margin-left: 2mm; }
+
+/* ---------- Garantien ---------- */
+.grid2 { break-inside: avoid; display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 3mm 0 4mm; }
+.grid2 .cell { border: 1px solid var(--line); border-radius: 2mm; padding: 3.5mm 4mm; break-inside: avoid; }
+.grid2 .cell h4 { font-size: 10.5pt; margin-bottom: 1mm; }
+.grid2 .cell h4::before { content: "✓"; color: var(--accent); margin-right: 2mm; }
+.grid2 .cell p { margin: 0; font-size: 9.6pt; color: var(--stone); }
+
+/* ---------- Unterschrift ---------- */
+.sign-block { break-inside: avoid; margin-top: 6mm; }
+.checkrow { display: flex; gap: 8mm; margin: 3mm 0 5mm; }
+.check { display: flex; align-items: flex-start; gap: 2.5mm; }
+.check .cb {
+  flex: 0 0 5mm; height: 5mm; border: 1.2px solid var(--navy); border-radius: 0.8mm; margin-top: 0.8mm;
+}
+.sig-row { display: flex; gap: 12mm; margin-top: 8mm; }
+.sig { flex: 1; }
+.sig .line { border-bottom: 0.8px solid var(--ink); height: 14mm; }
+.sig .cap { font-size: 8.5pt; color: var(--stone); margin-top: 1.5mm; }
+
+/* ---------- Vertrag ---------- */
+.contract h2 { font-size: 12.5pt; margin-top: 7mm; border-bottom: none; padding-bottom: 0; }
+.contract h2 .par { color: var(--accent); margin-right: 2mm; }
+.contract p { margin-bottom: 2mm; text-align: left; }
+.contract ol.abs { list-style: none; padding-left: 0; counter-reset: abs; }
+.contract ol.abs > li { counter-increment: abs; position: relative; padding-left: 8mm; margin-bottom: 2mm; }
+.contract ol.abs > li::before { content: "(" counter(abs) ")"; position: absolute; left: 0; color: var(--stone); }
+.contract ol.abs ul { margin-top: 1mm; }
+.contract .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; margin: 4mm 0 5mm; }
+.contract .parties .party { background: var(--surface); padding: 3.5mm 4.5mm; border-left: 3px solid var(--accent); }
+.contract .parties .role { font-size: 8.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.contract .between { text-align: center; color: var(--stone); font-size: 9.5pt; }
+
+/* ---------- Hilfsklassen ---------- */
+.page-break { break-before: page; }
+.avoid { break-inside: avoid; }
+.mt0 { margin-top: 0 !important; }
+.center { text-align: center; }
+.placeholder { background: #fff6d6; color: #7a5a00; padding: 0 1mm; border-radius: 0.6mm; }

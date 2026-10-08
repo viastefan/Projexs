@@ -12,6 +12,29 @@ const paths: Record<PageKey, { de: string; en: string }> = {
   terms: { de: "/agb", en: "/agb" },
 };
 
+/** Titel-Suffix für alle Unterseiten, z. B. „Kontakt | ProjeXs – Daniela Franzen“. */
+export const titleSuffix = `${site.brand} – ${site.owner.name}`;
+
+/** Gemeinsame Metadaten für das Layout einer Sprache (Titel-Template, Icons, Format-Erkennung). */
+export function buildLayoutMetadata(dict: Dictionary): Metadata {
+  return {
+    metadataBase: new URL(site.url),
+    title: { default: dict.meta.title, template: `%s | ${titleSuffix}` },
+    description: dict.meta.description,
+    applicationName: site.brand,
+    authors: [{ name: site.owner.name, url: site.url }],
+    creator: site.owner.name,
+    publisher: site.brand,
+    category: "business",
+    formatDetection: { telephone: false, email: false, address: false },
+    referrer: "strict-origin-when-cross-origin",
+  };
+}
+
+/**
+ * Metadaten pro Seite. Für Unterseiten `title` kurz angeben („Kontakt“) –
+ * das Template aus dem Layout ergänzt den Markennamen.
+ */
 export function buildMetadata(
   dict: Dictionary,
   page: PageKey,
@@ -19,39 +42,38 @@ export function buildMetadata(
 ): Metadata {
   const locale = dict.locale as "de" | "en";
   const path = paths[page][locale];
-  const title = overrides.title ?? dict.meta.title;
+  const title = page === "home" ? { absolute: dict.meta.title } : (overrides.title ?? dict.meta.title);
+  const fullTitle = page === "home" ? dict.meta.title : `${overrides.title ?? dict.meta.title} | ${titleSuffix}`;
   const description = overrides.description ?? dict.meta.description;
+  const noindex = Boolean(overrides.noindex);
 
   return {
-    metadataBase: new URL(site.url),
     title,
     description,
     keywords: page === "home" ? dict.meta.keywords : undefined,
-    applicationName: site.brand,
-    authors: [{ name: site.owner.name, url: site.url }],
-    creator: site.owner.name,
     alternates: {
       canonical: path,
       languages:
         page === "terms"
-          ? undefined
-          : { "de-DE": paths[page].de, en: paths[page].en, "x-default": paths[page].de },
+          ? { "de-DE": paths.terms.de, "x-default": paths.terms.de }
+          : { "de-DE": paths[page].de, "en-GB": paths[page].en, en: paths[page].en, "x-default": paths[page].de },
     },
     openGraph: {
       type: "website",
       url: path,
       siteName: site.brand,
-      title,
+      title: fullTitle,
       description,
       locale: dict.ogLocale,
       alternateLocale: locale === "de" ? ["en_GB"] : ["de_DE"],
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: fullTitle,
       description,
     },
-    robots: overrides.noindex ? { index: false, follow: true } : { index: true, follow: true },
-    formatDetection: { telephone: false, email: false, address: false },
+    robots: noindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   };
 }

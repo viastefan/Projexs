@@ -1,6 +1,21 @@
 "use server";
 
-import { site } from "@/content/site";
+import { createHash } from "node:crypto";
+import { after } from "next/server";
+import { createInquiry } from "@/lib/cms/inquiries";
+import { getSettings } from "@/lib/cms/settings";
+import type { InquirySource } from "@/lib/cms/types";
+import {
+  confirmationSender,
+  isMailConfigured,
+  sendConfirmationMail,
+  sendContactMail,
+  sendInquiryNotice,
+  type ContactPayload,
+} from "@/lib/mail";
+import { sendInquiryPush } from "@/lib/push";
+import { requestOrigin } from "@/lib/request-origin";
+import { isStorageConfigured } from "@/lib/storage";
 
 export type ContactField =
   | "firstName"
@@ -23,20 +38,26 @@ export type ContactState = {
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const SOURCES: InquirySource[] = ["dialog", "form", "contact-page", "popup"];
 
 function clean(value: FormDataEntryValue | null, max = 2000) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
 }
 
-/** Entfernt Zeilenumbrüche, damit Eingaben nicht in den Betreff gelangen. */
-function oneLine(text: string) {
-  return text.replace(/[\r\n\t]+/g, " ");
-}
-
-function escapeHtml(text: string) {
-  return text.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
-}
-
+/**
+ * Anfrage aus dem Formular (Dialog, Kontaktseite, klassisches Formular).
+ *
+ * Mit eingerichtetem Speicher landet die Anfrage im Postfach der Admin-App —
+ * das ist der eigentliche Eingang. E-Mail und Push danach sind nur
+ * Benachrichtigung: Schlägt eins davon fehl, ist nichts verloren.
+ *
+ * Ohne Speicher bleibt es beim bisherigen Weg: Die E-Mail ist die Anfrage.
+ * Ohne Speicher und ohne Mail-Dienst bietet das Formular den Versand per
+ * E-Mail-Programm an („unconfigured“).
+ *
+ * Versteckte Felder (optional): `source` (dialog | form | contact-page | popup,
+ * Standard „form“) und `locale` (de | en, Standard „de“).
+ */
 export async function submitContact(_prev: ContactState, formData: FormData): Promise<ContactState> {
   const values: ContactValues = {
     firstName: clean(formData.get("firstName"), 120),
@@ -49,6 +70,9 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     message: clean(formData.get("message"), 5000),
   };
   const consent = formData.get("consent") === "on";
+  const sourceRaw = clean(formData.get("source"), 20) as InquirySource;
+  const source: InquirySource = SOURCES.includes(sourceRaw) ? sourceRaw : "form";
+  const locale = clean(formData.get("locale"), 5) === "en" ? "en" : "de";
 
   // Spam-Schutz: unsichtbares Honeypot-Feld. Bots erhalten eine scheinbar erfolgreiche Antwort.
   const honeypot = clean(formData.get("website"));
@@ -61,80 +85,112 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
   if (!values.lastName) errors.lastName = "required";
   if (!values.email) errors.email = "required";
   else if (!EMAIL_RE.test(values.email)) errors.email = "email";
-  if (!values.message) errors.message = "required";
-  else if (values.message.length < 10) errors.message = "short";
+  // Die Nachricht ist freiwillig – wer nur Kontaktdaten hinterlässt, wird trotzdem zurückgerufen.
   if (!consent) errors.consent = "consent";
 
   if (Object.keys(errors).length > 0) {
     return { status: "invalid", errors, values };
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    // Kein Mail-Dienst konfiguriert: Formular bietet den Versand per E-Mail-Programm an.
+  const payload: ContactPayload = {
+    firstName: values.firstName!,
+    lastName: values.lastName!,
+    email: values.email!,
+    phone: values.phone,
+    company: values.company,
+    topic: values.topic,
+    timeframe: values.timeframe,
+    message: values.message!,
+  };
+
+  if (isStorageConfigured()) {
+    let stored;
+    try {
+      stored = await createInquiry({
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        email: payload.email,
+        phone: values.phone ?? "",
+        company: values.company ?? "",
+        topic: values.topic ?? "",
+        timeframe: values.timeframe ?? "",
+        message: payload.message,
+        source,
+        locale,
+      });
+    } catch (error) {
+      console.error("[Anfrage] Speichern in der App fehlgeschlagen:", error);
+    }
+    if (stored) {
+      // Ohne personenbezogene Daten: nur, dass und woher sie kam.
+      console.info(`[Anfrage] gespeichert ${stored.key} (${source}, ${locale})`);
+      await notify(payload, stored.key);
+      confirmLater(payload.email, locale);
+      return { status: "success" };
+    }
+  }
+
+  if (!isMailConfigured()) {
+    // Weder Speicher noch Mail-Dienst: Formular bietet den Versand per E-Mail-Programm an.
     return { status: "unconfigured", values };
   }
 
-  const to = process.env.CONTACT_TO_EMAIL || site.contact.email;
-  const from = process.env.CONTACT_FROM_EMAIL || `ProjeXs Website <website@projexs.de>`;
-  const name = `${values.firstName} ${values.lastName}`;
-
-  const rows: Array<[string, string | undefined]> = [
-    ["Name", name],
-    ["E-Mail", values.email],
-    ["Mobil", values.phone],
-    ["Firma", values.company],
-    ["Anliegen", values.topic],
-    ["Zeitrahmen", values.timeframe],
-  ];
-
-  const text = [
-    ...rows.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`),
-    "",
-    values.message,
-  ].join("\n");
-
-  const html = `
-    <div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.55;color:#0a0f16">
-      <h2 style="margin:0 0 16px;font-size:18px">Neue Anfrage über projexs.de</h2>
-      <table style="border-collapse:collapse;margin-bottom:20px">
-        ${rows
-          .filter(([, v]) => v)
-          .map(
-            ([k, v]) =>
-              `<tr><td style="padding:4px 16px 4px 0;color:#515b68">${k}</td><td style="padding:4px 0"><strong>${escapeHtml(v!)}</strong></td></tr>`,
-          )
-          .join("")}
-      </table>
-      <div style="white-space:pre-wrap;border-left:3px solid #0aa5c0;padding:4px 0 4px 14px">${escapeHtml(values.message!)}</div>
-    </div>`;
-
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: values.email,
-        subject: oneLine(`Anfrage von ${name}${values.company ? ` (${values.company})` : ""}${values.topic ? ` – ${values.topic}` : ""}`),
-        text,
-        html,
-      }),
-      cache: "no-store",
-      signal: AbortSignal.timeout(10_000),
-    });
-
-    if (!res.ok) {
-      console.error("Kontaktformular: Versand fehlgeschlagen", res.status, await res.text().catch(() => ""));
-      return { status: "error", values };
-    }
-    return { status: "success" };
+    await sendContactMail(payload);
   } catch (err) {
-    console.error("Kontaktformular: Netzwerkfehler", err);
+    console.error("Kontaktformular: Versand fehlgeschlagen", err);
     return { status: "error", values };
+  }
+  confirmLater(payload.email, locale);
+  return { status: "success" };
+}
+
+/** Dieselbe Adresse bekommt höchstens eine Bestätigung am Tag — gegen Missbrauch als Mailbombe. */
+const confirmedAt = new Map<string, number>();
+const CONFIRM_EVERY_MS = 24 * 60 * 60 * 1000;
+
+function confirmLater(email: string, locale: "de" | "en"): void {
+  if (!confirmationSender()) return;
+  const now = Date.now();
+  const key = createHash("sha256").update(email.toLowerCase()).digest("base64url");
+  const last = confirmedAt.get(key);
+  if (last !== undefined && now - last < CONFIRM_EVERY_MS) return;
+  confirmedAt.set(key, now);
+  if (confirmedAt.size > 5000) {
+    for (const [entry, at] of confirmedAt) if (now - at >= CONFIRM_EVERY_MS) confirmedAt.delete(entry);
+  }
+  after(async () => {
+    try {
+      await sendConfirmationMail(email, locale);
+    } catch (error) {
+      console.error("[Anfrage] Eingangsbestätigung nicht verschickt:", error);
+    }
+  });
+}
+
+/** E-Mail und Push gleichzeitig — die anfragende Person wartet nur auf das langsamere. */
+async function notify(payload: ContactPayload, key: string): Promise<void> {
+  await Promise.all([notifyByMail(payload, key), notifyByPush(key)]);
+}
+
+async function notifyByMail(payload: ContactPayload, key: string): Promise<void> {
+  if (!isMailConfigured()) return;
+  try {
+    const { notifications } = await getSettings();
+    if (notifications === "off") return;
+    const link = `${await requestOrigin()}/admin/anfragen/${key}`;
+    if (notifications === "notice") await sendInquiryNotice(link);
+    else await sendContactMail(payload, link);
+  } catch (error) {
+    console.error("[Anfrage] E-Mail-Benachrichtigung fehlgeschlagen:", error);
+  }
+}
+
+async function notifyByPush(key: string): Promise<void> {
+  try {
+    const result = await sendInquiryPush(key);
+    if (result.failed > 0) console.error(`[Push] ${result.failed} Geräte nicht erreicht.`);
+  } catch (error) {
+    console.error("[Anfrage] Push fehlgeschlagen:", error);
   }
 }
