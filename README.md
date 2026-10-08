@@ -9,7 +9,8 @@ neu strukturiert, schneller, zweisprachig und DSGVO-freundlich (keine Cookies, k
 | **Framework** | Next.js 16 (App Router) · React 19 · TypeScript |
 | **Styling** | Tailwind CSS 4 · Farben aus dem ProjeXs-Logo (Navy + Türkis), Schrift Source Sans 3 |
 | **Sprachen** | Deutsch unter `/`, Englisch unter `/en` |
-| **Hosting** | vorbereitet für Vercel (alle Seiten statisch vorgerendert) |
+| **Hosting** | Vercel, alle Seiten statisch vorgerendert |
+| **Live (Vorschau)** | https://projexs-delta.vercel.app |
 
 ---
 
@@ -85,18 +86,23 @@ Eine Vorlage aller Variablen liegt in `.env.example`.
 
 ## Deployment auf Vercel (wenn es so weit ist)
 
-> **Aktuell bewusst deaktiviert:** `vercel.json` verhindert automatische Deployments für Arbeits-Branches
-> (`festagclaude/**`), damit kein Vercel-Nutzungsguthaben verbraucht wird. Entwickelt und geprüft wird lokal.
+Das Repository ist mit dem Vercel-Projekt **projexs** (Team *Festag App*) verbunden. Jeder Push auf `main`
+erzeugt ein Production-Deployment. `vercel.json` verhindert Deployments für Arbeits-Branches (`festagclaude/**`),
+damit kein Nutzungsguthaben verbraucht wird.
 
-Für den Livegang:
+Aktuelle Vorschau: **https://projexs-delta.vercel.app**
 
-1. In Vercel **Add New → Project** und das GitHub-Repository `viastefan/Projexs` importieren
-   (Framework wird automatisch als Next.js erkannt, keine weiteren Build-Einstellungen nötig).
-2. Umgebungsvariablen eintragen (`NEXT_PUBLIC_SITE_URL=https://www.projexs.de` sowie optional die Resend-Werte).
-3. Branch `main` als Production-Branch nutzen – jeder Merge nach `main` erzeugt ein Production-Deployment.
-4. Unter **Settings → Domains** `projexs.de` und `www.projexs.de` hinzufügen und die von Vercel angezeigten
+> Hinweis: Die Adresse `projexs-festag.vercel.app` ist durch Vercel-SSO geschützt und nur mit Team-Login
+> erreichbar. Zum Teilen eignet sich `projexs-delta.vercel.app`.
+
+Für den Livegang unter der eigenen Domain:
+
+1. Umgebungsvariablen eintragen (`NEXT_PUBLIC_SITE_URL=https://www.projexs.de` sowie optional die Resend-Werte).
+2. Unter **Settings → Domains** `projexs.de` und `www.projexs.de` hinzufügen und die von Vercel angezeigten
    DNS-Einträge beim Domain-Anbieter eintragen (dort, wo die Domain heute auf Wix zeigt).
-5. Wix-Abo erst kündigen, wenn die neue Seite unter der Domain erreichbar ist.
+3. Prüfen, ob der Vercel-Tarif für eine gewerbliche Seite ausreicht (der Hobby-Plan ist nur für
+   nicht-kommerzielle Projekte zulässig).
+4. Wix-Abo erst kündigen, wenn die neue Seite unter der Domain erreichbar ist.
 
 **SEO beim Umzug:** Die alten Wix-Adressen werden dauerhaft (308) auf die neuen Seiten umgeleitet
 (`/privacy-policy` → `/datenschutz`, `/privacy-policy-1` → `/impressum`, `/privacy-policy-2` → `/agb`,
