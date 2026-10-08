@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { site } from "@/content/site";
 import type { Dictionary } from "@/lib/i18n";
 
-type PageKey = "home" | "imprint" | "privacy" | "terms";
+type PageKey = "home" | "contact" | "imprint" | "privacy" | "terms";
 
 const paths: Record<PageKey, { de: string; en: string }> = {
   home: { de: "/", en: "/en" },
+  contact: { de: "/kontakt", en: "/en/contact" },
   imprint: { de: "/impressum", en: "/en/legal-notice" },
   privacy: { de: "/datenschutz", en: "/en/privacy" },
   terms: { de: "/agb", en: "/agb" },

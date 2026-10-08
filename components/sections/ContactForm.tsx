@@ -64,7 +64,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
         <p className="mt-6 max-w-md leading-relaxed text-stone">{f.fallbackText}</p>
         <a
           href={href}
-          className="mt-8 inline-flex h-12 items-center rounded-[3px] bg-navy px-6 font-semibold text-white hover:bg-navy-deep"
+          className="mt-8 inline-flex h-12 items-center rounded-md bg-navy px-6 font-semibold text-white hover:bg-navy-deep"
         >
           {f.fallbackButton}
         </a>
@@ -74,7 +74,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
 
   const inputClass = (error?: string) =>
     cn(
-      "block h-12 w-full rounded-[3px] border bg-white px-4 text-[1rem] text-ink outline-none transition-colors focus:border-navy focus:ring-2 focus:ring-navy/20",
+      "block h-12 w-full rounded-md border bg-white px-4 text-[1rem] text-ink outline-none transition-colors focus:border-navy focus:ring-2 focus:ring-navy/20",
       error ? "border-red-700" : "border-line",
     );
 
@@ -106,7 +106,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
           {f.topics.map((t) => (
             <label
               key={t}
-              className="cursor-pointer rounded-[3px] border border-line px-4 py-2 text-[0.95rem] transition-colors hover:border-navy has-checked:border-navy has-checked:bg-navy has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-navy/30"
+              className="cursor-pointer rounded-md border border-line px-4 py-2 text-[0.95rem] transition-colors hover:border-navy has-checked:border-navy has-checked:bg-navy has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-navy/30"
             >
               <input type="radio" name="topic" value={t} defaultChecked={v.topic === t} className="sr-only" />
               {t}
@@ -129,7 +129,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
           aria-invalid={Boolean(err("message"))}
           aria-describedby={err("message") ? "message-error" : undefined}
           className={cn(
-            "block w-full resize-y rounded-[3px] border bg-white px-4 py-3 text-[1rem] text-ink outline-none transition-colors placeholder:text-stone/70 focus:border-navy focus:ring-2 focus:ring-navy/20",
+            "block w-full resize-y rounded-md border bg-white px-4 py-3 text-[1rem] text-ink outline-none transition-colors placeholder:text-stone/70 focus:border-navy focus:ring-2 focus:ring-navy/20",
             err("message") ? "border-red-700" : "border-line",
           )}
         />
@@ -178,7 +178,7 @@ export function ContactForm({ dict }: { dict: Dictionary }) {
       <button
         type="submit"
         disabled={pending}
-        className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-[3px] bg-navy px-8 text-[1rem] font-semibold text-white transition-colors hover:bg-navy-deep disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+        className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-md bg-navy px-8 text-[1rem] font-semibold text-white transition-colors hover:bg-navy-deep disabled:cursor-wait disabled:opacity-70 sm:w-auto"
       >
         {pending ? f.sending : f.submit}
       </button>

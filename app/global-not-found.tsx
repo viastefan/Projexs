@@ -32,10 +32,10 @@ export default function GlobalNotFound() {
             Die Adresse ist möglicherweise verschoben oder nicht mehr vorhanden. · This page could not be found.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/" className="inline-flex h-12 items-center rounded-[3px] bg-navy px-6 font-semibold text-white hover:bg-navy-deep">
+            <Link href="/" className="inline-flex h-12 items-center rounded-md bg-navy px-6 font-semibold text-white hover:bg-navy-deep">
               Zur Startseite
             </Link>
-            <Link href="/en" className="inline-flex h-12 items-center rounded-[3px] border border-navy px-6 font-semibold text-navy hover:bg-navy hover:text-white">
+            <Link href="/en" className="inline-flex h-12 items-center rounded-md border border-navy px-6 font-semibold text-navy hover:bg-navy hover:text-white">
               English homepage
             </Link>
           </div>

@@ -14,6 +14,7 @@ export const de = {
     imprint: "/impressum",
     privacy: "/datenschutz",
     terms: "/agb",
+    contact: "/kontakt",
   },
 
   ids: {
@@ -61,7 +62,7 @@ export const de = {
     menuClose: "Menü schließen",
     menuTitle: "Navigation",
     switchLabel: "EN",
-    switchAria: "Auf Englisch wechseln",
+    switchAria: "EN – auf Englisch wechseln",
     homeAria: "ProjeXs – zur Startseite",
   },
 
@@ -79,12 +80,78 @@ export const de = {
     trustLabel: "Projekterfahrung u. a. bei",
     trust: ["HELM AG", "Panasonic", "IBM"],
     photoAlt: "Daniela Franzen, SAP-Programm- und Projektmanagerin",
-    badge: {
-      label: "Go-live",
-      title: "S/4HANA global",
-      lines: ["8 Niederlassungen in Europa", "5 Niederlassungen in Asien"],
-      foot: "Termingerecht & im Budget",
+    callLabel: "Oder direkt anrufen",
+    card: {
+      label: "Zuletzt verantwortet",
+      title: "Globale S/4HANA-Einführung",
+      client: "HELM AG · 2020 – 2024",
+      result: "Go-live in 13 Niederlassungen in Europa und Asien – termingerecht und im Budget.",
     },
+  },
+
+  process: {
+    eyebrow: "Zusammenarbeit",
+    title: "So kommen wir ins Projekt.",
+    intro: "Drei Schritte von der ersten Anfrage bis zum Start – klar, schnell und ohne Umwege.",
+    steps: [
+      {
+        title: "Erstgespräch",
+        text: "Wir besprechen Ausgangslage, Ziele und Zeitrahmen Ihres Vorhabens – telefonisch oder per Video.",
+      },
+      {
+        title: "Einschätzung & Angebot",
+        text: "Sie erhalten meine ehrliche Einschätzung, welche Rolle und welchen Einsatz Ihr Projekt braucht – mit einem klaren Angebot.",
+      },
+      {
+        title: "Start & Umsetzung",
+        text: "Schnelle Einarbeitung, klare Struktur und regelmäßiges Reporting – bis zum Go-live und zur geordneten Übergabe.",
+      },
+    ],
+    cta: "Erstgespräch anfragen",
+  },
+
+  inquiry: {
+    title: "Projekt anfragen",
+    subtitle: "In zwei Minuten zur Anfrage. Ich melde mich persönlich bei Ihnen.",
+    stepLabel: "Schritt",
+    of: "von",
+    next: "Weiter",
+    back: "Zurück",
+    submit: "Anfrage senden",
+    close: "Schließen",
+    enterHint: "Enter ↵ für Weiter",
+    optionalHint: "Sie können diesen Schritt auch überspringen.",
+    steps: {
+      topic: { q: "Worum geht es bei Ihrem Vorhaben?", hint: "Wählen Sie, was am besten passt." },
+      timeframe: {
+        q: "Wann soll es losgehen?",
+        label: "Zeitrahmen",
+        options: ["So schnell wie möglich", "In den nächsten 1–3 Monaten", "Später im Jahr", "Noch offen"],
+      },
+      person: { q: "Mit wem spreche ich?", hint: "Name und Unternehmen." },
+      contact: { q: "Wie erreiche ich Sie am besten?", hint: "Eine E-Mail-Adresse genügt – die Mobilnummer ist optional." },
+      message: { q: "Was sollte ich vorab wissen?", hint: "Ausgangslage, Rahmen und Ziele – in wenigen Sätzen." },
+      consent: { q: "Fast geschafft.", hint: "Bitte bestätigen Sie die Datenverarbeitung, dann geht die Anfrage an mich." },
+    },
+    pageLink: "Lieber in Ruhe auf der Kontaktseite?",
+  },
+
+  contactPage: {
+    metaTitle: "Kontakt | ProjeXs – Daniela Franzen",
+    metaDescription:
+      "Nehmen Sie Kontakt zu Daniela Franzen auf: SAP-Projektleitung, Programmmanagement und Interim Management. Anfrage in wenigen Schritten oder direkt per Telefon und E-Mail.",
+    eyebrow: "Kontakt",
+    title: "Erzählen Sie mir von Ihrem Vorhaben.",
+    intro:
+      "Beschreiben Sie Ihr SAP-Projekt in wenigen Schritten – oder rufen Sie mich direkt an. Ich melde mich persönlich bei Ihnen.",
+    formTitle: "Ihre Anfrage in wenigen Schritten",
+    directTitle: "Direkter Kontakt",
+    backHome: "Zur Startseite",
+  },
+
+  mobileBar: {
+    call: "Anrufen",
+    inquire: "Projekt anfragen",
   },
 
   stats: [
@@ -483,6 +550,9 @@ export const de = {
     intro:
       "Nutzen Sie das Kontaktformular oder schreiben Sie mir direkt. Ich melde mich persönlich bei Ihnen.",
     personal: "Ich freue mich auf Ihre Nachricht.",
+    stepperTeaser: "Lieber Schritt für Schritt?",
+    stepperCta: "Anfrage im Dialog starten",
+    pageCta: "Zur Kontaktseite",
     emailLabel: "E-Mail",
     phoneLabel: "Mobil",
     linkedinLabel: "LinkedIn",

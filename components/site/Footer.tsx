@@ -13,7 +13,7 @@ export function Footer({ dict }: { dict: Dictionary }) {
       <div className="mx-auto grid max-w-[80rem] gap-10 px-5 py-14 sm:px-8 md:grid-cols-3">
         <div>
           <Link href={home} aria-label={dict.nav.homeAria} className="inline-block text-white">
-            <Logo />
+            <Logo markClassName="text-accent-light" />
           </Link>
           <p className="mt-5 max-w-xs text-[0.98rem] text-mist">{dict.footer.tagline}</p>
           <p className="mt-3 text-[0.9rem] text-mist">{roles.join(" · ")}</p>
@@ -21,16 +21,16 @@ export function Footer({ dict }: { dict: Dictionary }) {
 
         <nav aria-label={dict.footer.navTitle}>
           <h2 className="text-[0.9rem] font-semibold uppercase tracking-[0.06em] text-mist">{dict.footer.navTitle}</h2>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-3 space-y-1">
             {dict.nav.items.map((item) => (
               <li key={item.id}>
-                <Link href={`${home}#${item.id}`} className="hover:underline underline-offset-4">
+                <Link href={`${home}#${item.id}`} className="inline-block py-1 hover:underline underline-offset-4">
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href={`${home}#${dict.ids.contact}`} className="hover:underline underline-offset-4">
+              <Link href={`${home}#${dict.ids.contact}`} className="inline-block py-1 hover:underline underline-offset-4">
                 {dict.nav.contactLabel}
               </Link>
             </li>
@@ -39,36 +39,36 @@ export function Footer({ dict }: { dict: Dictionary }) {
 
         <div>
           <h2 className="text-[0.9rem] font-semibold uppercase tracking-[0.06em] text-mist">{dict.footer.contactTitle}</h2>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-3 space-y-1">
             <li>
-              <a href={`mailto:${site.contact.email}`} className="break-all hover:underline underline-offset-4">
+              <a href={`mailto:${site.contact.email}`} className="inline-block break-all py-1 hover:underline underline-offset-4">
                 {site.contact.email}
               </a>
             </li>
             <li>
-              <a href={`tel:${site.contact.phoneHref}`} className="hover:underline underline-offset-4">
+              <a href={`tel:${site.contact.phoneHref}`} className="inline-block py-1 hover:underline underline-offset-4">
                 {site.contact.phone}
               </a>
             </li>
             <li>
-              <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">
+              <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="inline-block py-1 hover:underline underline-offset-4">
                 LinkedIn
               </a>
             </li>
           </ul>
-          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[0.95rem]">
+          <ul className="mt-4 flex flex-wrap gap-x-5 text-[0.95rem]">
             <li>
-              <Link href={dict.routes.imprint} className="hover:underline underline-offset-4">
+              <Link href={dict.routes.imprint} className="inline-block py-1.5 hover:underline underline-offset-4">
                 {dict.footer.imprint}
               </Link>
             </li>
             <li>
-              <Link href={dict.routes.privacy} className="hover:underline underline-offset-4">
+              <Link href={dict.routes.privacy} className="inline-block py-1.5 hover:underline underline-offset-4">
                 {dict.footer.privacy}
               </Link>
             </li>
             <li>
-              <Link href={dict.routes.terms} hrefLang="de" className="hover:underline underline-offset-4">
+              <Link href={dict.routes.terms} hrefLang="de" className="inline-block py-1.5 hover:underline underline-offset-4">
                 {dict.footer.terms}
               </Link>
             </li>

@@ -15,6 +15,7 @@ export type { Dictionary };
 /** Seitenpaare DE ↔ EN für den Sprachumschalter und hreflang. */
 export const pagePairs: Array<{ de: string; en: string }> = [
   { de: "/", en: "/en" },
+  { de: "/kontakt", en: "/en/contact" },
   { de: "/impressum", en: "/en/legal-notice" },
   { de: "/datenschutz", en: "/en/privacy" },
   { de: "/agb", en: "/en" },

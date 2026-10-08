@@ -2,7 +2,16 @@
 
 import { site } from "@/content/site";
 
-export type ContactField = "firstName" | "lastName" | "email" | "phone" | "company" | "topic" | "message" | "consent";
+export type ContactField =
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "phone"
+  | "company"
+  | "topic"
+  | "timeframe"
+  | "message"
+  | "consent";
 export type ContactErrorCode = "required" | "email" | "consent" | "short";
 
 export type ContactValues = Partial<Record<Exclude<ContactField, "consent">, string>>;
@@ -36,6 +45,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     phone: clean(formData.get("phone"), 60),
     company: clean(formData.get("company"), 160),
     topic: clean(formData.get("topic"), 120),
+    timeframe: clean(formData.get("timeframe"), 120),
     message: clean(formData.get("message"), 5000),
   };
   const consent = formData.get("consent") === "on";
@@ -75,6 +85,7 @@ export async function submitContact(_prev: ContactState, formData: FormData): Pr
     ["Mobil", values.phone],
     ["Firma", values.company],
     ["Anliegen", values.topic],
+    ["Zeitrahmen", values.timeframe],
   ];
 
   const text = [

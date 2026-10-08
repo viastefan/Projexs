@@ -3,6 +3,7 @@ import { buildJsonLd, JsonLdScript } from "@/lib/jsonld";
 import { Hero } from "@/components/sections/Hero";
 import { Stats } from "@/components/sections/Stats";
 import { Services } from "@/components/sections/Services";
+import { Process } from "@/components/sections/Process";
 import { Expertise } from "@/components/sections/Expertise";
 import { Projects } from "@/components/sections/Projects";
 import { GoLive } from "@/components/sections/GoLive";
@@ -17,6 +18,7 @@ export function HomePage({ dict }: { dict: Dictionary }) {
       <Hero dict={dict} />
       <Stats dict={dict} />
       <Services dict={dict} />
+      <Process dict={dict} />
       <Expertise dict={dict} />
       <Projects dict={dict} />
       <GoLive dict={dict} />

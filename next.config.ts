@@ -36,8 +36,6 @@ const nextConfig: NextConfig = {
       // Naheliegende URLs auf die neuen Seiten lenken
       { source: "/de", destination: "/", permanent: true },
       { source: "/de/:path*", destination: "/:path*", permanent: true },
-      { source: "/kontakt", destination: "/#kontakt", permanent: true },
-      { source: "/en/contact", destination: "/en#contact", permanent: true },
       { source: "/en/impressum", destination: "/en/legal-notice", permanent: true },
       { source: "/en/agb", destination: "/agb", permanent: true },
       { source: "/en/terms", destination: "/agb", permanent: true },

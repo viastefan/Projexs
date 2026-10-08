@@ -13,6 +13,7 @@ export const en: Dictionary = {
     imprint: "/en/legal-notice",
     privacy: "/en/privacy",
     terms: "/agb",
+    contact: "/en/contact",
   },
 
   ids: {
@@ -60,7 +61,7 @@ export const en: Dictionary = {
     menuClose: "Close menu",
     menuTitle: "Navigation",
     switchLabel: "DE",
-    switchAria: "Switch to German",
+    switchAria: "DE – switch to German",
     homeAria: "ProjeXs – home",
   },
 
@@ -78,12 +79,77 @@ export const en: Dictionary = {
     trustLabel: "Project experience includes",
     trust: ["HELM AG", "Panasonic", "IBM"],
     photoAlt: "Daniela Franzen, SAP programme and project manager",
-    badge: {
-      label: "Go-live",
-      title: "Global S/4HANA",
-      lines: ["8 subsidiaries in Europe", "5 subsidiaries in Asia"],
-      foot: "On time & on budget",
+    callLabel: "Or call directly",
+    card: {
+      label: "Most recent programme",
+      title: "Global S/4HANA implementation",
+      client: "HELM AG · 2020 – 2024",
+      result: "Go-live in 13 subsidiaries across Europe and Asia – on time and on budget.",
     },
+  },
+
+  process: {
+    eyebrow: "Working together",
+    title: "How we get started.",
+    intro: "Three steps from first enquiry to kick-off – clear, fast and straightforward.",
+    steps: [
+      {
+        title: "Introductory call",
+        text: "We discuss the starting point, goals and timeline of your initiative – by phone or video.",
+      },
+      {
+        title: "Assessment & proposal",
+        text: "You receive my honest assessment of the role and commitment your project needs – with a clear proposal.",
+      },
+      {
+        title: "Kick-off & delivery",
+        text: "Fast onboarding, clear structure and regular reporting – through go-live and an orderly handover.",
+      },
+    ],
+    cta: "Request an introductory call",
+  },
+
+  inquiry: {
+    title: "Start a project",
+    subtitle: "Two minutes to your enquiry. I’ll get back to you personally.",
+    stepLabel: "Step",
+    of: "of",
+    next: "Next",
+    back: "Back",
+    submit: "Send enquiry",
+    close: "Close",
+    enterHint: "Enter ↵ to continue",
+    optionalHint: "You can also skip this step.",
+    steps: {
+      topic: { q: "What is your initiative about?", hint: "Choose what fits best." },
+      timeframe: {
+        q: "When should it start?",
+        label: "Timeframe",
+        options: ["As soon as possible", "Within the next 1–3 months", "Later this year", "Still open"],
+      },
+      person: { q: "Who am I speaking with?", hint: "Name and company." },
+      contact: { q: "How can I best reach you?", hint: "An email address is enough – the mobile number is optional." },
+      message: { q: "What should I know up front?", hint: "Starting point, scope and goals – in a few sentences." },
+      consent: { q: "Almost done.", hint: "Please confirm the data processing and your enquiry comes straight to me." },
+    },
+    pageLink: "Prefer the contact page instead?",
+  },
+
+  contactPage: {
+    metaTitle: "Contact | ProjeXs – Daniela Franzen",
+    metaDescription:
+      "Get in touch with Daniela Franzen: SAP project leadership, programme management and interim management. Enquire in a few steps or directly by phone and email.",
+    eyebrow: "Contact",
+    title: "Tell me about your initiative.",
+    intro: "Describe your SAP project in a few steps – or simply call me. I’ll get back to you personally.",
+    formTitle: "Your enquiry in a few steps",
+    directTitle: "Direct contact",
+    backHome: "Back to home",
+  },
+
+  mobileBar: {
+    call: "Call",
+    inquire: "Start a project",
   },
 
   stats: [
@@ -476,6 +542,9 @@ export const en: Dictionary = {
     intro:
       "Use the contact form or write to me directly. I’ll get back to you personally.",
     personal: "I look forward to hearing from you.",
+    stepperTeaser: "Prefer step by step?",
+    stepperCta: "Start the enquiry dialog",
+    pageCta: "Go to the contact page",
     emailLabel: "Email",
     phoneLabel: "Mobile",
     linkedinLabel: "LinkedIn",

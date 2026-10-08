@@ -25,7 +25,7 @@ export function Button({
     <Link
       href={href}
       className={cn(
-        "inline-flex h-12 items-center justify-center rounded-[3px] px-6 text-[1rem] font-semibold transition-colors duration-200",
+        "inline-flex h-12 items-center justify-center rounded-md px-6 text-[1rem] font-semibold transition-colors duration-200",
         variants[variant],
         className,
       )}

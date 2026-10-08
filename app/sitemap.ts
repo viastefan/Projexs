@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const pairs = [
     { de: "/", en: "/en", priority: 1, changeFrequency: "monthly" as const },
+    { de: "/kontakt", en: "/en/contact", priority: 0.8, changeFrequency: "monthly" as const },
     { de: "/impressum", en: "/en/legal-notice", priority: 0.3, changeFrequency: "yearly" as const },
     { de: "/datenschutz", en: "/en/privacy", priority: 0.3, changeFrequency: "yearly" as const },
   ];

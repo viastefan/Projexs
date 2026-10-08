@@ -9,7 +9,7 @@ export function GoLive({ dict }: { dict: Dictionary }) {
   return (
     <section id={dict.ids.golive} aria-labelledby="golive-title" className="bg-surface py-20 sm:py-24 lg:py-28">
       <div className="mx-auto grid max-w-[80rem] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-white lg:col-span-5">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-white lg:col-span-5">
           <Image
             src={site.images.golive}
             alt={g.photoAlt}

@@ -52,7 +52,15 @@ Empfohlen: Hochformat 4:5, mindestens 1280 × 1600 px, JPEG.
 
 ---
 
-## Kontaktformular
+## Anfrage & Kontakt
+
+Es gibt drei Wege, Daniela zu erreichen – alle nutzen dieselbe Server-Logik (`lib/contact.ts`):
+
+- **Anfrage-Dialog** („Projekt anfragen“ im Header, im Hero, in der Ablauf-Sektion und in der mobilen Leiste):
+  mehrstufiges Formular im Overlay, eine Frage pro Schritt, Enter springt weiter (`components/inquiry/`).
+  Deep-Link: `/#anfrage` öffnet den Dialog direkt.
+- **Kontaktseite** `/kontakt` bzw. `/en/contact`: dieselben Schritte als Seite plus direkte Kontaktwege.
+- **Klassisches Formular** am Ende der Startseite (`components/sections/ContactForm.tsx`).
 
 Das Formular funktioniert sofort – auch ohne Konfiguration:
 
@@ -116,13 +124,14 @@ Für den Livegang:
 
 ```
 app/
-  (de)/            Deutsche Seiten: Startseite, Impressum, Datenschutz, AGB
-  (en)/en/         Englische Seiten: Startseite, Legal notice, Privacy
+  (de)/            Deutsche Seiten: Startseite, Kontakt, Impressum, Datenschutz, AGB
+  (en)/en/         Englische Seiten: Startseite, Contact, Legal notice, Privacy
   globals.css      Design-System (Farben, Schrift, Rechtstext-Styles)
   global-not-found.tsx   404-Seite
   sitemap.ts · robots.ts · manifest.ts · icon.svg · apple-icon.tsx
 components/
-  sections/        Abschnitte der Startseite (Hero, Leistungen, Projekte, …)
+  inquiry/         Anfrage-Dialog: mehrstufiges Formular, Overlay, Auslöser-Button
+  sections/        Abschnitte der Startseite (Hero, Leistungen, Ablauf, Projekte, …) und Kontaktseite
   site/            Header, Footer, Logo, Seitengerüst
   legal/           Rechtstexte
   ui/              Wiederverwendbare Bausteine (Buttons, Icons, …)

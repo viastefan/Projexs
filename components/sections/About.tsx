@@ -12,7 +12,7 @@ export function About({ dict }: { dict: Dictionary }) {
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-surface">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-surface">
                 <Image
                   src={site.images.portrait}
                   alt={a.portraitAlt}
