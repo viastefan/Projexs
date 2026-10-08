@@ -10,19 +10,21 @@ export function Contact({ dict }: { dict: Dictionary }) {
   const c = dict.contact;
 
   return (
-    <section id={dict.ids.contact} className="border-t border-line bg-white py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto grid max-w-[80rem] gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-5">
+    <section id={dict.ids.contact} className="section border-t border-line bg-surface">
+      <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5" data-reveal>
           <Eyebrow>{c.eyebrow}</Eyebrow>
-          <h2 className="mt-3 text-[clamp(1.85rem,3vw,2.6rem)] font-semibold leading-[1.15]">{c.title}</h2>
+          <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12]">{c.title}</h2>
           <p className="mt-5 text-[1.05rem] leading-relaxed text-stone">{c.intro}</p>
           <p className="mt-4 font-semibold text-navy">{c.personal}</p>
 
-          <div className="mt-8 rounded-lg bg-surface p-6">
+          <div className="mt-8 rounded-xl border border-line bg-white p-5 shadow-[var(--shadow-card)] sm:p-6">
             <p className="font-semibold text-navy">{c.stepperTeaser}</p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <InquiryTrigger href={dict.routes.contact}>{c.stepperCta}</InquiryTrigger>
-              <Link href={dict.routes.contact} className="inline-flex items-center gap-1.5 font-semibold text-navy underline underline-offset-4">
+              <InquiryTrigger href={dict.routes.contact} source="dialog" className="w-full sm:w-auto">
+                {c.stepperCta}
+              </InquiryTrigger>
+              <Link href={dict.routes.contact} className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-navy underline underline-offset-4">
                 {c.pageCta}
                 <ArrowRight className="size-4" />
               </Link>
@@ -34,8 +36,8 @@ export function Contact({ dict }: { dict: Dictionary }) {
           </div>
         </div>
 
-        <div className="lg:col-span-7">
-          <ContactForm dict={dict} />
+        <div className="lg:col-span-7" data-reveal>
+          <ContactForm dict={dict} source="form" />
         </div>
       </div>
     </section>

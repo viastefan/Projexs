@@ -1,0 +1,325 @@
+/*
+ * „Bald für Sie da“ — Wartebildschirm der Praxis-App.
+ * Nur CSS: Lichtschleier im Hintergrund, Wellen ums Logo,
+ * Titel Wort für Wort aus der Unschärfe. Bei reduzierter Bewegung steht alles still.
+ */
+
+.page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: calc(2.5rem + env(safe-area-inset-top, 0px)) 1.25rem calc(2.5rem + env(safe-area-inset-bottom, 0px));
+  background: var(--a-bg);
+}
+
+/* ——— Lichtschleier ——— */
+
+.aurora {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  filter: blur(70px) saturate(1.2);
+  pointer-events: none;
+}
+
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.9;
+  will-change: transform;
+}
+
+.blobA {
+  top: 18%;
+  left: 22%;
+  width: 46vmax;
+  height: 46vmax;
+  background: var(--a-glow-1);
+  animation: driftA 22s ease-in-out infinite alternate;
+}
+
+.blobB {
+  top: 34%;
+  right: 14%;
+  width: 40vmax;
+  height: 40vmax;
+  background: var(--a-glow-2);
+  animation: driftB 26s ease-in-out infinite alternate;
+}
+
+.blobC {
+  bottom: 8%;
+  left: 36%;
+  width: 36vmax;
+  height: 36vmax;
+  background: var(--a-glow-3);
+  animation: driftC 30s ease-in-out infinite alternate;
+}
+
+/* ——— Inhalt ——— */
+
+.stage {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 15rem;
+  height: 15rem;
+  margin-bottom: 0.5rem;
+  animation: appear 1.1s var(--a-ease) both;
+}
+
+.emblem > * {
+  grid-area: 1 / 1;
+}
+
+.mark {
+  position: relative;
+  z-index: 2;
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 1.6rem;
+  box-shadow:
+    0 0 0 0.5px var(--a-line-strong),
+    0 18px 48px rgba(30, 44, 32, 0.22),
+    0 2px 6px rgba(30, 44, 32, 0.12);
+  animation: float 6s ease-in-out infinite;
+}
+
+.halo {
+  z-index: 1;
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 2.4rem;
+  background: var(--a-accent);
+  opacity: 0.28;
+  filter: blur(26px);
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.ripple {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  border: 1px solid var(--a-accent);
+  opacity: 0;
+  animation: ripple 4.2s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+.ripple:nth-child(2) {
+  animation-delay: 1.4s;
+}
+
+.ripple:nth-child(3) {
+  animation-delay: 2.8s;
+}
+
+.ring {
+  z-index: 1;
+  width: 11.5rem;
+  height: 11.5rem;
+  border-radius: 50%;
+  border: 0.5px solid var(--a-line-strong);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--a-mute);
+  animation: appear 0.9s var(--a-ease) 0.25s both;
+}
+
+.title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.28em;
+  margin: 0;
+  font-family: var(--a-font-display), system-ui, sans-serif;
+  font-size: clamp(2.75rem, 11vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--a-ink);
+}
+
+.word {
+  display: inline-block;
+  animation: wordIn 1.1s var(--a-ease) both;
+  animation-delay: calc(0.45s + var(--i) * 0.12s);
+}
+
+.lead {
+  max-width: 26rem;
+  margin: 1.25rem 0 2rem;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--a-mute);
+  text-wrap: balance;
+  animation: appear 1s var(--a-ease) 1s both;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  background: var(--a-accent-wash);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--a-accent);
+  animation: appear 1s var(--a-ease) 1.2s both;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.back {
+  margin-top: 2.75rem;
+  padding: 0.7rem 1.2rem;
+  border-radius: 999px;
+  border: 0.5px solid var(--a-glass-rim);
+  background: var(--a-glass);
+  -webkit-backdrop-filter: var(--a-glass-blur);
+  backdrop-filter: var(--a-glass-blur);
+  box-shadow: var(--a-glass-shadow);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--a-text);
+  text-decoration: none;
+  transition: transform 0.35s var(--a-spring), background 0.2s;
+  animation: appear 1s var(--a-ease) 1.6s both;
+}
+
+.back:hover {
+  background: var(--a-glass-strong);
+  transform: translateY(-1px);
+}
+
+.back:focus-visible {
+  outline: 2px solid var(--a-focus);
+  outline-offset: 3px;
+}
+
+.back span {
+  display: inline-block;
+  transition: transform 0.35s var(--a-spring);
+}
+
+.back:hover span {
+  transform: translateX(3px);
+}
+
+/* ——— Bewegung ——— */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes wordIn {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(0.35em) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.38;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  15% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+
+@keyframes driftA {
+  to {
+    transform: translate(12vmax, 8vmax) scale(1.15);
+  }
+}
+
+@keyframes driftB {
+  to {
+    transform: translate(-14vmax, -6vmax) scale(0.9);
+  }
+}
+
+@keyframes driftC {
+  to {
+    transform: translate(-6vmax, -12vmax) scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page *,
+  .page *::before,
+  .page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .ripple {
+    display: none;
+  }
+}

@@ -1,0 +1,91 @@
+/*
+ * PIN-Zugang — modern, appig, an die Website angelehnt:
+ * Salbei-Akzent, weiche Flächen, flüssige Mikro-Animation.
+ */
+
+.pad {
+  display: grid;
+  justify-items: stretch;
+  gap: 1.35rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Flacher Salbei-CTA wie auf der Website */
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;
+  margin: 0.1rem 0 0;
+  padding: 0 1.35rem;
+  border: 0;
+  border-radius: 999px;
+  background: #082078;
+  box-shadow: none;
+  color: #ffffff;
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.2s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity 0.2s ease,
+    transform 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.submit:disabled {
+  background: color-mix(in srgb, #082078 38%, #e8ecf4);
+  color: rgba(255, 255, 255, 0.92);
+  cursor: default;
+}
+
+.submit:not(:disabled):active {
+  background: #061a5e;
+  transform: scale(0.985);
+}
+
+.submit:focus-visible {
+  outline: 2px solid #082078;
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .submit:not(:disabled):hover {
+    background: #061a5e;
+  }
+}
+
+.message {
+  min-height: 1.25em;
+  margin: -0.15rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--a-bad);
+}
+
+.help {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--a-mute);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submit {
+    transition: none;
+  }
+}

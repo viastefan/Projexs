@@ -25,3 +25,6 @@ npm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Lokaler Speicher der Admin-App (STORAGE_DRIVER=local)
+/.data/

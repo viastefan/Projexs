@@ -1,0 +1,1148 @@
+/*
+ * Der kleine Installationsfilm. Alles läuft in einer Schleife: iPhone 11 s,
+ * sonst 10 s. Die Schritte daneben nutzen dieselben Zeiten.
+ *
+ * Zeitfenster (10 s): Schritt 1 6–38 %, Schritt 2 38–62 %, Schritt 3 62–100 %
+ * Zeitfenster iPhone (11 s): 6–26 %, 26–50 %, 50–100 %
+ */
+
+.stage {
+  --ink: #111;
+  --pane: rgba(255, 255, 255, 0.82);
+  --pane-line: rgba(0, 0, 0, 0.08);
+  --blue: #0a7aff;
+  --ios: 11s;
+  --std: 10s;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  user-select: none;
+}
+
+/* ---------- Telefon ---------- */
+
+.phone {
+  position: relative;
+  width: 13.5rem;
+  aspect-ratio: 9 / 19.5;
+  padding: 0.4375rem;
+  border-radius: 2.5rem;
+  background: linear-gradient(145deg, #3a3b3d, #0d0d0e 40%, #2a2b2d);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.14),
+    0 30px 60px rgba(0, 0, 0, 0.28),
+    0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2.0625rem;
+  background: linear-gradient(170deg, #f7f8f5, #eceee9);
+  font-size: 0.5625rem;
+}
+
+.status {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7%;
+  padding: 0 10%;
+  font-size: 0.5625rem;
+  font-weight: 600;
+}
+
+.island {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  width: 32%;
+  height: 58%;
+  border-radius: 999px;
+  background: #000;
+  transform: translateX(-50%);
+}
+
+.statusIcons {
+  width: 1.5rem;
+  height: 0.4rem;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #111 0 30%, transparent 30% 38%, #111 38% 62%, transparent 62% 70%, #111 70%);
+  opacity: 0.8;
+}
+
+.homeIndicator {
+  position: absolute;
+  bottom: 1.3%;
+  left: 50%;
+  z-index: 9;
+  width: 34%;
+  height: 0.9%;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.75);
+  transform: translateX(-50%);
+}
+
+/* Die Seite im Browser */
+.page {
+  position: absolute;
+  inset: 13% 9% 16%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding-top: 8%;
+}
+
+.pageIcon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.65rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.pageTitle {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pageLine {
+  width: 78%;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.short {
+  width: 52%;
+}
+
+.pageField {
+  width: 100%;
+  height: 1.55rem;
+  margin-top: 0.3rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+}
+
+.pageButton {
+  width: 100%;
+  height: 1.55rem;
+  margin-top: 0.4rem;
+  border-radius: 999px;
+  background: #082078;
+}
+
+/* Ebenen, die nacheinander auftauchen */
+.layer {
+  position: absolute;
+  z-index: 6;
+  opacity: 0;
+}
+
+/* ---------- iPhone: Safari-Leiste unten (iOS 26) ---------- */
+
+.safariBar {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 4.5%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 7.5%;
+  padding: 0 0.55rem;
+  border-radius: 999px;
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 0.5px var(--pane-line),
+    0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.safariBack {
+  font-size: 1rem;
+  color: var(--blue);
+}
+
+.safariUrl {
+  flex: 1;
+  text-align: center;
+  font-size: 0.5625rem;
+  font-weight: 500;
+}
+
+.safariMore {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  animation: pressMore var(--ios) infinite;
+}
+
+.iosMenu {
+  right: 5%;
+  bottom: 13.5%;
+  display: grid;
+  width: 60%;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: var(--pane);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 0 0.5px var(--pane-line), 0 12px 28px rgba(0, 0, 0, 0.16);
+  transform-origin: 90% 100%;
+  animation: iosMenu var(--ios) infinite;
+}
+
+.iosMenu > span,
+.chromeMenu > span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 1.75rem;
+  padding: 0 0.6rem;
+  font-size: 0.5625rem;
+}
+
+.iosMenu > span + span {
+  box-shadow: inset 0 0.5px 0 var(--pane-line);
+}
+
+.iosMenu svg,
+.chromeMenu svg,
+.sheetRow svg,
+.popover svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menuHit {
+  animation: hitA var(--ios) infinite;
+}
+
+.iosSheet {
+  inset: auto 0 0;
+  display: grid;
+  gap: 0;
+  height: 56%;
+  padding: 0.35rem 0.55rem 0;
+  border-radius: 1.1rem 1.1rem 0 0;
+  background: #f2f2f7;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.12);
+  align-content: start;
+  opacity: 1;
+  transform: translateY(105%);
+  animation: iosSheet var(--ios) infinite;
+}
+
+.grabber {
+  justify-self: center;
+  width: 16%;
+  height: 0.2rem;
+  margin-bottom: 0.4rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.sheetHead {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.2rem 0.55rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.sheetHead img {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.sheetRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.9rem;
+  padding: 0 0.6rem;
+  background: #fff;
+  font-size: 0.5625rem;
+}
+
+.sheetRow:nth-of-type(3) {
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.sheetRow + .sheetRow {
+  box-shadow: inset 0 0.5px 0 var(--pane-line);
+}
+
+.sheetHit {
+  border-radius: 0 0 0.6rem 0.6rem;
+  animation: hitSheet var(--ios) infinite;
+}
+
+.iosAdd {
+  inset: 7% 0 0;
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.9rem 0.9rem 0 0;
+  background: #f2f2f7;
+  opacity: 1;
+  transform: translateY(105%);
+  animation: iosAdd var(--ios) infinite;
+}
+
+.addBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 1.6rem;
+  font-size: 0.5625rem;
+  color: var(--blue);
+}
+
+.addBar b {
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  animation: hitAdd var(--ios) infinite;
+}
+
+.addCard {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  background: #fff;
+}
+
+.addCard img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.addCard b,
+.addCard small {
+  display: block;
+}
+
+.addCard small {
+  color: #8e8e93;
+}
+
+.addToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.6rem;
+  background: #fff;
+  font-size: 0.5625rem;
+}
+
+.addToggle i {
+  position: relative;
+  width: 1.4rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  background: #34c759;
+}
+
+.addToggle i::after {
+  content: '';
+  position: absolute;
+  top: 0.08rem;
+  right: 0.08rem;
+  width: 0.69rem;
+  height: 0.69rem;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* ---------- Android: Chrome ---------- */
+
+.chromeBar {
+  position: absolute;
+  top: 7%;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 7%;
+  padding: 0 0.55rem;
+  background: #fff;
+  box-shadow: 0 0.5px 0 var(--pane-line);
+}
+
+.chromeUrl {
+  flex: 1;
+  padding: 0.3rem 0.5rem;
+  border-radius: 999px;
+  background: #eef1f4;
+  font-size: 0.5625rem;
+}
+
+.chromeMore {
+  width: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.chromeMenu {
+  top: 8%;
+  right: 3%;
+  display: grid;
+  width: 62%;
+  padding: 0.3rem 0;
+  border-radius: 0.6rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform-origin: 100% 0;
+  animation: chromeMenu var(--std) infinite;
+}
+
+.chromeMenu .menuHit {
+  animation: hitChrome var(--std) infinite;
+}
+
+.androidDialog {
+  top: 34%;
+  left: 8%;
+  right: 8%;
+  display: grid;
+  justify-items: center;
+  gap: 0.3rem;
+  padding: 0.9rem 0.7rem 0.6rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  font-size: 0.5625rem;
+  animation: androidDialog var(--std) infinite;
+}
+
+.androidDialog img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+}
+
+.androidDialog b {
+  font-size: 0.6875rem;
+}
+
+.androidDialog small {
+  color: #5f6368;
+}
+
+.androidActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.4rem;
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.androidActions > span {
+  padding: 0.3rem 0.5rem;
+  border-radius: 999px;
+}
+
+.androidPrimary {
+  background: #1a73e8;
+  color: #fff;
+  animation: hitAndroid var(--std) infinite;
+}
+
+/* ---------- Home-Bildschirm ---------- */
+
+.home {
+  inset: 0;
+  z-index: 7;
+  padding: 18% 9% 0;
+  background:
+    radial-gradient(90% 60% at 20% 10%, #b9cdb7, transparent 70%),
+    radial-gradient(80% 60% at 90% 40%, #b8cde4, transparent 70%),
+    radial-gradient(90% 60% at 40% 100%, #ead8bd, transparent 70%),
+    #dfe5dc;
+  animation: home var(--ios) infinite;
+}
+
+.phone:has(.chromeBar) .home {
+  animation-duration: var(--std);
+  animation-name: homeStd;
+}
+
+.homeGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem 0.55rem;
+}
+
+.homeApp {
+  aspect-ratio: 1;
+  border-radius: 22%;
+  background: linear-gradient(160deg, hsl(var(--hue) 45% 78%), hsl(calc(var(--hue) + 30) 40% 62%));
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.homeNew {
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  font-size: 0.5rem;
+  font-weight: 500;
+  color: #111;
+  animation: popIn var(--ios) infinite;
+}
+
+.phone:has(.chromeBar) .homeNew {
+  animation-duration: var(--std);
+  animation-name: popInStd;
+}
+
+.homeNew img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 22%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+}
+
+.homeDock {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: 3.5%;
+  height: 11%;
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.35);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* ---------- Fingertipp ---------- */
+
+.tap {
+  position: absolute;
+  z-index: 10;
+  width: 1.9rem;
+  height: 1.9rem;
+  margin: -0.95rem 0 0 -0.95rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 30%, rgba(80, 105, 79, 0.35) 31% 60%, transparent 62%);
+  box-shadow: 0 0 0 1.5px rgba(80, 105, 79, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tapI1 {
+  left: 88%;
+  top: 91.2%;
+  animation: tapI1 var(--ios) infinite;
+}
+
+.tapI2 {
+  left: 58%;
+  top: 70.5%;
+  animation: tapI2 var(--ios) infinite;
+}
+
+.tapI3 {
+  left: 50%;
+  top: 83%;
+  animation: tapI3 var(--ios) infinite;
+}
+
+.tapI4 {
+  left: 84%;
+  top: 11.8%;
+  animation: tapI4 var(--ios) infinite;
+}
+
+.tapA1 {
+  left: 92%;
+  top: 10.5%;
+  animation: tapA1 var(--std) infinite;
+}
+
+.tapA2 {
+  left: 64%;
+  top: 36%;
+  animation: tapA2 var(--std) infinite;
+}
+
+.tapA3 {
+  left: 76%;
+  top: 60%;
+  animation: tapA3 var(--std) infinite;
+}
+
+/* ---------- Computer ---------- */
+
+.desktopStage {
+  aspect-ratio: 16 / 10.5;
+}
+
+.window,
+.appWindow {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 0.8rem;
+  background: linear-gradient(170deg, #f7f8f5, #eceee9);
+  box-shadow:
+    0 0 0 0.5px rgba(0, 0, 0, 0.18),
+    0 24px 50px rgba(0, 0, 0, 0.22);
+  font-size: 0.5625rem;
+}
+
+.window {
+  inset: 4% 3% 17%;
+}
+
+.windowBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 12%;
+  min-height: 1.6rem;
+  padding: 0 0.6rem;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0.5px 0 var(--pane-line);
+}
+
+.lights {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.lights i {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #ff5f57;
+}
+
+.lights i:nth-child(2) {
+  background: #febc2e;
+}
+
+.lights i:nth-child(3) {
+  background: #28c840;
+}
+
+.address {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  height: 62%;
+  padding: 0 0.3rem 0 0.6rem;
+  border-radius: 999px;
+  background: #eef0ee;
+  color: #444;
+}
+
+.addressInstall,
+.windowShare {
+  display: grid;
+  place-items: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  animation: pressInstall var(--std) infinite;
+}
+
+.addressInstall svg,
+.windowShare svg {
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: none;
+  stroke: #333;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.windowBody {
+  position: relative;
+  height: 88%;
+}
+
+.windowBody .page {
+  inset: 6% 30% 4%;
+  padding-top: 2%;
+}
+
+.popover {
+  position: absolute;
+  top: 13%;
+  right: 2%;
+  z-index: 6;
+  display: grid;
+  gap: 0.5rem;
+  width: 44%;
+  padding: 0.6rem;
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.12), 0 12px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform-origin: 90% 0;
+  animation: popover var(--std) infinite;
+}
+
+.popoverHead {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.popoverHead img {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.popoverHead b,
+.popoverHead small {
+  display: block;
+}
+
+.popoverHead small {
+  color: #666;
+}
+
+.popoverActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.popoverActions > span {
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: #eef0ee;
+}
+
+.popoverPrimary {
+  animation: hitDesk var(--std) infinite;
+}
+
+.popoverSafari {
+  width: 42%;
+  padding: 0.3rem 0;
+  gap: 0;
+}
+
+.popoverRow {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 1.55rem;
+  padding: 0 0.6rem;
+}
+
+.popoverHit {
+  animation: hitDesk var(--std) infinite;
+}
+
+.tapD1 {
+  left: 93.5%;
+  top: 6%;
+  animation: tapD1 var(--std) infinite;
+}
+
+.tapD2 {
+  left: 86%;
+  top: 40%;
+  animation: tapD2 var(--std) infinite;
+}
+
+.tapSafari1 {
+  left: 96%;
+}
+
+.tapSafari2 {
+  left: 72%;
+  top: 29%;
+}
+
+.appWindow {
+  inset: 12% 14% 16%;
+  z-index: 8;
+  opacity: 0;
+  animation: appWindow var(--std) infinite;
+}
+
+.appWindowTitle {
+  flex: 1;
+  margin-right: 1.6rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dock {
+  position: absolute;
+  left: 50%;
+  bottom: 1%;
+  z-index: 9;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.3rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+}
+
+.dock span,
+.dock img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.36rem;
+}
+
+.dock span {
+  background: linear-gradient(160deg, hsl(var(--hue) 45% 78%), hsl(calc(var(--hue) + 30) 40% 62%));
+}
+
+.dock img {
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  animation: dockIn var(--std) infinite;
+}
+
+/* ---------- Schritte neben dem Film ---------- */
+
+.steps {
+  display: grid;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 1.625rem minmax(0, 1fr);
+  gap: 0.625rem;
+  align-items: start;
+  padding: 0.5625rem 0.75rem;
+  border-radius: 0.875rem;
+  opacity: var(--ip-step-dim, 0.5);
+  transition: none;
+}
+
+.steps li b {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.steps li span > span {
+  display: block;
+  margin-top: 0.0625rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+.stepNumber {
+  display: grid;
+  place-items: center;
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: 50%;
+  background: var(--ip-accent, #082078);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.step1 {
+  animation: stepA var(--std, 10s) infinite;
+}
+
+.step2 {
+  animation: stepB var(--std, 10s) infinite;
+}
+
+.step3 {
+  animation: stepC var(--std, 10s) infinite;
+}
+
+.step1Ios {
+  animation: stepIosA 11s infinite;
+}
+
+.step2Ios {
+  animation: stepIosB 11s infinite;
+}
+
+.step3Ios {
+  animation: stepIosC 11s infinite;
+}
+
+/* ---------- Zeitleisten ---------- */
+
+@keyframes pressMore {
+  0%, 7%, 13%, 100% { transform: none; }
+  9%, 11% { transform: scale(0.85); }
+}
+
+@keyframes iosMenu {
+  0%, 11% { opacity: 0; transform: scale(0.6); }
+  14%, 25% { opacity: 1; transform: none; }
+  27%, 100% { opacity: 0; transform: scale(0.96); }
+}
+
+@keyframes hitA {
+  0%, 19% { background: transparent; }
+  21%, 25% { background: rgba(0, 0, 0, 0.08); }
+  26%, 100% { background: transparent; }
+}
+
+@keyframes iosSheet {
+  0%, 26% { transform: translateY(105%); }
+  31%, 49% { transform: none; }
+  53%, 100% { transform: translateY(105%); }
+}
+
+@keyframes hitSheet {
+  0%, 38% { background: #fff; }
+  41%, 47% { background: #e5e5ea; }
+  49%, 100% { background: #fff; }
+}
+
+@keyframes iosAdd {
+  0%, 49% { transform: translateY(105%); }
+  53%, 69% { transform: none; }
+  71%, 100% { transform: translateY(105%); }
+}
+
+@keyframes hitAdd {
+  0%, 60% { background: transparent; }
+  62%, 67% { background: rgba(10, 122, 255, 0.14); }
+  68%, 100% { background: transparent; }
+}
+
+@keyframes home {
+  0%, 69% { opacity: 0; transform: scale(1.08); }
+  73%, 97% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+
+@keyframes homeStd {
+  0%, 61% { opacity: 0; transform: scale(1.08); }
+  65%, 97% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+
+@keyframes popIn {
+  0%, 74% { opacity: 0; transform: scale(0.3); }
+  79% { opacity: 1; transform: scale(1.12); }
+  83%, 100% { opacity: 1; transform: none; }
+}
+
+@keyframes popInStd {
+  0%, 66% { opacity: 0; transform: scale(0.3); }
+  71% { opacity: 1; transform: scale(1.12); }
+  75%, 100% { opacity: 1; transform: none; }
+}
+
+@keyframes chromeMenu {
+  0%, 12% { opacity: 0; transform: scale(0.7); }
+  15%, 36% { opacity: 1; transform: none; }
+  38%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes hitChrome {
+  0%, 27% { background: transparent; }
+  29%, 35% { background: rgba(0, 0, 0, 0.08); }
+  36%, 100% { background: transparent; }
+}
+
+@keyframes androidDialog {
+  0%, 38% { opacity: 0; transform: scale(0.92); }
+  41%, 60% { opacity: 1; transform: none; }
+  62%, 100% { opacity: 0; transform: scale(0.96); }
+}
+
+@keyframes hitAndroid {
+  0%, 52% { filter: none; }
+  54%, 59% { filter: brightness(0.8); }
+  60%, 100% { filter: none; }
+}
+
+@keyframes pressInstall {
+  0%, 7%, 13%, 100% { background: transparent; }
+  9%, 12% { background: rgba(0, 0, 0, 0.1); }
+}
+
+@keyframes popover {
+  0%, 12% { opacity: 0; transform: scale(0.85); }
+  15%, 58% { opacity: 1; transform: none; }
+  61%, 100% { opacity: 0; transform: none; }
+}
+
+@keyframes hitDesk {
+  0%, 50% { background: #eef0ee; color: inherit; }
+  52%, 58% { background: #082078; color: #fff; }
+  59%, 100% { background: #eef0ee; color: inherit; }
+}
+
+@keyframes appWindow {
+  0%, 61% { opacity: 0; transform: scale(0.85) translateY(6%); }
+  66%, 96% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+
+@keyframes dockIn {
+  0%, 60% { transform: scale(0); }
+  64% { transform: scale(1.25) translateY(-20%); }
+  68%, 100% { transform: none; }
+}
+
+@keyframes tapI1 {
+  0%, 6% { opacity: 0; transform: scale(1.6); }
+  8%, 11% { opacity: 1; transform: scale(1); }
+  13%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapI2 {
+  0%, 18% { opacity: 0; transform: scale(1.6); }
+  20%, 23% { opacity: 1; transform: scale(1); }
+  25%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapI3 {
+  0%, 39% { opacity: 0; transform: scale(1.6); }
+  41%, 45% { opacity: 1; transform: scale(1); }
+  47%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapI4 {
+  0%, 59% { opacity: 0; transform: scale(1.6); }
+  61%, 65% { opacity: 1; transform: scale(1); }
+  67%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapA1 {
+  0%, 6% { opacity: 0; transform: scale(1.6); }
+  8%, 12% { opacity: 1; transform: scale(1); }
+  14%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapA2 {
+  0%, 26% { opacity: 0; transform: scale(1.6); }
+  28%, 33% { opacity: 1; transform: scale(1); }
+  35%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapA3 {
+  0%, 51% { opacity: 0; transform: scale(1.6); }
+  53%, 58% { opacity: 1; transform: scale(1); }
+  60%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapD1 {
+  0%, 6% { opacity: 0; transform: scale(1.6); }
+  8%, 12% { opacity: 1; transform: scale(1); }
+  14%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes tapD2 {
+  0%, 48% { opacity: 0; transform: scale(1.6); }
+  51%, 57% { opacity: 1; transform: scale(1); }
+  59%, 100% { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes stepA {
+  0%, 5% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+  7%, 36% { opacity: 1; background: var(--ip-step, rgba(80, 105, 79, 0.12)); }
+  38%, 100% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+}
+
+@keyframes stepB {
+  0%, 37% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+  39%, 60% { opacity: 1; background: var(--ip-step, rgba(80, 105, 79, 0.12)); }
+  62%, 100% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+}
+
+@keyframes stepC {
+  0%, 61% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+  63%, 97% { opacity: 1; background: var(--ip-step, rgba(80, 105, 79, 0.12)); }
+  100% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+}
+
+@keyframes stepIosA {
+  0%, 5% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+  7%, 25% { opacity: 1; background: var(--ip-step, rgba(80, 105, 79, 0.12)); }
+  27%, 100% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+}
+
+@keyframes stepIosB {
+  0%, 26% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+  28%, 49% { opacity: 1; background: var(--ip-step, rgba(80, 105, 79, 0.12)); }
+  51%, 100% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+}
+
+@keyframes stepIosC {
+  0%, 50% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+  52%, 97% { opacity: 1; background: var(--ip-step, rgba(80, 105, 79, 0.12)); }
+  100% { opacity: var(--ip-step-dim, 0.5); background: transparent; }
+}
+
+/* Ohne Bewegung: Endbild zeigen, alle Schritte gleich hell */
+@media (prefers-reduced-motion: reduce) {
+  .stage *,
+  .steps li {
+    animation: none !important;
+  }
+
+  .steps li {
+    opacity: 1;
+  }
+
+  .home,
+  .homeNew,
+  .appWindow {
+    opacity: 1;
+    transform: none;
+  }
+}

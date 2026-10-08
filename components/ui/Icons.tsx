@@ -113,3 +113,71 @@ export function Close(props: IconProps) {
     </svg>
   );
 }
+
+export function Shield(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3 5 6v5.5c0 4.4 3 8.1 7 9.5 4-1.4 7-5.1 7-9.5V6l-7-3Z" />
+      <path d="m9 12 2 2 4-4.5" />
+    </svg>
+  );
+}
+
+export function Clock(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
+    </svg>
+  );
+}
+
+export function Award(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="9" r="5.5" />
+      <path d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7" />
+    </svg>
+  );
+}
+
+export function Users(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="9" cy="8.5" r="3.5" />
+      <path d="M2.5 20a6.5 6.5 0 0 1 13 0" />
+      <path d="M16 5.5a3.5 3.5 0 0 1 0 6.5" />
+      <path d="M17.5 14a6.5 6.5 0 0 1 4 6" />
+    </svg>
+  );
+}
+
+export function Target(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function Globe(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M3.5 12h17" />
+      <path d="M12 3.5c2.6 2.6 2.6 14.4 0 17" />
+      <path d="M12 3.5c-2.6 2.6-2.6 14.4 0 17" />
+    </svg>
+  );
+}
+
+export function Cookie(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5 3 3 0 0 1-3.5-3 3 3 0 0 1-3-3.5 3 3 0 0 1-2-2Z" />
+      <path d="M9 9.5v.01M8.5 14.5v.01M13 15.5v.01M14.5 11v.01" strokeWidth={2.4} />
+    </svg>
+  );
+}

@@ -1,0 +1,305 @@
+.page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding: calc(2rem + env(safe-area-inset-top, 0px)) 1.25rem calc(2rem + env(safe-area-inset-bottom, 0px));
+  background: var(--a-bg);
+}
+
+/* PIN-Login: ruhig und sachlich — heller Grund, klare Hierarchie */
+.pagePin {
+  align-content: center;
+  overflow: auto;
+  background: var(--a-bg);
+  padding: calc(2rem + env(safe-area-inset-top, 0px)) 1.5rem calc(2rem + env(safe-area-inset-bottom, 0px));
+}
+
+.pinShell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 22.5rem;
+  margin-inline: auto;
+}
+
+.pinHead {
+  margin-bottom: 1.85rem;
+  text-align: left;
+}
+
+.pinBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.pinMark {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 7px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--a-line);
+}
+
+.pinBrandText {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.pinApp {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.25;
+  color: var(--a-ink);
+}
+
+.pinRole {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--a-mute);
+}
+
+.pinTitle {
+  margin: 0;
+  font-family: var(--a-font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--a-ink);
+  text-wrap: balance;
+}
+
+.pinLead {
+  margin: 0.7rem 0 0;
+  max-width: 28em;
+  font-size: 0.975rem;
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  color: var(--a-mute);
+}
+
+.pinBody {
+  width: 100%;
+}
+
+.pinFoot {
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--a-mute);
+}
+
+.pinLegal {
+  margin: auto 0 0;
+  padding-top: 2.75rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--a-faint);
+}
+
+.pinLegal a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.pinLegal a:hover {
+  color: #082078;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* Farbwolken im Hintergrund — für den sachlichen Auftritt abgeschaltet. */
+.aurora {
+  display: none;
+}
+
+.aurora span {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.9;
+  will-change: transform;
+}
+
+.blobA {
+  top: 16%;
+  left: 18%;
+  width: 42vmax;
+  height: 42vmax;
+  background: var(--a-glow-1);
+  animation: driftA 22s ease-in-out infinite alternate;
+}
+
+.blobB {
+  top: 36%;
+  right: 10%;
+  width: 36vmax;
+  height: 36vmax;
+  background: var(--a-glow-2);
+  animation: driftB 26s ease-in-out infinite alternate;
+}
+
+.blobC {
+  bottom: 6%;
+  left: 40%;
+  width: 32vmax;
+  height: 32vmax;
+  background: var(--a-glow-3);
+  animation: driftC 30s ease-in-out infinite alternate;
+}
+
+.panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  max-width: 24rem;
+}
+
+.panel > * {
+  width: 100%;
+}
+
+.emblem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.emblem > * {
+  grid-area: 1 / 1;
+}
+
+.halo {
+  display: none;
+}
+
+.mark {
+  position: relative;
+  z-index: 1;
+  width: 5.5rem !important;
+  height: 5.5rem;
+  border-radius: 1.35rem;
+  box-shadow:
+    0 0 0 0.5px var(--a-line-strong),
+    0 14px 36px rgba(30, 44, 32, 0.18),
+    0 2px 6px rgba(30, 44, 32, 0.1);
+}
+
+.head {
+  margin-bottom: 1.35rem;
+  text-align: center;
+}
+
+.head p {
+  margin-inline: auto;
+}
+
+.app {
+  margin: 0 0 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--a-mute);
+}
+
+.card {
+  width: 100%;
+  -webkit-backdrop-filter: var(--a-glass-blur);
+  backdrop-filter: var(--a-glass-blur);
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+}
+
+.foot {
+  margin-top: 1.25rem;
+  padding-inline: 0.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  text-align: center;
+  color: var(--a-mute);
+}
+
+.code {
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  background: var(--a-sunken);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.8125rem;
+}
+
+.list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+  display: grid;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes driftA {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(4%, 3%, 0);
+  }
+}
+
+@keyframes driftB {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-3%, 4%, 0);
+  }
+}
+
+@keyframes driftC {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(2%, -3%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .blobA,
+  .blobB,
+  .blobC {
+    animation: none !important;
+  }
+}

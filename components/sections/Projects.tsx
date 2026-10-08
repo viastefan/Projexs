@@ -1,8 +1,8 @@
 import type { Dictionary } from "@/lib/i18n";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Button } from "@/components/ui/Button";
 import { Plus } from "@/components/ui/Icons";
+import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
 
 type Client = Dictionary["projects"]["clients"][number];
 type Engagement = Client["engagements"][number];
@@ -41,23 +41,23 @@ function ClientCase({ c, labels, open }: { c: Client; labels: Labels; open: bool
 
   return (
     <details name="projekte" open={open} className="group">
-      <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-7 sm:py-8">
+      <summary className="flex cursor-pointer list-none items-start justify-between gap-4 py-6 sm:gap-6 sm:py-8">
         <div className="min-w-0">
           <p className="text-[0.9rem] text-stone">
             {c.period} · {c.industry}
           </p>
-          <h3 className="mt-1 text-[1.6rem] font-semibold leading-tight sm:text-[1.8rem]">{c.client}</h3>
+          <h3 className="mt-1 text-[1.45rem] font-semibold leading-tight sm:text-[1.8rem]">{c.client}</h3>
           <p className="mt-1 text-[1.05rem] text-ink">{c.headline}</p>
         </div>
         <span
           aria-hidden="true"
-          className="mt-1 grid size-10 shrink-0 place-items-center rounded-md border border-line text-navy transition-transform duration-200 group-open:rotate-45 group-open:border-navy"
+          className="mt-1 grid size-11 shrink-0 place-items-center rounded-md border border-line text-navy transition-transform duration-200 group-open:rotate-45 group-open:border-navy"
         >
           <Plus className="size-5" />
         </span>
       </summary>
 
-      <div className="grid gap-10 pb-12 lg:grid-cols-12 lg:gap-12">
+      <div className="grid gap-8 pb-8 sm:pb-12 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">
           <dl className="divide-y divide-line border-y border-line text-[0.98rem]">
             {facts
@@ -113,21 +113,21 @@ export function Projects({ dict }: { dict: Dictionary }) {
   const p = dict.projects;
 
   return (
-    <section id={dict.ids.projects} className="bg-white py-20 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
+    <section id={dict.ids.projects} className="section border-t border-line bg-surface">
+      <div className="container-site">
         <SectionHeading eyebrow={<Eyebrow>{p.eyebrow}</Eyebrow>} title={p.title} intro={p.intro} />
 
-        <div className="mt-12 divide-y divide-line border-y border-line">
+        <div className="mt-10 divide-y divide-line rounded-xl border border-line bg-white px-5 shadow-[var(--shadow-card)] sm:px-8" data-reveal>
           {p.clients.map((c, i) => (
             <ClientCase key={c.client} c={c} labels={p.labels} open={i === 0} />
           ))}
         </div>
 
-        <div className="mt-8 flex flex-col items-start justify-between gap-6 rounded-lg border border-line bg-surface p-8 sm:flex-row sm:items-center sm:p-10">
-          <p className="max-w-xl text-[1.05rem] leading-relaxed text-ink">{p.note}</p>
-          <Button href={dict.routes.contact} variant="secondary" className="shrink-0">
+        <div className="mt-6 flex flex-col items-start justify-between gap-5 rounded-xl bg-navy p-6 text-white sm:flex-row sm:items-center sm:p-8" data-reveal>
+          <p className="max-w-xl text-[1.05rem] leading-relaxed text-white/85">{p.note}</p>
+          <InquiryTrigger href={dict.routes.contact} source="dialog" variant="light" className="w-full shrink-0 sm:w-auto">
             {p.cta}
-          </Button>
+          </InquiryTrigger>
         </div>
       </div>
     </section>

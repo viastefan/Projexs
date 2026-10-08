@@ -7,27 +7,31 @@ export function SectionHeading({
   title,
   intro,
   tone = "dark",
+  align = "left",
   className,
 }: {
   eyebrow: ReactNode;
   title: ReactNode;
   intro?: ReactNode;
   tone?: "dark" | "light";
+  align?: "left" | "center";
   className?: string;
 }) {
   return (
-    <div className={cn("max-w-3xl", className)}>
+    <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)} data-reveal>
       {eyebrow}
       <h2
         className={cn(
-          "mt-3 text-[clamp(1.85rem,3vw,2.6rem)] font-semibold leading-[1.15]",
+          "mt-3 text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12] tracking-[-0.01em]",
           tone === "light" && "text-white",
         )}
       >
         {title}
       </h2>
       {intro && (
-        <p className={cn("mt-5 text-[1.05rem] leading-relaxed", tone === "dark" ? "text-stone" : "text-mist")}>{intro}</p>
+        <p className={cn("mt-5 text-[1.05rem] leading-relaxed sm:text-[1.1rem]", tone === "dark" ? "text-stone" : "text-mist")}>
+          {intro}
+        </p>
       )}
     </div>
   );

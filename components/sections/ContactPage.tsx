@@ -3,39 +3,41 @@ import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { InquiryForm } from "@/components/inquiry/InquiryForm";
+import { Clock } from "@/components/ui/Icons";
 import { ContactChannels } from "./ContactChannels";
+import { ContactTabs } from "./ContactTabs";
+import { ContactMap } from "./ContactMap";
 
-/** Eigenständige Kontaktseite: mehrstufige Anfrage plus direkte Kontaktwege. */
+/** Eigenständige Kontaktseite: Anfrage (Schritte oder klassisch), direkte Kontaktwege, Erreichbarkeit und Standort. */
 export function ContactPage({ dict }: { dict: Dictionary }) {
   const c = dict.contactPage;
 
   return (
     <>
-      <section className="border-b border-line bg-surface pb-12 pt-14 sm:pt-20">
-        <div className="mx-auto max-w-[80rem] px-5 sm:px-8">
-          <Link href={dict.routes.home} className="text-[0.95rem] font-semibold text-navy underline underline-offset-4">
+      <section className="border-b border-line bg-surface pb-10 pt-10 sm:pb-12 sm:pt-16">
+        <div className="container-site">
+          <Link href={dict.routes.home} className="inline-flex min-h-11 items-center text-[0.95rem] font-semibold text-navy underline underline-offset-4">
             ← {c.backHome}
           </Link>
-          <div className="mt-6 max-w-3xl">
+          <div className="mt-4 max-w-3xl">
             <Eyebrow>{c.eyebrow}</Eyebrow>
-            <h1 className="mt-3 text-[clamp(2.1rem,4vw,3.2rem)] font-semibold leading-[1.1]">{c.title}</h1>
-            <p className="mt-5 text-[1.1rem] leading-relaxed text-stone">{c.intro}</p>
+            <h1 className="mt-3 text-[clamp(2rem,6vw,3.2rem)] font-semibold leading-[1.1]">{c.title}</h1>
+            <p className="mt-5 text-[1.08rem] leading-relaxed text-stone">{c.intro}</p>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-14 sm:py-20">
-        <div className="mx-auto grid max-w-[80rem] gap-12 px-5 sm:px-8 lg:grid-cols-12 lg:gap-16">
+      <section className="bg-white py-12 sm:py-20">
+        <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
-            <h2 className="mb-6 text-[1.35rem] font-semibold">{c.formTitle}</h2>
-            <InquiryForm dict={dict} variant="inline" />
+            <h2 className="mb-5 text-[1.35rem] font-semibold">{c.formTitle}</h2>
+            <ContactTabs dict={dict} />
           </div>
 
           <aside className="lg:col-span-5">
             <div className="lg:sticky lg:top-28">
               <div className="flex items-center gap-4">
-                <span className="relative size-16 shrink-0 overflow-hidden rounded-md bg-surface">
+                <span className="relative size-16 shrink-0 overflow-hidden rounded-full bg-surface ring-2 ring-line">
                   <Image src={site.images.portrait} alt="" fill sizes="64px" className="object-cover object-[50%_15%]" />
                 </span>
                 <div>
@@ -43,9 +45,26 @@ export function ContactPage({ dict }: { dict: Dictionary }) {
                   <p className="text-[0.95rem] text-stone">{dict.about.roles}</p>
                 </div>
               </div>
+
               <h2 className="mt-8 text-[1.35rem] font-semibold">{c.directTitle}</h2>
               <div className="mt-4">
                 <ContactChannels dict={dict} />
+              </div>
+
+              <div className="mt-6 flex gap-3 rounded-lg bg-surface p-4">
+                <Clock className="mt-0.5 size-5 shrink-0 text-navy" />
+                <div>
+                  <p className="font-semibold text-navy">{c.availabilityTitle}</p>
+                  <p className="mt-1 text-[0.95rem] leading-relaxed text-stone">{c.availabilityText}</p>
+                </div>
+              </div>
+
+              <h2 className="mt-8 text-[1.35rem] font-semibold">{c.mapTitle}</h2>
+              <p className="mt-1 text-[0.95rem] text-stone">
+                {site.address.street}, {site.address.zip} {site.address.city}
+              </p>
+              <div className="mt-4">
+                <ContactMap dict={dict} />
               </div>
             </div>
           </aside>
