@@ -46,7 +46,7 @@ export function InstallPicker() {
       </div>
       <div className={styles.installBody} key={kind}>
         <div className={styles.installFilm}>
-          <InstallDemo kind={kind} icon="/app-icons/projexs-192.png" name="Praxis" />
+          <InstallDemo kind={kind} icon="/app-icons/projexs-192.png" name="ProjeXs" />
         </div>
         <InstallSteps kind={kind} />
       </div>

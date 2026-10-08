@@ -9,12 +9,12 @@ import { Reveal } from './Reveal';
 import styles from './anleitung.module.css';
 
 /*
- * Anleitung für Anna — ein Link, der per WhatsApp verschickt wird. Öffentlich
+ * Anleitung für Daniela Franzen — ein Link, der per WhatsApp verschickt wird. Öffentlich
  * (kein Anmelden nötig), aber nicht in Suchmaschinen. Enthält keine
  * Zugangsdaten: Die kommen getrennt von der technischen Betreuung.
  */
 
-const TITLE = 'Ihre Praxis-App – so geht’s';
+const TITLE = 'Ihre ProjeXs-App – so geht’s';
 const DESCRIPTION = OFFER_APP_INSTALL
   ? 'In fünf Minuten startklar: anmelden, als App aufs Handy, Anfragen beantworten, Impulsvideos hochladen.'
   : 'In fünf Minuten startklar: anmelden, Anfragen beantworten, Impulsvideos hochladen.';
@@ -40,11 +40,11 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: 'website',
       locale: 'de_DE',
-      siteName: 'Praxis-App · Anna Kipp-Menke',
+      siteName: 'ProjeXs Admin · Daniela Franzen',
       title: TITLE,
       description: DESCRIPTION,
       url: `${origin}/admin/anleitung`,
-      images: [{ url: `${origin}/images/anleitung-vorschau.jpg`, width: 1200, height: 630, alt: 'Ihre Praxis-App – so geht’s' }],
+      images: [{ url: `${origin}/images/anleitung-vorschau.jpg`, width: 1200, height: 630, alt: 'Ihre ProjeXs-App – so geht’s' }],
     },
     twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION },
   };
@@ -64,7 +64,7 @@ const STEPS: Step[] = [
     title: 'Anmelden',
     text: (
       <>
-        Öffnen Sie die Praxis-App und geben Sie Ihre <strong>sechsstellige PIN</strong> ein — schon sind Sie drin.
+        Öffnen Sie die ProjeXs-App und geben Sie Ihre <strong>sechsstellige PIN</strong> ein — schon sind Sie drin.
         Auf diesem Gerät bleiben Sie dann 14 Tage angemeldet.
       </>
     ),
@@ -182,7 +182,7 @@ export default function GuidePage() {
         <span className={styles.barBrand}>
           {/* eslint-disable-next-line @next/next/no-img-element -- kleines statisches Symbol */}
           <img src="/app-icons/projexs-192.png" alt="" width={28} height={28} />
-          Praxis-App
+          ProjeXs-App
         </span>
         <a className={styles.barButton} href="/admin">
           Öffnen
@@ -195,9 +195,9 @@ export default function GuidePage() {
             {/* eslint-disable-next-line @next/next/no-img-element -- App-Symbol */}
             <img src="/app-icons/projexs-512.png" alt="" width={128} height={128} />
           </div>
-          <p className={styles.eyebrow}>Anleitung für Anna</p>
+          <p className={styles.eyebrow}>Anleitung für Daniela Franzen</p>
           <h1 className={styles.heroTitle} id="titel">
-            Ihre <span className={styles.nowrap}>Praxis-App.</span>
+            Ihre <span className={styles.nowrap}>ProjeXs-App.</span>
             <span className={styles.heroSecond}>In fünf Minuten startklar.</span>
           </h1>
           <p className={styles.heroLead}>
@@ -208,7 +208,7 @@ export default function GuidePage() {
           </p>
           <div className={styles.heroActions}>
             <a className={styles.primary} href="/admin">
-              Praxis-App öffnen <ArrowRight aria-hidden="true" />
+              ProjeXs-App öffnen <ArrowRight aria-hidden="true" />
             </a>
             <a className={styles.secondary} href="#anmelden">
               So geht’s <ArrowDown aria-hidden="true" />
@@ -233,7 +233,7 @@ export default function GuidePage() {
                 Aufs Handy legen
               </h2>
               <p className={styles.stepLead}>
-                Einmal auf den Home-Bildschirm gelegt, öffnet sich die Praxis-App wie jede andere App — mit eigenem
+                Einmal auf den Home-Bildschirm gelegt, öffnet sich die ProjeXs-App wie jede andere App — mit eigenem
                 Symbol, ohne Adressleiste. Die App bietet das beim ersten Öffnen auch selbst an.
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function GuidePage() {
           <h2 id="los-titel">Bereit?</h2>
           <p>Ihre Zugangsdaten bekommen Sie von Stefan. Den Rest erklärt die App.</p>
           <a className={styles.primary} href="/admin">
-            Praxis-App öffnen <ArrowRight aria-hidden="true" />
+            ProjeXs-App öffnen <ArrowRight aria-hidden="true" />
           </a>
         </section>
       </main>
