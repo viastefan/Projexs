@@ -8,12 +8,23 @@ import { InquiryModal } from "@/components/inquiry/InquiryModal";
 import { LeadPopup } from "@/components/lead/LeadPopup";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { RevealObserver } from "@/components/ui/Reveal";
+import { PreviewBar } from "@/components/admin-site/PreviewBar";
 
 /** Gemeinsames HTML-Gerüst für die deutschen und englischen Seiten. */
-export function SiteShell({ dict, children }: { dict: Dictionary; children: ReactNode }) {
+export function SiteShell({
+  dict,
+  preview,
+  children,
+}: {
+  dict: Dictionary;
+  /** Gesetzt in der Vorschau aus der Admin-App: zeigt die Leiste „Vorschau“. */
+  preview?: { live: boolean };
+  children: ReactNode;
+}) {
   return (
     <html lang={dict.htmlLang} className={fontVariables}>
       <body className="min-h-dvh bg-paper pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-ink antialiased lg:pb-0">
+        {preview ? <PreviewBar live={preview.live} /> : null}
         <Header dict={dict} />
         <main id="main" tabIndex={-1} className="outline-none">
           {children}

@@ -1,9 +1,17 @@
-import { de } from "@/content/de";
+import type { Metadata } from "next";
+import { PausedNotice } from "@/components/admin-site/SitePaused";
 import { HomePage } from "@/components/HomePage";
+import { resolveDictionary } from "@/lib/cms/content";
 import { buildMetadata } from "@/lib/metadata";
+import { sitePaused } from "@/lib/site-status";
 
-export const metadata = buildMetadata(de, "home");
+export async function generateMetadata(): Promise<Metadata> {
+  const { dict } = await resolveDictionary("de");
+  return buildMetadata(dict, "home");
+}
 
-export default function Page() {
-  return <HomePage dict={de} />;
+export default async function Page() {
+  const { dict } = await resolveDictionary("de");
+  if (await sitePaused()) return <PausedNotice dict={dict} />;
+  return <HomePage dict={dict} />;
 }
