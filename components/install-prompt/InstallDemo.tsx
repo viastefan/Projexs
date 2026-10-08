@@ -83,7 +83,7 @@ export function InstallDemo({ kind, icon, name }: { kind: DemoKind; icon: string
               <i />
             </span>
             <span className={styles.address}>
-              <span>anna-kipp-menke-beratung.de/admin</span>
+              <span>projexs.de/admin</span>
               {safari ? null : (
                 <span className={styles.addressInstall}>
                   <InstallGlyph />
@@ -167,7 +167,7 @@ export function InstallDemo({ kind, icon, name }: { kind: DemoKind; icon: string
 
           {android ? (
             <div className={styles.chromeBar}>
-              <span className={styles.chromeUrl}>anna-kipp-menke…</span>
+              <span className={styles.chromeUrl}>projexs.de…</span>
               <span className={styles.chromeMore}>⋮</span>
             </div>
           ) : null}
@@ -177,7 +177,7 @@ export function InstallDemo({ kind, icon, name }: { kind: DemoKind; icon: string
           {android ? null : (
             <div className={styles.safariBar}>
               <span className={styles.safariBack}>‹</span>
-              <span className={styles.safariUrl}>anna-kipp-menke…</span>
+              <span className={styles.safariUrl}>projexs.de…</span>
               <span className={styles.safariMore}>···</span>
             </div>
           )}
@@ -236,7 +236,7 @@ export function InstallDemo({ kind, icon, name }: { kind: DemoKind; icon: string
                   <img src={icon} alt="" />
                   <span>
                     <b>{name}</b>
-                    <small>anna-kipp-menke…</small>
+                    <small>projexs.de…</small>
                   </span>
                 </span>
                 <span className={styles.addToggle}>

@@ -2,7 +2,7 @@
 
 Ein Baustein, der eine Web-App (PWA) „installieren“ lässt — mit Glas-Optik im
 Stil von iOS 26 / macOS Tahoe, einem kurzen Film der Handgriffe und
-Ein-Klick-Installation, wo der Browser es erlaubt. Gebaut für die Praxis-App,
+Ein-Klick-Installation, wo der Browser es erlaubt. Gebaut für die Admin-App,
 gedacht zum Wiederverwenden in anderen Projekten.
 
 ## Was es kann

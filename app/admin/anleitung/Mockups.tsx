@@ -43,7 +43,7 @@ export function LoginFilm() {
       <div className={`${s.layer} ${s.base}`}>
         <AppIcon />
         <p className={s.title}>PIN eingeben</p>
-        <p className={s.sub}>Praxis-App · Anna Kipp-Menke</p>
+        <p className={s.sub}>ProjeXs Admin · Daniela Franzen</p>
         <div className={`${s.field} ${s.lField1}`}>
           <span className={s.fieldLabel}>PIN</span>
           <span className={`${s.fieldValue} ${s.dots} ${s.lEmail}`}>••••••</span>
@@ -55,7 +55,7 @@ export function LoginFilm() {
       </div>
       <div className={`${s.layer} ${s.sheet} ${s.lDash}`}>
         <p className={s.eyebrow}>Montag, 6. Oktober</p>
-        <p className={s.bigTitle}>Guten Morgen, Anna</p>
+        <p className={s.bigTitle}>Guten Morgen, Daniela</p>
         <div className={s.card}>
           <span className={s.cardLabel}>Anfragen</span>
           <span className={s.cardNumber}>2</span>
@@ -90,7 +90,7 @@ export function PushFilm() {
       </div>
       <div className={`${s.layer} ${s.dim} ${s.nAlert}`}>
         <div className={s.alert}>
-          <b>„Praxis“ möchte Ihnen Mitteilungen senden</b>
+          <b>„ProjeXs“ möchte Ihnen Mitteilungen senden</b>
           <span>Mitteilungen können Hinweise, Töne und Kennzeichen enthalten.</span>
           <span className={s.alertButtons}>
             <span>Nicht erlauben</span>
