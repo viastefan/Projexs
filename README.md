@@ -84,6 +84,72 @@ Eine Vorlage aller Variablen liegt in `.env.example`.
 
 ---
 
+## Admin-App (`/admin`)
+
+Unter **/admin** liegt die Verwaltung für Daniela — am Computer im Browser, auf dem Handy als
+installierbare App („Zum Home-Bildschirm“, ohne App Store). Sie kann dort:
+
+- **Anfragen beantworten.** Alles aus Anfrage-Dialog, Kontaktformular und Pop-up landet im Postfach der
+  App — mit Zähler für Ungelesenes, Status (Neu / In Bearbeitung / Erledigt), Notiz und Antwort direkt aus
+  der App (oder per Mailprogramm). Jede neue Anfrage meldet sich per Push aufs Handy und per E-Mail.
+  Erledigte Anfragen löschen sich nach der eingestellten Frist von selbst.
+- **Inhalte bearbeiten.** Alle Website-Texte (Deutsch und Englisch) und die Stammdaten (E-Mail, Telefon,
+  Anschrift, USt-IdNr.) — jedes Feld zeigt, ob es vom Standardtext im Code abweicht, und lässt sich
+  einzeln zurücksetzen. Gespeichert wird nur die Abweichung; die Website ist sofort aktuell.
+- **Website pausieren / veröffentlichen.** Schalter „Website online“ auf der Übersicht und in den
+  Einstellungen. Pausiert sehen Besucher nur einen Hinweis mit den Kontaktdaten (Impressum, Datenschutz
+  und AGB bleiben erreichbar); die Vorschau zeigt weiterhin alles. Ein signierter Vorschau-Link (14 Tage
+  gültig, ohne Anmeldung) lässt sich weitergeben. Jede Änderung steht im Verlauf.
+- **Einstellungen.** Push pro Gerät, E-Mail-Benachrichtigung, Aufbewahrungsfrist, Darstellung
+  (hell/dunkel), eigene PIN, weitere Zugänge (nur Inhaberin), Technik-Status, Testmail.
+
+Gestaltet wie eine aktuelle iPhone- bzw. Mac-App: Systemschrift, schwebende Tab-Leiste am Handy,
+Seitenleiste am Computer, hell und dunkel nach Systemeinstellung. Das App-Symbol ist das Logo-Zeichen
+der Website (`public/app-icons/`, erzeugt mit `node scripts/build-app-icons.mjs`).
+
+### Einrichtung in Vercel (einmalig)
+
+1. **Speicher anlegen:** Projekt → Storage → Create → **Blob**, Region **Frankfurt (fra1)**, Zugriff
+   **Private**, Häkchen bei „Add a read-write token env var“ → `BLOB_READ_WRITE_TOKEN`. Darin liegen
+   Anfragen, Zugänge, Einstellungen, Inhalts-Änderungen und Push-Abos als JSON.
+2. **Umgebungsvariablen** (Production und Preview; Vorlage in `.env.example`):
+   - `ADMIN_SESSION_SECRET` — signiert Anmeldung und Vorschau-Links (mind. 32 Zeichen, z. B.
+     `openssl rand -base64 48`)
+   - `ADMIN_PIN` — sechsstellige PIN von Daniela. Legt beim ersten Öffnen ihren Zugang an und bleibt als
+     Notzugang gültig, auch wenn sie in der App eine eigene PIN setzt.
+   - `CRON_SECRET` — schützt die tägliche Löschung erledigter Anfragen (`vercel.json` → `crons`)
+   - SMTP-Zugang (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, z. B. IONOS `smtp.ionos.de:587`)
+     oder `RESEND_API_KEY`; dazu `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, optional `CONFIRMATION_FROM`
+     (Eingangsbestätigung) und `REPLY_FROM` (Antworten aus der App)
+   - optional `VAPID_PUBLIC_KEY` / `VAPID_PRIVATE_KEY` — sonst erzeugt die App die Push-Schlüssel selbst
+3. **Erster Login:** `https://…/admin` öffnen und die `ADMIN_PIN` eingeben. Danach unter Einstellungen →
+   „PIN ändern“ eine eigene PIN wählen, Push auf dem Handy einschalten und eine Testmail senden.
+4. **Aufs Handy:** Beim ersten Öffnen bietet die App die Installation selbst an (Safari: Teilen → „Zum
+   Home-Bildschirm“; Chrome/Edge: „App installieren“). Push kommt auf iPhone und iPad nur in der
+   installierten App an. Anleitung für Daniela: `/admin/anleitung` (ohne Anmeldung lesbar).
+
+Ohne Speicher (z. B. im CI-Build oder lokal ohne Variablen) bleibt die Website statisch und online, die
+Admin-App zeigt „Bald für Sie da“, und das Kontaktformular arbeitet wie bisher über E-Mail.
+
+**Lokal testen:**
+
+```bash
+STORAGE_DRIVER=local ADMIN_SESSION_SECRET=$(openssl rand -base64 48) ADMIN_PIN=123456 npm run dev
+```
+
+Daten liegen dann unter `.data/` (nicht im Repository).
+
+| Pfad | Zweck |
+|---|---|
+| `app/admin/` | Seiten der App (Anmelden, Übersicht, Anfragen, Inhalte, Einstellungen, Anleitung) |
+| `app/admin/actions/` | Server Actions (Anmeldung, Anfragen, Inhalte, Push, Einstellungen) |
+| `app/api/vorschau`, `app/api/admin/website`, `app/api/cron/aufbewahrung` | Vorschau-Link, Website ein/aus, tägliche Löschung |
+| `components/admin/`, `components/admin-site/` | Bausteine der App bzw. Vorschau-Leiste und Pausenseite |
+| `lib/auth/`, `lib/cms/`, `lib/storage/`, `lib/push.ts`, `lib/mail.ts` | Zugänge, Daten, Speicher, Push, E-Mail |
+| `proxy.ts` | Schranke vor `/admin`: ohne gültige Sitzung zur Anmeldung |
+
+---
+
 ## Deployment auf Vercel (wenn es so weit ist)
 
 Das Repository ist mit dem Vercel-Projekt **projexs** (Team *Festag App*) verbunden. Jeder Push auf `main`
@@ -97,7 +163,7 @@ Aktuelle Vorschau: **https://projexs-delta.vercel.app**
 
 Für den Livegang unter der eigenen Domain:
 
-1. Umgebungsvariablen eintragen (`NEXT_PUBLIC_SITE_URL=https://www.projexs.de` sowie optional die Resend-Werte).
+1. Umgebungsvariablen eintragen (`NEXT_PUBLIC_SITE_URL=https://www.projexs.de`, SMTP bzw. Resend sowie die Werte der Admin-App, siehe oben).
 2. Unter **Settings → Domains** `projexs.de` und `www.projexs.de` hinzufügen und die von Vercel angezeigten
    DNS-Einträge beim Domain-Anbieter eintragen (dort, wo die Domain heute auf Wix zeigt).
 3. Prüfen, ob der Vercel-Tarif für eine gewerbliche Seite ausreicht (der Hobby-Plan ist nur für
