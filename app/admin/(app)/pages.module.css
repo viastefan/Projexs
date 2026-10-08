@@ -1037,3 +1037,51 @@ a.listItem:active {
     min-height: 14rem;
   }
 }
+
+/* ---------- Inhalte: aufklappbare Abschnitte ---------- */
+
+.section {
+  padding: 0;
+}
+
+.section[open] .sectionChevron {
+  transform: rotate(180deg);
+}
+
+.sectionSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.sectionSummary::-webkit-details-marker {
+  display: none;
+}
+
+.sectionText {
+  display: grid;
+  gap: 0.125rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.sectionText > * {
+  margin: 0;
+}
+
+.sectionChevron {
+  flex: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--a-mute);
+  transition: transform 0.2s ease;
+}
+
+.sectionBody {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--a-line);
+  padding-top: 1rem;
+}
