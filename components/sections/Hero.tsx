@@ -69,7 +69,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
         </div>
 
         {/* Foto mit Glas-Karte */}
-        <div className="relative mx-auto w-full max-w-[26rem] lg:col-span-5 lg:max-w-none" data-reveal>
+        <div className="relative mx-auto w-full max-w-[20rem] sm:max-w-[26rem] lg:col-span-5 lg:max-w-none" data-reveal>
           <div
             aria-hidden="true"
             className="absolute -inset-x-8 -top-8 bottom-10 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(78,200,224,0.28),transparent)] blur-2xl"

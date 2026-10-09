@@ -42,8 +42,8 @@ export function Footer({ dict }: { dict: Dictionary }) {
       </div>
 
       {/* Spalten */}
-      <div className="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
-        <div className="sm:col-span-2 lg:col-span-4">
+      <div className="container-site grid grid-cols-2 gap-x-6 gap-y-10 py-12 sm:py-14 lg:grid-cols-12 lg:gap-8">
+        <div className="col-span-2 lg:col-span-4">
           <Link href={home} aria-label={dict.nav.homeAria} className="inline-block">
             <Logo tone="light" />
           </Link>
@@ -84,11 +84,6 @@ export function Footer({ dict }: { dict: Dictionary }) {
               </li>
             ))}
             <li>
-              <Link href={`${home}#warum`} className={linkClass}>
-                {dict.why.eyebrow}
-              </Link>
-            </li>
-            <li>
               <Link href={dict.routes.contact} className={linkClass}>
                 {dict.nav.contactLabel}
               </Link>
@@ -96,7 +91,7 @@ export function Footer({ dict }: { dict: Dictionary }) {
           </ul>
         </nav>
 
-        <div className="lg:col-span-2">
+        <div className="col-span-2 sm:col-span-1 lg:col-span-2">
           <h2 className={headingClass}>{f.contactTitle}</h2>
           <ul className="mt-3 flex flex-col gap-1 text-[0.95rem] text-mist">
             <li className="flex gap-2.5 py-1.5">
