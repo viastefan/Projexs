@@ -173,6 +173,16 @@ export function Header({ dict }: { dict: Dictionary }) {
           </ul>
         </nav>
       </header>
+
+      {/* Abdunkelung unter dem Menü: der Seiteninhalt bleibt sichtbar, tritt aber zurück */}
+      <div
+        aria-hidden="true"
+        onClick={() => setOpen(false)}
+        className={cn(
+          "fixed inset-x-0 bottom-0 top-[4.5rem] z-40 bg-navy-deep/55 backdrop-blur-[1.5px] transition-opacity duration-300 lg:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+      />
     </>
   );
 }

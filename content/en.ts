@@ -210,6 +210,8 @@ export const en: Dictionary = {
   mobileBar: {
     call: "Call",
     inquire: "Start a project",
+    expand: "Expand contact bar",
+    collapse: "Collapse contact bar",
   },
 
   stats: [

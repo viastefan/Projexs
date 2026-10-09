@@ -16,15 +16,16 @@ export function Hero({ dict }: { dict: Dictionary }) {
   return (
     <section className="hero-dark relative isolate overflow-hidden text-white">
       <div aria-hidden="true" className="hero-grid absolute inset-0 -z-10" />
+      <div aria-hidden="true" className="hero-glow-top absolute inset-0 -z-10" />
 
       <div className="container-site grid items-center gap-10 pb-12 pt-[6.5rem] sm:pt-[7.5rem] lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-[9.5rem]">
         {/* Text */}
         <div className="lg:col-span-7">
-          <p className="inline-flex items-center gap-2.5 text-[0.82rem] font-semibold uppercase tracking-[0.1em] text-accent-light sm:text-[0.88rem]">
+          <p className="hero-rise inline-flex items-center gap-2.5 text-[0.82rem] font-semibold uppercase tracking-[0.1em] text-accent-light sm:text-[0.88rem]">
             <span aria-hidden="true" className="h-px w-6 bg-accent-light" />
             {h.eyebrow}
           </p>
-          <h1 className="mt-5 text-[clamp(2.35rem,7.5vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.015em] text-white">
+          <h1 className="hero-rise hero-rise-2 mt-5 text-[clamp(2.35rem,7.5vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.015em] text-white">
             {h.titleLead}{" "}
             <span className="relative inline-block whitespace-nowrap text-accent-light">
               {h.titleAccent}
@@ -32,7 +33,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
             </span>{" "}
             {h.titleTail}
           </h1>
-          <p className="mt-6 max-w-[36rem] text-[1.08rem] leading-relaxed text-white/80 sm:text-[1.2rem]">{h.lead}</p>
+          <p className="hero-rise hero-rise-3 mt-6 max-w-[36rem] text-[1.08rem] leading-relaxed text-white/80 sm:text-[1.2rem]">{h.lead}</p>
 
           <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row">
             <InquiryTrigger href={dict.routes.contact} source="dialog" variant="light" className="w-full sm:w-auto">
@@ -73,7 +74,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
             aria-hidden="true"
             className="absolute -inset-x-8 -top-8 bottom-10 -z-10 rounded-[2rem] bg-[radial-gradient(closest-side,rgba(78,200,224,0.28),transparent)] blur-2xl"
           />
-          <div className="hero-photo relative aspect-[4/4.4] overflow-hidden rounded-2xl sm:aspect-[4/4.6] lg:aspect-[4/5]">
+          <div className="hero-photo relative aspect-[4/4.4] ring-1 ring-white/10 overflow-hidden rounded-2xl sm:aspect-[4/4.6] lg:aspect-[4/5]">
             <Image
               src={site.images.hero}
               alt={h.photoAlt}
@@ -97,7 +98,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
       </div>
 
       {/* Vertrauensleiste */}
-      <div className="border-t border-white/10 bg-black/10">
+      <div className="hero-fade border-t border-white/10">
         <div className="container-site flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:py-6">
           <p className="text-[0.85rem] uppercase tracking-[0.08em] text-white/55">{h.trustLabel}</p>
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-2">
