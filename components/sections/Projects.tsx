@@ -118,8 +118,8 @@ export function Projects({ dict }: { dict: Dictionary }) {
         <SectionHeading eyebrow={<Eyebrow>{p.eyebrow}</Eyebrow>} title={p.title} intro={p.intro} />
 
         <div className="mt-10 divide-y divide-line rounded-xl border border-line bg-white px-5 shadow-[var(--shadow-card)] sm:px-8" data-reveal>
-          {p.clients.map((c, i) => (
-            <ClientCase key={c.client} c={c} labels={p.labels} open={i === 0} />
+          {p.clients.map((c) => (
+            <ClientCase key={c.client} c={c} labels={p.labels} open={false} />
           ))}
         </div>
 

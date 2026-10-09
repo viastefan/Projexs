@@ -13,7 +13,7 @@ export function About({ dict }: { dict: Dictionary }) {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-28" data-reveal>
-              <div className="relative mx-auto aspect-[4/4.2] w-full max-w-[26rem] overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-card)] sm:aspect-[4/5] lg:max-w-none">
+              <div className="relative mx-auto aspect-[4/4.2] w-full max-w-[15rem] sm:max-w-[26rem] overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-card)] sm:aspect-[4/5] lg:max-w-none">
                 <Image
                   src={site.images.portrait}
                   alt={a.portraitAlt}
@@ -37,44 +37,31 @@ export function About({ dict }: { dict: Dictionary }) {
               ))}
             </div>
 
-            <div className="mt-12">
-              <h3 className="text-[1.25rem] font-semibold">{a.valuesTitle}</h3>
-              <dl className="mt-5 divide-y divide-line border-y border-line">
-                {a.values.map((v) => (
-                  <div key={v.title} className="grid gap-2 py-5 sm:grid-cols-[13rem_1fr] sm:gap-6">
-                    <dt className="font-semibold text-navy">{v.title}</dt>
-                    <dd className="leading-relaxed text-stone">{v.text}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="mt-12">
-              <h3 className="text-[1.25rem] font-semibold">{a.certsTitle}</h3>
-              <ul className="mt-5 divide-y divide-line border-y border-line">
+            <div className="mt-10">
+              <h3 className="text-[1.15rem] font-semibold">{a.certsTitle}</h3>
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {a.certs.map((c) => (
-                  <li key={c.detail} className="grid gap-1 py-4 sm:grid-cols-[13rem_1fr] sm:gap-6">
+                  <li key={c.detail} title={c.detail} className="rounded-md border border-line bg-white px-3 py-1.5 text-[0.92rem]">
                     <span className="font-semibold text-navy">{c.name}</span>
-                    <span className="text-stone">{c.detail}</span>
+                    <span className="text-stone"> · {c.detail}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="mt-12">
-              <h3 className="text-[1.25rem] font-semibold">{a.timelineTitle}</h3>
-              <dl className="mt-5 divide-y divide-line border-y border-line">
+            <div className="mt-10">
+              <h3 className="text-[1.15rem] font-semibold">{a.timelineTitle}</h3>
+              <ol className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {a.timeline.map((t) => (
-                  <div key={t.year + t.title} className="grid gap-0.5 py-4 sm:grid-cols-[6rem_12rem_1fr] sm:gap-6">
-                    <dt className="font-semibold text-navy">{t.year}</dt>
-                    <dd className="font-semibold">{t.title}</dd>
-                    <dd className="text-stone">{t.text}</dd>
-                  </div>
+                  <li key={t.year + t.title} className="rounded-lg border border-line bg-white p-4">
+                    <p className="text-[0.85rem] font-semibold text-accent">{t.year}</p>
+                    <p className="mt-1 font-semibold text-navy">{t.title}</p>
+                  </li>
                 ))}
-              </dl>
+              </ol>
             </div>
 
-            <div className="mt-12 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
               <InquiryTrigger href={dict.routes.contact} source="dialog" className="w-full sm:w-auto">
                 {dict.nav.cta}
               </InquiryTrigger>

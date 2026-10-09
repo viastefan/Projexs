@@ -82,6 +82,46 @@
    ------------------------------------------------------------------ */
 @layer components {
   /* Einheitlicher Seitencontainer */
+  /* Mobil: Karten als wischbare Reihe, ab md als Raster */
+  .swipe-row {
+    display: flex;
+    gap: 1rem;
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+    padding-bottom: 0.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.25rem;
+    scrollbar-width: none;
+  }
+  .swipe-row::-webkit-scrollbar {
+    display: none;
+  }
+  .swipe-row > * {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+  @media (min-width: 640px) {
+    .swipe-row {
+      margin-inline: -2rem;
+      padding-inline: 2rem;
+      scroll-padding-inline: 2rem;
+    }
+    .swipe-row > * {
+      flex-basis: 60%;
+    }
+  }
+  @media (min-width: 768px) {
+    .swipe-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-inline: 0;
+      padding-inline: 0;
+      overflow: visible;
+    }
+  }
+
   .container-site {
     margin-inline: auto;
     width: 100%;

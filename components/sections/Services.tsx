@@ -1,8 +1,7 @@
 import type { Dictionary } from "@/lib/i18n";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
-import { ArrowRight, Check } from "@/components/ui/Icons";
+import { Check, Plus } from "@/components/ui/Icons";
 
 export function Services({ dict }: { dict: Dictionary }) {
   const s = dict.services;
@@ -12,7 +11,7 @@ export function Services({ dict }: { dict: Dictionary }) {
       <div className="container-site">
         <SectionHeading eyebrow={<Eyebrow>{s.eyebrow}</Eyebrow>} title={s.title} intro={s.intro} />
 
-        <ol className="mt-12 grid gap-5 md:grid-cols-3">
+        <ol className="swipe-row mt-10">
           {s.roles.map((role, i) => (
             <li key={role.title} className="card flex flex-col p-6 sm:p-8" data-reveal style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}>
               <span className="text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-accent">0{i + 1}</span>
@@ -26,24 +25,23 @@ export function Services({ dict }: { dict: Dictionary }) {
                   </li>
                 ))}
               </ul>
-              <InquiryTrigger href={dict.routes.contact} source="dialog" variant="plain" className="mt-6 inline-flex min-h-11 items-center gap-1.5 font-semibold text-navy hover:underline underline-offset-4">
-                {dict.nav.cta}
-                <ArrowRight className="size-4" />
-              </InquiryTrigger>
             </li>
           ))}
         </ol>
 
-        <div className="mt-16 sm:mt-20">
-          <h3 className="text-[1.4rem] font-semibold" data-reveal>{s.situationsTitle}</h3>
-          <dl className="mt-6 grid gap-x-12 md:grid-cols-2">
+        <div className="mt-14 sm:mt-16">
+          <h3 className="text-[1.25rem] font-semibold" data-reveal>{s.situationsTitle}</h3>
+          <div className="mt-5 grid gap-x-10 border-t border-line md:grid-cols-2">
             {s.situations.map((item) => (
-              <div key={item.title} className="border-t border-line py-6 sm:py-7" data-reveal>
-                <dt className="text-[1.1rem] font-semibold text-navy">{item.title}</dt>
-                <dd className="mt-2 leading-relaxed text-stone">{item.text}</dd>
-              </div>
+              <details key={item.title} className="group border-b border-line">
+                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-[1.05rem] font-semibold text-navy">
+                  {item.title}
+                  <Plus aria-hidden="true" className="size-5 shrink-0 transition-transform duration-200 group-open:rotate-45" />
+                </summary>
+                <p className="pb-5 leading-relaxed text-stone">{item.text}</p>
+              </details>
             ))}
-          </dl>
+          </div>
         </div>
       </div>
     </section>
