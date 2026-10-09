@@ -212,6 +212,8 @@ export const de = {
   mobileBar: {
     call: "Anrufen",
     inquire: "Projekt anfragen",
+    expand: "Kontaktleiste ausklappen",
+    collapse: "Kontaktleiste einklappen",
   },
 
   stats: [

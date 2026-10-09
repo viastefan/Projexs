@@ -153,6 +153,47 @@
     mask-image: radial-gradient(70rem 40rem at 50% 0%, #000 30%, transparent 80%);
     -webkit-mask-image: radial-gradient(70rem 40rem at 50% 0%, #000 30%, transparent 80%);
   }
+  /* Zweiter, weicherer Lichtschimmer oben links, feine Linie am oberen Rand */
+  .hero-glow-top {
+    background-image:
+      radial-gradient(38rem 22rem at 6% -6%, rgba(78, 200, 224, 0.2), transparent 70%),
+      linear-gradient(90deg, transparent, rgba(78, 200, 224, 0.55), transparent);
+    background-size: 100% 100%, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 0;
+  }
+  /* Weicher Übergang vom Hero in die Vertrauensleiste */
+  .hero-fade {
+    background: linear-gradient(180deg, transparent 0%, rgba(6, 26, 94, 0.55) 100%);
+  }
+  /* Gestaffeltes Einblenden der Texte beim Laden */
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hero-rise {
+    animation: hero-rise 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero-rise-2 {
+    animation-delay: 120ms;
+  }
+  .hero-rise-3 {
+    animation-delay: 240ms;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise,
+    .hero-rise-2,
+    .hero-rise-3 {
+      animation: none;
+    }
+  }
+
   /* Foto weich in den Hintergrund auslaufen lassen */
   .hero-photo {
     mask-image: linear-gradient(180deg, #000 0%, #000 68%, transparent 100%);
