@@ -1,7 +1,6 @@
 import type { Dictionary } from "@/lib/i18n";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
 
 export function Faq({ dict }: { dict: Dictionary }) {
   const f = dict.faq;
@@ -11,11 +10,6 @@ export function Faq({ dict }: { dict: Dictionary }) {
       <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <SectionHeading eyebrow={<Eyebrow>{f.eyebrow}</Eyebrow>} title={f.title} />
-          <div className="mt-8 hidden lg:block" data-reveal>
-            <InquiryTrigger href={dict.routes.contact} source="dialog" variant="secondary">
-              {dict.nav.cta}
-            </InquiryTrigger>
-          </div>
         </div>
 
         <div className="lg:col-span-8" data-reveal>

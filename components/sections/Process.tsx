@@ -11,14 +11,12 @@ export function Process({ dict }: { dict: Dictionary }) {
       <div className="container-site">
         <SectionHeading eyebrow={<Eyebrow>{p.eyebrow}</Eyebrow>} title={p.title} intro={p.intro} />
 
-        <ol className="swipe-row mt-10">
+        <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
           {p.steps.map((s, i) => (
-            <li key={s.title} className="card relative p-6 sm:p-8" data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}>
-              <span className="grid size-12 place-items-center rounded-md bg-navy text-[1.1rem] font-semibold text-white shadow-[0_8px_20px_-10px_rgba(8,32,120,0.7)]">
-                {i + 1}
-              </span>
-              <h3 className="mt-6 text-[1.2rem] font-semibold">{s.title}</h3>
-              <p className="mt-3 leading-relaxed text-stone">{s.text}</p>
+            <li key={s.title} className="border-t-2 border-navy pt-5" data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}>
+              <span className="text-[0.85rem] font-semibold text-accent">0{i + 1}</span>
+              <h3 className="mt-2 text-[1.2rem] font-semibold">{s.title}</h3>
+              <p className="mt-2 leading-relaxed text-stone">{s.text}</p>
             </li>
           ))}
         </ol>

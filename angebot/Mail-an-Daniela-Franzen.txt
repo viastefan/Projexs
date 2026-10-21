@@ -1,21 +1,31 @@
 An: Daniela.Franzen@projexs.de
-Betreff: Ihre neue Website und Angebot
-Anhang: Angebot-ProjeXs-Website.pdf (und optional Vertrag-ProjeXs-Website.pdf)
+Betreff: Ihre neue Website – Vorschau und Angebot
+Anhang: Angebot-ProjeXs-Website.pdf, Vertrag-ProjeXs-Website.pdf
 
 Liebe Frau Franzen,
 
-wir haben länger nichts voneinander gehört, und ich hoffe, es geht Ihnen gut. Ich melde mich, weil ich Ihre Website in den letzten Wochen komplett neu aufgebaut habe.
+wir haben länger nichts voneinander gehört. Ich hoffe, es geht Ihnen gut.
 
-Die neue Seite ist fertig und liegt als Vorschau vor: https://projexs-delta.vercel.app
+Ich melde mich, weil ich Ihre Website in den letzten Wochen komplett neu aufgebaut habe. Sie ist fertig, und Sie können sie sich hier ansehen:
 
-Sie hat dieselben Inhalte wie bisher, ist aber schneller, auf dem Handy sauber dargestellt und wird bei Google besser gefunden. Dazu kommt eine eigene Admin-App, mit der Sie Texte, Anfragen und Einstellungen selbst steuern können. Das Kontaktformular und der Anfrage-Dialog sind neu und sollen mehr Anfragen bringen.
+https://projexs-delta.vercel.app
 
-Im Anhang finden Sie mein Angebot. Darin stelle ich die Unterschiede zu Wix offen gegenüber, mit Fakten zu Sicherheit, Ladezeit, Google-Sichtbarkeit und Kosten. Es gibt zwei Wege:
+Die Inhalte sind dieselben wie bisher. Neu ist:
 
-- Einmalig: 1.299 € für Website, Admin-App und Umzug. Hosting danach 50 € pro Jahr.
-- Monatlich: 150 € pro Monat, inklusive Hosting, Betreuung und allen Änderungswünschen. Diesen Weg empfehle ich Ihnen.
+- Die Seite lädt deutlich schneller und sieht auf dem Handy sauber aus.
+- Google findet sie besser (Suchmaschinen-Optimierung ist eingebaut).
+- Es gibt eine englische Version.
+- Interessenten können Sie über einen kurzen Anfrage-Dialog direkt kontaktieren.
+- Mit einer eigenen Admin-App ändern Sie Texte und sehen alle Anfragen, auch vom Handy aus.
 
-Den Vertragsentwurf finden Sie ebenfalls im Anhang. Sie müssen nichts sofort entscheiden. Wenn Sie Fragen haben oder etwas ändern möchten, rufen Sie mich an oder schreiben Sie mir.
+Im Anhang finden Sie mein Angebot mit zwei Möglichkeiten:
+
+- Einmalig 1.299 € für Website, Admin-App und Umzug, danach 50 € Hosting pro Jahr.
+- Oder 150 € pro Monat inklusive Hosting, Betreuung und aller Änderungswünsche. Diese Variante empfehle ich Ihnen.
+
+Den Vertragsentwurf habe ich ebenfalls angehängt. Ihr E-Mail-Postfach bei projexs.de bleibt beim Umzug unverändert.
+
+Sie müssen nichts sofort entscheiden. Am einfachsten zeige ich Ihnen die Seite in 15 Minuten am Telefon oder per Video. Wann passt es Ihnen in den nächsten Tagen?
 
 Herzliche Grüße
 Stefan Dirnberger

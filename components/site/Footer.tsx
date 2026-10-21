@@ -3,8 +3,7 @@ import type { Dictionary, Locale } from "@/lib/i18n";
 import { site } from "@/content/site";
 import { Logo } from "./Logo";
 import { LocaleSwitch } from "./LocaleSwitch";
-import { ArrowUp, Award, LinkedIn, Mail, MapPin, Phone } from "@/components/ui/Icons";
-import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
+import { ArrowUp, LinkedIn, Mail, MapPin, Phone } from "@/components/ui/Icons";
 import { ConsentSettingsButton } from "@/components/consent/ConsentSettingsButton";
 
 const linkClass = "inline-flex min-h-10 items-center text-[0.95rem] text-mist transition-colors hover:text-white";
@@ -19,28 +18,6 @@ export function Footer({ dict }: { dict: Dictionary }) {
 
   return (
     <footer className="bg-navy-night text-white">
-      {/* Abschluss-CTA */}
-      <div className="border-b border-white/10 bg-navy">
-        <div className="container-site flex flex-col gap-5 py-10 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-[1.35rem] font-semibold leading-snug text-white sm:text-[1.5rem]">{f.ctaTitle}</p>
-            <p className="mt-1 text-mist">{f.ctaText}</p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <InquiryTrigger href={dict.routes.contact} source="dialog" variant="light" className="w-full sm:w-auto">
-              {f.cta}
-            </InquiryTrigger>
-            <a
-              href={`tel:${site.contact.phoneHref}`}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/35 px-6 font-semibold text-white hover:border-white hover:bg-white/10"
-            >
-              <Phone className="size-4" />
-              {site.contact.phone}
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Spalten */}
       <div className="container-site grid grid-cols-2 gap-x-6 gap-y-10 py-12 sm:py-14 lg:grid-cols-12 lg:gap-8">
         <div className="col-span-2 lg:col-span-4">
@@ -144,17 +121,12 @@ export function Footer({ dict }: { dict: Dictionary }) {
         </nav>
       </div>
 
-      {/* Zertifikate · Sprache · Nach oben */}
+      {/* Copyright · Sprache · Nach oben */}
       <div className="border-t border-white/10">
-        <div className="container-site flex flex-col gap-5 py-6 lg:flex-row lg:items-center lg:justify-between">
-          <ul aria-label={f.certsLabel} className="flex flex-wrap gap-x-6 gap-y-2">
-            {f.certs.map((c) => (
-              <li key={c} className="inline-flex items-center gap-2 text-[0.9rem] text-mist">
-                <Award className="size-4 text-accent-light" />
-                {c}
-              </li>
-            ))}
-          </ul>
+        <div className="container-site flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-[0.85rem] text-mist/80">
+            © {year} {site.brand} · {site.owner.name} · {a.city}. {f.rights}
+          </p>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <LocaleSwitch locale={locale} label={f.languageLabel} />
             <a href="#main" className="inline-flex min-h-11 items-center gap-1.5 text-[0.95rem] font-semibold text-white hover:underline underline-offset-4">
@@ -162,16 +134,6 @@ export function Footer({ dict }: { dict: Dictionary }) {
               <ArrowUp className="size-4" />
             </a>
           </div>
-        </div>
-      </div>
-
-      {/* SEO-Schlusstext und Copyright */}
-      <div className="border-t border-white/10">
-        <div className="container-site py-7">
-          <p className="max-w-5xl text-[0.78rem] leading-relaxed text-mist/70">{f.seoText}</p>
-          <p className="mt-5 text-[0.85rem] text-mist/80">
-            © {year} {site.brand} · {site.owner.name} · {a.city}. {f.rights}
-          </p>
         </div>
       </div>
     </footer>

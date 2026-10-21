@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
 
 export function About({ dict }: { dict: Dictionary }) {
   const a = dict.about;
@@ -51,24 +50,19 @@ export function About({ dict }: { dict: Dictionary }) {
 
             <div className="mt-10">
               <h3 className="text-[1.15rem] font-semibold">{a.timelineTitle}</h3>
-              <ol className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <ol className="mt-4 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-line pt-4 sm:grid-cols-4">
                 {a.timeline.map((t) => (
-                  <li key={t.year + t.title} className="rounded-lg border border-line bg-white p-4">
+                  <li key={t.year + t.title}>
                     <p className="text-[0.85rem] font-semibold text-accent">{t.year}</p>
-                    <p className="mt-1 font-semibold text-navy">{t.title}</p>
+                    <p className="mt-0.5 font-semibold text-navy">{t.title}</p>
                   </li>
                 ))}
               </ol>
             </div>
 
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-              <InquiryTrigger href={dict.routes.contact} source="dialog" className="w-full sm:w-auto">
-                {dict.nav.cta}
-              </InquiryTrigger>
-              <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-navy underline underline-offset-4">
-                {dict.contact.linkedinLabel}: {dict.contact.linkedinText}
-              </a>
-            </div>
+            <a href={site.contact.linkedin} target="_blank" rel="noopener noreferrer" className="mt-10 inline-flex min-h-11 items-center gap-1.5 font-semibold text-navy underline underline-offset-4">
+              {dict.contact.linkedinLabel}: {dict.contact.linkedinText}
+            </a>
           </div>
         </div>
       </div>
