@@ -123,9 +123,9 @@ export function Projects({ dict }: { dict: Dictionary }) {
           ))}
         </div>
 
-        <div className="mt-6 flex flex-col items-start justify-between gap-5 rounded-xl bg-navy p-6 text-white sm:flex-row sm:items-center sm:p-8" data-reveal>
+        <div className="mt-6 flex flex-col items-start justify-between gap-5 rounded-xl bg-navy p-6 text-white sm:flex-row sm:items-center sm:p-8" data-reveal="zoom">
           <p className="max-w-xl text-[1.05rem] leading-relaxed text-white/85">{p.note}</p>
-          <InquiryTrigger href={dict.routes.contact} source="dialog" variant="light" className="w-full shrink-0 sm:w-auto">
+          <InquiryTrigger href={dict.routes.contact} source="dialog" variant="light" className="h-auto! min-h-12 w-full shrink-0 py-3 text-center leading-snug sm:w-auto">
             {p.cta}
           </InquiryTrigger>
         </div>

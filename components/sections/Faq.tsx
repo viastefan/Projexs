@@ -12,7 +12,7 @@ export function Faq({ dict }: { dict: Dictionary }) {
           <SectionHeading eyebrow={<Eyebrow>{f.eyebrow}</Eyebrow>} title={f.title} />
         </div>
 
-        <div className="lg:col-span-8" data-reveal>
+        <div className="lg:col-span-8" data-reveal="right">
           <ul className="border-t border-line">
             {f.items.map((item) => (
               <li key={item.q} className="border-b border-line">

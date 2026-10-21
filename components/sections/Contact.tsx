@@ -11,7 +11,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
   return (
     <section id={dict.ids.contact} className="section border-t border-line bg-surface">
       <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-6" data-reveal>
+        <div className="lg:col-span-6" data-reveal="left">
           <Eyebrow>{c.eyebrow}</Eyebrow>
           <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12]">{c.title}</h2>
           <p className="mt-5 text-[1.05rem] leading-relaxed text-stone">{c.intro}</p>
@@ -21,7 +21,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
             </InquiryTrigger>
             <Link
               href={dict.routes.contact}
-              className="inline-flex h-12 items-center justify-center gap-1.5 rounded-md border border-navy px-6 font-semibold text-navy hover:bg-white"
+              className="nudge inline-flex h-12 items-center justify-center gap-1.5 rounded-md border border-navy px-6 font-semibold text-navy hover:bg-white"
             >
               {c.pageCta}
               <ArrowRight className="size-4" />
@@ -29,7 +29,7 @@ export function Contact({ dict }: { dict: Dictionary }) {
           </div>
         </div>
 
-        <div className="lg:col-span-6" data-reveal>
+        <div className="lg:col-span-6" data-reveal="right">
           <ContactChannels dict={dict} />
         </div>
       </div>

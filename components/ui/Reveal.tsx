@@ -15,7 +15,7 @@ export function RevealObserver() {
     const items = () => Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
 
     if (reduce || !("IntersectionObserver" in window)) {
-      items().forEach((el) => el.setAttribute("data-reveal", "in"));
+      items().forEach((el) => el.setAttribute("data-revealed", ""));
       return;
     }
 
@@ -24,15 +24,15 @@ export function RevealObserver() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.setAttribute("data-reveal", "in");
+            entry.target.setAttribute("data-revealed", "");
             io.unobserve(entry.target);
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 },
     );
 
-    const observe = () => items().forEach((el) => el.getAttribute("data-reveal") !== "in" && io.observe(el));
+    const observe = () => items().forEach((el) => !el.hasAttribute("data-revealed") && io.observe(el));
     observe();
 
     // Elemente, die bereits sichtbar sind (z. B. nach Hash-Navigation), sofort zeigen

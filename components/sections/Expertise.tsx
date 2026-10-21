@@ -11,7 +11,7 @@ export function Expertise({ dict }: { dict: Dictionary }) {
       <div className="container-site">
         <SectionHeading eyebrow={<Eyebrow>{e.eyebrow}</Eyebrow>} title={e.title} intro={e.intro} />
 
-        <div className="mt-10 grid gap-x-10 border-t border-line md:grid-cols-2">
+        <div className="mt-10 grid gap-x-10 border-t border-line md:grid-cols-2" data-reveal>
           {e.pillars.map((p) => (
             <details key={p.title} className="group border-b border-line">
               <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-[1.1rem] font-semibold text-navy">
@@ -23,7 +23,7 @@ export function Expertise({ dict }: { dict: Dictionary }) {
           ))}
         </div>
 
-        <div className="mt-12" data-reveal>
+        <div className="mt-12" data-reveal="zoom">
           <h3 className="text-[1.25rem] font-semibold">{e.modulesTitle}</h3>
           <ul className="mt-6 flex flex-wrap gap-2">
             {e.modules.map((m) => (

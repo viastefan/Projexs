@@ -13,7 +13,8 @@ export function Process({ dict }: { dict: Dictionary }) {
 
         <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
           {p.steps.map((s, i) => (
-            <li key={s.title} className="border-t-2 border-navy pt-5" data-reveal style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}>
+            <li key={s.title} className="relative pt-5" data-reveal style={{ "--reveal-delay": `${i * 140}ms` } as React.CSSProperties}>
+              <span aria-hidden="true" className="draw-line absolute inset-x-0 top-0 h-0.5 bg-navy" />
               <span className="text-[0.85rem] font-semibold text-accent">0{i + 1}</span>
               <h3 className="mt-2 text-[1.2rem] font-semibold">{s.title}</h3>
               <p className="mt-2 leading-relaxed text-stone">{s.text}</p>

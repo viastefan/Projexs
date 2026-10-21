@@ -12,9 +12,9 @@ import { Menu, Close, Phone } from "@/components/ui/Icons";
 import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
 
 /**
- * Kopfzeile. Auf der Startseite liegt sie transparent über dem dunklen Hero
- * (weiße Typo) und wird beim Scrollen weiß mit Schatten; auf Unterseiten
- * ist sie von Anfang an weiß.
+ * Kopfzeile. Auf der Startseite liegt sie transparent über dem hellen Hero
+ * und wird beim Scrollen weiß mit Schatten; auf Unterseiten ist sie von
+ * Anfang an weiß.
  */
 export function Header({ dict }: { dict: Dictionary }) {
   const pathname = usePathname();
@@ -44,7 +44,7 @@ export function Header({ dict }: { dict: Dictionary }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const dark = isHome && !scrolled && !open;
+  const atTop = isHome && !scrolled && !open;
 
   const links = [
     ...dict.nav.items.map((item) => ({ label: item.label, href: sectionHref(item.id) })),
@@ -61,18 +61,17 @@ export function Header({ dict }: { dict: Dictionary }) {
       </a>
 
       <header
-        data-tone={dark ? "dark" : "light"}
         className={cn(
           "inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
           isHome ? "fixed" : "sticky",
-          dark
+          atTop
             ? "border-b border-transparent bg-transparent"
             : "border-b border-line/80 bg-white/92 shadow-[0_8px_30px_-18px_rgba(8,32,120,0.35)] backdrop-blur-md",
         )}
       >
         <div className="container-site flex h-[4.5rem] items-center justify-between gap-6">
           <Link href={home} aria-label={dict.nav.homeAria} onClick={() => setOpen(false)}>
-            <Logo tone={dark ? "light" : "dark"} />
+            <Logo tone="dark" />
           </Link>
 
           <nav aria-label={dict.nav.menuTitle} className="hidden lg:block">
@@ -84,7 +83,7 @@ export function Header({ dict }: { dict: Dictionary }) {
                     aria-current={pathname === item.href ? "page" : undefined}
                     className={cn(
                       "text-[0.98rem] underline-offset-[6px] transition-colors hover:underline aria-[current=page]:font-semibold",
-                      dark ? "text-white/85 hover:text-white aria-[current=page]:text-white" : "text-ink hover:text-navy aria-[current=page]:text-navy",
+                      "text-ink hover:text-navy aria-[current=page]:text-navy",
                     )}
                   >
                     {item.label}
@@ -99,7 +98,7 @@ export function Header({ dict }: { dict: Dictionary }) {
               href={`tel:${site.contact.phoneHref}`}
               className={cn(
                 "hidden items-center gap-2 text-[0.98rem] font-semibold xl:inline-flex",
-                dark ? "text-white" : "text-navy",
+                "text-navy",
               )}
             >
               <Phone className="size-4" />
@@ -111,7 +110,7 @@ export function Header({ dict }: { dict: Dictionary }) {
               aria-label={dict.nav.switchAria}
               className={cn(
                 "grid h-11 min-w-11 place-items-center rounded-md border px-3 text-sm font-semibold transition-colors",
-                dark ? "border-white/35 text-white hover:border-white" : "border-line text-navy hover:border-navy",
+                "border-line text-navy hover:border-navy",
               )}
             >
               {dict.nav.switchLabel}
@@ -119,7 +118,7 @@ export function Header({ dict }: { dict: Dictionary }) {
             <InquiryTrigger
               href={dict.routes.contact}
               source="dialog"
-              variant={dark ? "light" : "primary"}
+              variant="primary"
               display="hidden md:inline-flex"
               className="h-11 px-5 text-[0.95rem]"
             >
@@ -129,7 +128,7 @@ export function Header({ dict }: { dict: Dictionary }) {
               type="button"
               className={cn(
                 "grid size-11 place-items-center rounded-md border transition-colors lg:hidden",
-                dark ? "border-white/35 text-white" : "border-line text-navy",
+                "border-line text-navy",
               )}
               aria-expanded={open}
               aria-controls="mobile-menu"

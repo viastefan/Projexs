@@ -24,6 +24,7 @@ export function SiteShell({
   return (
     <html lang={dict.htmlLang} className={fontVariables}>
       <body className="min-h-dvh bg-paper pb-[calc(4.25rem+env(safe-area-inset-bottom))] text-ink antialiased lg:pb-0">
+        <div aria-hidden="true" className="scroll-progress" />
         {preview ? <PreviewBar live={preview.live} /> : null}
         <Header dict={dict} />
         <main id="main" tabIndex={-1} className="outline-none">

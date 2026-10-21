@@ -13,7 +13,7 @@ export function Services({ dict }: { dict: Dictionary }) {
 
         <ol className="swipe-row mt-10">
           {s.roles.map((role, i) => (
-            <li key={role.title} className="card flex flex-col p-6 sm:p-8" data-reveal style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}>
+            <li key={role.title} className="card flex flex-col p-6 sm:p-8" data-reveal="right" style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}>
               <span className="text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-accent">0{i + 1}</span>
               <h3 className="mt-3 text-[1.3rem] font-semibold leading-snug">{role.title}</h3>
               <p className="mt-4 leading-relaxed text-stone">{role.text}</p>
@@ -29,8 +29,8 @@ export function Services({ dict }: { dict: Dictionary }) {
           ))}
         </ol>
 
-        <div className="mt-14 sm:mt-16">
-          <h3 className="text-[1.25rem] font-semibold" data-reveal>{s.situationsTitle}</h3>
+        <div className="mt-14 sm:mt-16" data-reveal>
+          <h3 className="text-[1.25rem] font-semibold">{s.situationsTitle}</h3>
           <div className="mt-5 grid gap-x-10 border-t border-line md:grid-cols-2">
             {s.situations.map((item) => (
               <details key={item.title} className="group border-b border-line">

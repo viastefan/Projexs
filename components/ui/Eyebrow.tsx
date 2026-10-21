@@ -18,7 +18,7 @@ export function Eyebrow({
         className,
       )}
     >
-      <span aria-hidden="true" className={cn("h-px w-6", tone === "dark" ? "bg-accent" : "bg-accent-light")} />
+      <span aria-hidden="true" className={cn("draw-line h-px w-6", tone === "dark" ? "bg-accent" : "bg-accent-light")} />
       {children}
     </p>
   );

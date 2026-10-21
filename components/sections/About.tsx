@@ -11,7 +11,7 @@ export function About({ dict }: { dict: Dictionary }) {
       <div className="container-site">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-28" data-reveal>
+            <div className="lg:sticky lg:top-28" data-reveal="left">
               <div className="relative mx-auto aspect-[4/4.2] w-full max-w-[15rem] sm:max-w-[26rem] overflow-hidden rounded-2xl bg-white shadow-[var(--shadow-card)] sm:aspect-[4/5] lg:max-w-none">
                 <Image
                   src={site.images.portrait}
@@ -27,7 +27,7 @@ export function About({ dict }: { dict: Dictionary }) {
             </div>
           </div>
 
-          <div className="lg:col-span-7" data-reveal>
+          <div className="lg:col-span-7" data-reveal="right">
             <Eyebrow>{a.eyebrow}</Eyebrow>
             <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12]">{a.title}</h2>
             <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-stone">
