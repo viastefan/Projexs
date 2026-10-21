@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Plus } from "@/components/ui/Icons";
 import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
@@ -115,7 +114,7 @@ export function Projects({ dict }: { dict: Dictionary }) {
   return (
     <section id={dict.ids.projects} className="section border-t border-line bg-surface">
       <div className="container-site">
-        <SectionHeading eyebrow={<Eyebrow>{p.eyebrow}</Eyebrow>} title={p.title} intro={p.intro} />
+        <SectionHeading title={p.title} intro={p.intro} />
 
         <div className="mt-10 divide-y divide-line rounded-xl border border-line bg-white px-5 shadow-[var(--shadow-card)] sm:px-8" data-reveal>
           {p.clients.map((c) => (

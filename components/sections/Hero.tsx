@@ -6,7 +6,8 @@ import { Check } from "@/components/ui/Icons";
 import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
 
 /**
- * Heller Hero: viel Weißraum, Navy-Typo, Foto mit kleiner Referenzkarte.
+ * Heller Hero ohne Labels: frischer Türkis-Verlauf, Navy-Typo, Foto mit
+ * kleiner Referenzkarte.
  * Zertifikate, Standort und Referenzkunden stehen als ruhige Textzeilen
  * statt als Chips. Liegt unter der transparenten Kopfzeile.
  */
@@ -17,14 +18,12 @@ export function Hero({ dict }: { dict: Dictionary }) {
     <section className="hero-light relative isolate overflow-hidden">
       <div aria-hidden="true" className="hero-orb hero-orb-a" />
       <div aria-hidden="true" className="hero-orb hero-orb-b" />
+      <div aria-hidden="true" className="hero-orb hero-orb-c" />
+      <div aria-hidden="true" className="hero-dots" />
       <div className="container-site grid items-center gap-12 pb-14 pt-[6.5rem] sm:pt-[7.5rem] lg:grid-cols-12 lg:gap-16 lg:pb-20 lg:pt-[9rem]">
         {/* Text */}
         <div className="lg:col-span-7">
-          <p className="hero-rise inline-flex items-center gap-2.5 text-[0.82rem] font-semibold uppercase tracking-[0.1em] text-accent sm:text-[0.88rem]">
-            <span aria-hidden="true" className="h-px w-6 bg-accent" />
-            {h.eyebrow}
-          </p>
-          <h1 className="hero-rise hero-rise-2 mt-5 text-[clamp(2.35rem,7.5vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.015em] text-navy">
+          <h1 className="hero-rise text-[clamp(2.35rem,7.5vw,3.9rem)] font-semibold leading-[1.06] tracking-[-0.015em] text-navy">
             {h.titleLead}{" "}
             <span className="relative inline-block whitespace-nowrap text-accent">
               {h.titleAccent}
@@ -50,7 +49,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
               <dd className="text-stone">{h.location}</dd>
             </div>
             <div className="flex flex-wrap gap-x-2">
-              <dt className="text-stone">{h.trustLabel}:</dt>
+              <dt className="sr-only">{h.trustLabel}</dt>
               <dd className="font-semibold text-navy">{h.trust.join(" · ")}</dd>
             </div>
           </dl>
@@ -70,8 +69,7 @@ export function Hero({ dict }: { dict: Dictionary }) {
             />
           </div>
           <div className="hero-card-in relative -mt-12 mx-4 rounded-xl border border-line bg-white p-4 shadow-[var(--shadow-card)] sm:mx-6 lg:absolute lg:-left-10 lg:bottom-8 lg:m-0 lg:max-w-[19rem]">
-            <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-accent">{h.card.label}</p>
-            <p className="mt-1.5 font-semibold leading-snug text-navy">{h.card.title}</p>
+            <p className="font-semibold leading-snug text-navy">{h.card.title}</p>
             <p className="text-[0.9rem] text-stone">{h.card.client}</p>
             <p className="mt-2.5 flex gap-2 text-[0.92rem] leading-relaxed text-ink">
               <Check className="mt-1 size-4 shrink-0 text-accent" strokeWidth={2.2} />

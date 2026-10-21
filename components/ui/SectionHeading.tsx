@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-/** Einheitlicher Abschnittskopf: Kopfzeile, Überschrift und Einleitung. */
+/** Einheitlicher Abschnittskopf: Überschrift und Einleitung, optional mit Kopfzeile. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -10,7 +10,7 @@ export function SectionHeading({
   align = "left",
   className,
 }: {
-  eyebrow: ReactNode;
+  eyebrow?: ReactNode;
   title: ReactNode;
   intro?: ReactNode;
   tone?: "dark" | "light";
@@ -19,10 +19,11 @@ export function SectionHeading({
 }) {
   return (
     <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)} data-reveal>
-      {eyebrow}
+      {eyebrow ?? <span aria-hidden="true" className={cn("draw-line mb-5 block h-1 w-10 rounded-full bg-gradient-to-r from-accent to-accent-light", align === "center" && "mx-auto")} />}
       <h2
         className={cn(
-          "mt-3 text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12] tracking-[-0.01em]",
+          eyebrow ? "mt-3" : undefined,
+          "text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12] tracking-[-0.01em]",
           tone === "light" && "text-white",
         )}
       >

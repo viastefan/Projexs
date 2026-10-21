@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function Faq({ dict }: { dict: Dictionary }) {
@@ -9,7 +8,7 @@ export function Faq({ dict }: { dict: Dictionary }) {
     <section id={dict.ids.faq} className="section border-t border-line bg-white">
       <div className="container-site grid gap-10 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
-          <SectionHeading eyebrow={<Eyebrow>{f.eyebrow}</Eyebrow>} title={f.title} />
+          <SectionHeading title={f.title} />
         </div>
 
         <div className="lg:col-span-8" data-reveal="right">

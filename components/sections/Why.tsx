@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Award, Clock, Target, Users } from "@/components/ui/Icons";
 import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
@@ -13,7 +12,7 @@ export function Why({ dict }: { dict: Dictionary }) {
   return (
     <section id="warum" className="section border-y border-line bg-surface">
       <div className="container-site">
-        <SectionHeading eyebrow={<Eyebrow>{w.eyebrow}</Eyebrow>} title={w.title} intro={w.intro} />
+        <SectionHeading title={w.title} intro={w.intro} />
 
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {w.points.map((p, i) => {

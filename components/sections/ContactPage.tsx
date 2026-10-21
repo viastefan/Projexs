@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Clock } from "@/components/ui/Icons";
 import { ContactChannels } from "./ContactChannels";
 import { ContactTabs } from "./ContactTabs";
@@ -20,8 +19,8 @@ export function ContactPage({ dict }: { dict: Dictionary }) {
             ← {c.backHome}
           </Link>
           <div className="mt-4 max-w-3xl">
-            <Eyebrow>{c.eyebrow}</Eyebrow>
-            <h1 className="mt-3 text-[clamp(2rem,6vw,3.2rem)] font-semibold leading-[1.1]">{c.title}</h1>
+            <span aria-hidden="true" className="draw-line mb-5 block h-1 w-10 rounded-full bg-gradient-to-r from-accent to-accent-light" />
+            <h1 className="text-[clamp(2rem,6vw,3.2rem)] font-semibold leading-[1.1]">{c.title}</h1>
             <p className="mt-5 text-[1.08rem] leading-relaxed text-stone">{c.intro}</p>
           </div>
         </div>

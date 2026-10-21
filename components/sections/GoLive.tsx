@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 
 export function GoLive({ dict }: { dict: Dictionary }) {
   const g = dict.golive;
@@ -21,8 +20,8 @@ export function GoLive({ dict }: { dict: Dictionary }) {
         </div>
 
         <div className="lg:col-span-7" data-reveal>
-          <Eyebrow>{g.eyebrow}</Eyebrow>
-          <h2 id="golive-title" className="mt-3 text-[clamp(1.85rem,3vw,2.6rem)] font-semibold leading-[1.15]">
+          <span aria-hidden="true" className="draw-line mb-5 block h-1 w-10 rounded-full bg-gradient-to-r from-accent to-accent-light" />
+          <h2 id="golive-title" className="text-[clamp(1.85rem,3vw,2.6rem)] font-semibold leading-[1.15]">
             {g.title}
           </h2>
 

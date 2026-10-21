@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { InquiryTrigger } from "@/components/inquiry/InquiryTrigger";
 
@@ -9,7 +8,7 @@ export function Process({ dict }: { dict: Dictionary }) {
   return (
     <section id="ablauf" className="section border-y border-line bg-surface">
       <div className="container-site">
-        <SectionHeading eyebrow={<Eyebrow>{p.eyebrow}</Eyebrow>} title={p.title} intro={p.intro} />
+        <SectionHeading title={p.title} intro={p.intro} />
 
         <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
           {p.steps.map((s, i) => (

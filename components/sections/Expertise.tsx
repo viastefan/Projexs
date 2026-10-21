@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Plus } from "@/components/ui/Icons";
 
@@ -9,7 +8,7 @@ export function Expertise({ dict }: { dict: Dictionary }) {
   return (
     <section id={dict.ids.expertise} className="section bg-white">
       <div className="container-site">
-        <SectionHeading eyebrow={<Eyebrow>{e.eyebrow}</Eyebrow>} title={e.title} intro={e.intro} />
+        <SectionHeading title={e.title} intro={e.intro} />
 
         <div className="mt-10 grid gap-x-10 border-t border-line md:grid-cols-2" data-reveal>
           {e.pillars.map((p) => (

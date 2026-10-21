@@ -168,32 +168,56 @@
     }
   }
 
-  /* Heller Hero: weicher Verlauf, zwei langsam treibende Farbflächen */
+  /* Heller Hero: frischer Türkis-Verlauf, drei langsam treibende Farbflächen,
+     feines Punktraster oben rechts; läuft unten nahtlos in Weiß aus. */
   .hero-light {
-    background: linear-gradient(180deg, #ffffff 0%, var(--color-surface) 100%);
+    background:
+      radial-gradient(55rem 34rem at 100% 0%, rgba(78, 200, 224, 0.22), transparent 62%),
+      radial-gradient(40rem 26rem at 0% 0%, rgba(176, 232, 244, 0.45), transparent 65%),
+      linear-gradient(180deg, #f1fafc 0%, #ffffff 92%);
+  }
+  .hero-dots {
+    position: absolute;
+    inset: 0 0 auto auto;
+    z-index: -1;
+    width: min(46rem, 70%);
+    height: 32rem;
+    background-image: radial-gradient(rgba(0, 151, 178, 0.28) 1.2px, transparent 1.4px);
+    background-size: 22px 22px;
+    mask-image: radial-gradient(closest-side at 70% 30%, #000 20%, transparent 100%);
+    -webkit-mask-image: radial-gradient(closest-side at 70% 30%, #000 20%, transparent 100%);
+    pointer-events: none;
   }
   .hero-orb {
     position: absolute;
     z-index: -1;
     border-radius: 9999px;
-    filter: blur(60px);
+    filter: blur(50px);
     pointer-events: none;
   }
   .hero-orb-a {
-    top: -8rem;
-    right: -6rem;
-    width: 34rem;
-    height: 34rem;
-    background: radial-gradient(closest-side, rgba(78, 200, 224, 0.28), transparent);
-    animation: orb-drift 18s ease-in-out infinite alternate;
+    top: -10rem;
+    right: -4rem;
+    width: 36rem;
+    height: 36rem;
+    background: radial-gradient(closest-side, rgba(78, 200, 224, 0.42), transparent);
+    animation: orb-drift 16s ease-in-out infinite alternate;
   }
   .hero-orb-b {
-    bottom: -12rem;
-    left: -10rem;
+    top: 30%;
+    left: -12rem;
     width: 30rem;
     height: 30rem;
-    background: radial-gradient(closest-side, rgba(8, 32, 120, 0.1), transparent);
-    animation: orb-drift 22s ease-in-out infinite alternate-reverse;
+    background: radial-gradient(closest-side, rgba(120, 210, 255, 0.3), transparent);
+    animation: orb-drift 21s ease-in-out infinite alternate-reverse;
+  }
+  .hero-orb-c {
+    bottom: 4rem;
+    right: 30%;
+    width: 22rem;
+    height: 22rem;
+    background: radial-gradient(closest-side, rgba(78, 200, 224, 0.16), transparent);
+    animation: orb-drift 26s ease-in-out infinite alternate;
   }
   @keyframes orb-drift {
     from {

@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Check, Plus } from "@/components/ui/Icons";
 
@@ -9,7 +8,7 @@ export function Services({ dict }: { dict: Dictionary }) {
   return (
     <section id={dict.ids.services} className="section bg-white">
       <div className="container-site">
-        <SectionHeading eyebrow={<Eyebrow>{s.eyebrow}</Eyebrow>} title={s.title} intro={s.intro} />
+        <SectionHeading title={s.title} intro={s.intro} />
 
         <ol className="swipe-row mt-10">
           {s.roles.map((role, i) => (

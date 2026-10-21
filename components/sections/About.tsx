@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n";
 import { site } from "@/content/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 
 export function About({ dict }: { dict: Dictionary }) {
   const a = dict.about;
@@ -28,8 +27,8 @@ export function About({ dict }: { dict: Dictionary }) {
           </div>
 
           <div className="lg:col-span-7" data-reveal="right">
-            <Eyebrow>{a.eyebrow}</Eyebrow>
-            <h2 className="mt-3 text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12]">{a.title}</h2>
+            <span aria-hidden="true" className="draw-line mb-5 block h-1 w-10 rounded-full bg-gradient-to-r from-accent to-accent-light" />
+            <h2 className="text-[clamp(1.9rem,3.2vw,2.7rem)] font-semibold leading-[1.12]">{a.title}</h2>
             <div className="mt-6 space-y-4 text-[1.05rem] leading-relaxed text-stone">
               {a.paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
