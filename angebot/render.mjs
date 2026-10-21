@@ -8,8 +8,10 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const executablePath = process.env.CHROMIUM_PATH ?? "/opt/pw-browsers/chromium";
 
 const docs = [
-  { html: "angebot.html", pdf: "Angebot-ProjeXs-Website.pdf", title: "Angebot A-2026-10-01 · Website, Admin-App & Betreuung" },
+  { html: "kurzangebot.html", pdf: "Angebot-ProjeXs-Website.pdf", title: "Angebot A-2026-10-02 · Website, Admin-App & Betreuung" },
+  { html: "angebot.html", pdf: "Angebot-ausfuehrlich-ProjeXs-Website.pdf", title: "Angebot A-2026-10-01 · Website, Admin-App & Betreuung" },
   { html: "vertrag.html", pdf: "Vertrag-ProjeXs-Website.pdf", title: "Vertrag über Erstellung, Hosting und Betreuung einer Website" },
+  { html: "mail.html", pdf: "Mail-an-Daniela-Franzen.pdf", title: "E-Mail an Daniela Franzen" },
 ];
 
 const footer = (title) => `
